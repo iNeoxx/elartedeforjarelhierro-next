@@ -20,7 +20,7 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
         ) : null}
         <span> - {formatDate(node.created)}</span>
       </div>
-      {node.field_image && (
+      {node.field_article_image && (
         <figure>
           <Image
             src={absoluteUrl(node.field_article_image[0].uri.url)}
