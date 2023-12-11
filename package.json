@@ -11,7 +11,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@nextui-org/react": "^2.2.9",
     "@tailwindcss/typography": "^0.5.8",
+    "framer-motion": "^10.16.16",
     "next": "^13",
     "next-drupal": "^1.5.0",
     "react": "^18.2.0",
