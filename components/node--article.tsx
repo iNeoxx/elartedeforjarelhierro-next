@@ -23,15 +23,15 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
       {node.field_image && (
         <figure>
           <Image
-            src={absoluteUrl(node.field_image.uri.url)}
+            src={absoluteUrl(node.field_article_image[0].uri.url)}
             width={768}
             height={400}
-            alt={node.field_image.resourceIdObjMeta.alt}
+            alt={node.field_article_image[0].resourceIdObjMeta.alt}
             priority
           />
-          {node.field_image.resourceIdObjMeta.title && (
+          {node.field_article_image[0].resourceIdObjMeta.title && (
             <figcaption className="py-2 text-sm text-center text-gray-600">
-              {node.field_image.resourceIdObjMeta.title}
+              {node.field_article_image[0].resourceIdObjMeta.title}
             </figcaption>
           )}
         </figure>

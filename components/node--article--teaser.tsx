@@ -26,10 +26,10 @@ export function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps) {
       {node.field_image && (
         <figure className="my-4">
           <Image
-            src={absoluteUrl(node.field_image.uri.url)}
+            src={absoluteUrl(node.field_article_image.uri.url)}
             width={768}
             height={480}
-            alt={node.field_image.resourceIdObjMeta.alt}
+            alt={node.field_article_image.resourceIdObjMeta.alt}
           />
         </figure>
       )}

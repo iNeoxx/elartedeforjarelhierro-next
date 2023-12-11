@@ -1,33 +1,23 @@
 import Link from "next/link"
-
+import { Roboto } from 'next/font/google'
 import { PreviewAlert } from "components/preview-alert"
 // 1. import `NextUIProvider` component
 import {NextUIProvider} from "@nextui-org/react";
+import Navbar from '../components/Navbar'
+
+const roboto = Roboto ({
+  weight: '400',
+  subsets: ['latin'],
+})
 
 export function Layout({ children }) {
   return (
-    <>
-      <NextUIProvider>
+      <NextUIProvider className={roboto.className}>
       <PreviewAlert />
-      <div className="max-w-screen-md px-6 mx-auto">
         <header>
-          <div className="container flex items-center justify-between py-6 mx-auto">
-            <Link href="/" className="text-2xl font-semibold no-underline">
-              Next.js for Drupal
-            </Link>
-            <Link
-              href="https://next-drupal.org/docs"
-              target="_blank"
-              rel="external"
-              className="hover:text-blue-600"
-            >
-              Read the docs
-            </Link>
-          </div>
+          <Navbar/>
         </header>
         <main className="container py-10 mx-auto">{children}</main>
-      </div>
       </NextUIProvider>
-    </>
   )
 }

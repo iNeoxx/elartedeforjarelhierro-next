@@ -4,10 +4,9 @@ import { DrupalNode } from "next-drupal"
 
 import { drupal } from "lib/drupal"
 import { NodeArticle } from "components/node--article"
-import { NodeBasicPage } from "components/node--basic-page"
 import { Layout } from "components/layout"
 
-const RESOURCE_TYPES = ["node--page", "node--article"]
+const RESOURCE_TYPES = ["node--article"]
 
 interface NodePageProps {
   resource: DrupalNode
@@ -22,7 +21,6 @@ export default function NodePage({ resource }: NodePageProps) {
         <title>{resource.title}</title>
         <meta name="description" content="A Next.js site powered by Drupal." />
       </Head>
-      {resource.type === "node--page" && <NodeBasicPage node={resource} />}
       {resource.type === "node--article" && <NodeArticle node={resource} />}
     </Layout>
   )
@@ -51,7 +49,7 @@ export async function getStaticProps(
   let params = {}
   if (type === "node--article") {
     params = {
-      include: "field_image,uid",
+      include: "field_article_image,uid",
     }
   }
 
