@@ -1,43 +1,84 @@
 import Link from "next/link"
 import Image from "next/image"
-export default function Navbar(){
-    return(
-    <nav class="bg-white border-gray-200 dark:bg-gray-900">
-        <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-            <Link href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <Image 
-            src="/logonavbar.svg"
-            width={100}
+import React from "react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
+
+export default function app() {
+    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  
+    const menuItems = [
+      "Blog",
+      "Catalogo",
+      "Acerca de",
+    ];
+  
+    return (
+      <Navbar maxWidth="full" className="pt-3" onMenuOpenChange={setIsMenuOpen} shouldHideOnScroll>
+        <NavbarContent>
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+            className="sm:hidden"
+          />
+          <Link href="/">
+          <NavbarBrand>
+            <Image
+            src= "/logonavbar.svg"
+            width={93}
             height={100}
-            class="h-8" 
-            alt="Flowbite Logo" />
+            alt="icon"
+            />
+          </NavbarBrand>
+          </Link>
+        </NavbarContent>
+        <NavbarContent className="font-bold gap-10" justify="end">
+        <NavbarItem className="hidden sm:flex">
+            <Link color="foreground" href="/blog">
+              Blog
             </Link>
-            <button data-collapse-toggle="navbar-default" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-default" aria-expanded="false">
-            <span class="sr-only">Open main menu</span>
-            <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1h15M1 7h15M1 13h15"/>
+          </NavbarItem>
+          <NavbarItem className="hidden sm:flex">
+          <Link color="foreground" href="/catalogo">
+              Catalogo
+            </Link>
+          </NavbarItem>
+          <NavbarItem className="hidden sm:flex">
+            <Link color="foreground" href="/acerca-de-nosotros">
+              Acerca De Nosotros
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Button as={Link} className="bg-red-600 font-bold text-white pt-6 pb-6" href="/contacto">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="19" viewBox="0 0 22 19" fill="none">
+            <g clip-path="url(#clip0_184_546)">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5012 4.81135V12.3585C19.5012 12.8589 19.2831 13.3388 18.8949 13.6927C18.5068 14.0465 17.9803 14.2453 17.4314 14.2453H12.2568L7.08226 18.0189V14.2453H5.01245C4.4635 14.2453 3.93703 14.0465 3.54886 13.6927C3.1607 13.3388 2.94263 12.8589 2.94263 12.3585V4.81135C2.94263 4.31094 3.1607 3.83103 3.54886 3.47719C3.93703 3.12335 4.4635 2.92456 5.01245 2.92456H17.4314C17.9803 2.92456 18.5068 3.12335 18.8949 3.47719C19.2831 3.83103 19.5012 4.31094 19.5012 4.81135ZM8.11717 7.64154H6.04736V9.52833H8.11717V7.64154ZM10.187 7.64154H12.2568V9.52833H10.187V7.64154ZM16.3965 7.64154H14.3266V9.52833H16.3965V7.64154Z" fill="white"/>
+            </g>
+            <defs>
+            <clipPath id="clip0_184_546">
+            <rect width="20.6982" height="18.8679" fill="white" transform="translate(0.872803 0.0943604)"/>
+            </clipPath>
+            </defs>
             </svg>
-            </button>
-            <div class="hidden w-full md:block md:w-auto" id="navbar-default">
-            <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-            <Link href="#" class="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500" aria-current="page">Home</Link>
-            </li>
-            <li>
-            <Link href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">About</Link>
-            </li>
-            <li>
-            <Link href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Services</Link>
-            </li>
-            <li>
-            <Link href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Pricing</Link>
-            </li>
-            <li>
-            <Link href="#" class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Contact</Link>
-            </li>
-             </ul>
-            </div>
-        </div>
-    </nav>
-    )
-}
+              Contacto
+            </Button>
+          </NavbarItem>
+        </NavbarContent>
+        <NavbarMenu>
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem key={`${item}-${index}`}>
+              <Link
+                color={
+                  index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
+                }
+                className="w-full"
+                href="#"
+                size="lg"
+              >
+                {item}
+              </Link>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
+      </Navbar>
+    );
+  }
+  

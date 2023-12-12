@@ -1,7 +1,7 @@
 import Head from "next/head"
 import { GetStaticPropsResult } from "next"
 import { DrupalNode } from "next-drupal"
-
+import Section1 from '../components/Section1'
 import { drupal } from "lib/drupal"
 import { Layout } from "components/layout"
 import { NodeArticleTeaser } from "components/node--article--teaser"
@@ -20,6 +20,7 @@ export default function IndexPage({ nodes }: IndexPageProps) {
           content="A Next.js site powered by a Drupal backend."
         />
       </Head>
+      <Section1/>
       <div>
         <h1 className="mb-10 text-6xl font-black">Latest Articles.</h1>
         {nodes?.length ? (
