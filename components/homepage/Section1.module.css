@@ -41,3 +41,13 @@
     text-align: center;
     }
 }
+
+@media only screen and (max-width: 1024px) {
+    .titulo1{
+        text-align: center;
+    }
+
+    .titulo2{
+        text-align: center;
+    }
+}

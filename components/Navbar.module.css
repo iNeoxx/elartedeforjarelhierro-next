@@ -1,0 +1,15 @@
+.contact_button{
+    border-radius: 16px;
+    background: #C93400;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    color: #FFF;
+    font-weight: 700;
+    border: 1px solid #C93400;
+}
+
+.contact_button:hover{
+    border-radius: 16px;
+    border: 1px solid #C93400;
+    background: transparent;
+    color: #C93400;
+}

@@ -1,7 +1,9 @@
 import Head from "next/head"
 import { GetStaticPropsResult } from "next"
 import { DrupalNode } from "next-drupal"
-import Section1 from '../components/Section1'
+import Section1 from '@/components/homepage/Section1'
+import QuienesSomos from '@/components/homepage/QuienesSomos'
+import Servicio from '@/components/homepage/Servicios'
 import { drupal } from "lib/drupal"
 import { Layout } from "components/layout"
 import { NodeArticleTeaser } from "components/article/node--article--teaser"
@@ -21,6 +23,8 @@ export default function IndexPage({ nodes }: IndexPageProps) {
         />
       </Head>
       <Section1/>
+      <QuienesSomos/>
+      <Servicio/>
       <div>
         <h1 className="mb-10 text-6xl font-black">Latest Articles.</h1>
         {nodes?.length ? (

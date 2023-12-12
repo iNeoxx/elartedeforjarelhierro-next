@@ -13,7 +13,7 @@ const roboto = Roboto ({
 export function Layout({ children }) {
   return (
       <NextUIProvider className={roboto.className}>
-      <PreviewAlert />
+      <PreviewAlert/>
         <header>
           <Navbar/>
         </header>
