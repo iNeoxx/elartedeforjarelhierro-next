@@ -4,7 +4,7 @@ import { DrupalNode } from "next-drupal"
 import Section1 from '../components/Section1'
 import { drupal } from "lib/drupal"
 import { Layout } from "components/layout"
-import { NodeArticleTeaser } from "components/node--article--teaser"
+import { NodeArticleTeaser } from "components/article/node--article--teaser"
 
 interface IndexPageProps {
   nodes: DrupalNode[]
@@ -47,7 +47,7 @@ export async function getStaticProps(
     {
       params: {
         "filter[status]": 1,
-        "fields[node--article]": "title,path,field_article_image,uid,created",
+        "fields[node--article]": "title,path,field_article_image,uid,created,field_body",
         include: "field_article_image,uid",
         sort: "-created",
       },

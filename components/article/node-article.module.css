@@ -1,0 +1,29 @@
+
+.visual{
+    position: relative;
+}
+.visual::before,
+.visual::after {
+    content: "";
+    position: absolute;
+    width: 250px; /* Ancho del borde de las esquinas */
+    height: 250px; /* Altura del borde de las esquinas */
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.visual::before {
+    top: 0;
+    left: 0;
+    border-top: 4px solid #497EDA;
+    border-left: 4px solid #497EDA;
+}
+
+.visual::after {
+    top: 100%;
+    right: 0%;
+    border-right: 4px solid #497EDA;
+    border-bottom: 4px solid #497EDA;
+}
+
+.separator {
+    background: #768692;
+}
