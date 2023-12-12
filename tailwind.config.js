@@ -10,8 +10,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        bodyColor: '#000000',
-      },
+        footerColor: '#768692',
+      }
     },
   },
   variants: {
