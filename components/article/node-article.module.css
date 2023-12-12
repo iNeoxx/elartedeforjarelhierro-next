@@ -18,7 +18,7 @@
 }
 
 .visual::after {
-    top: 100%;
+    bottom: 0%;
     right: 0%;
     border-right: 4px solid #497EDA;
     border-bottom: 4px solid #497EDA;
@@ -26,4 +26,41 @@
 
 .separator {
     background: #768692;
+}
+
+@media screen and (max-width: 1120px) {
+    .visual::after,
+    .visual::before {
+        width: 150px;
+        height: 150px;
+    }
+    .visual::before {
+        top: 4%;
+        left: -2%;
+        margin: auto
+    }
+}
+@media screen and (max-width: 748px) {
+    .visual::after,
+    .visual::before {
+        width: 100px;
+        height: 100px;
+    }
+    .visual::before {
+        top: 5%;
+        left: 10%;
+        margin: auto
+    }
+}
+@media screen and (max-width: 480px) {
+    .visual::after,
+    .visual::before {
+        width: 100px;
+        height: 100px;
+    }
+    .visual::before {
+        top: 3.8%;
+        left: -2%;
+        margin: auto
+    }
 }
