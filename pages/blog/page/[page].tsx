@@ -40,6 +40,11 @@ interface BlogPageProps {
           )}
           </div>
         </div>
+        <Pager
+        current = {page.current}
+        total = {page.total}
+        href={(page) => (page === 0 ? `/blog` : `/blog/page/${page}`)}
+        />
       </Layout>
     )
   }
@@ -96,7 +101,7 @@ interface BlogPageProps {
           ...params.getQueryObject(),
           page: {
             limit: ARTICLES_PER_PAGE,
-            offset: context.params.page,
+            offset: ARTICLES_PER_PAGE * current,
           },
         },
       }
