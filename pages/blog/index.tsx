@@ -48,7 +48,7 @@ interface IndexPageProps {
       {
         params: {
           "filter[status]": 1,
-          "fields[node--article]": "title,path,field_article_image,uid,created,field_body",
+          "fields[node--article]": "title,path,field_article_image,uid,created",
           include: "field_article_image,uid",
           sort: "-created",
         },

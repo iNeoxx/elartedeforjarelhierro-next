@@ -1,7 +1,8 @@
 import data from './cardServices.json'
+
 export default function Servicios(){
     return(
-        <section className="bg-slate-100 py-16">
+        <section className="bg-[#EEEDED] py-16">
             <div className="text-center">
             <h2 className="font-bold max-[1024px]:text-2xl  lg:text-5xl">Nuestros Servicios</h2>
             </div>

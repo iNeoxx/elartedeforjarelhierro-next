@@ -1,12 +1,13 @@
 import Head from "next/head"
-import { GetStaticPropsResult } from "next"
-import { DrupalNode } from "next-drupal"
 import Section1 from '@/components/homepage/Section1'
 import QuienesSomos from '@/components/homepage/QuienesSomos'
 import Servicio from '@/components/homepage/Servicios'
-import { drupal } from "lib/drupal"
 import { Layout } from "components/layout"
-import { NodeArticleTeaser } from "components/article/node--article--teaser"
+import { drupal } from "lib/drupal"
+import { GetStaticPropsResult } from "next"
+import { DrupalNode } from "next-drupal"
+import { NodeArticleTeaser } from "@/components/article/node--article--teaser"
+import VermasButton from "@/components/VermasButton"
 
 interface IndexPageProps {
   nodes: DrupalNode[]
@@ -25,19 +26,27 @@ export default function IndexPage({ nodes }: IndexPageProps) {
       <Section1/>
       <QuienesSomos/>
       <Servicio/>
-      <div>
-        <h1 className="mb-10 text-6xl font-black">Latest Articles.</h1>
-        {nodes?.length ? (
-          nodes.map((node) => (
-            <div key={node.id}>
-              <NodeArticleTeaser node={node} />
-              <hr className="my-20" />
-            </div>
-          ))
-        ) : (
-          <p className="py-4">No nodes found</p>
-        )}
-      </div>
+      <div className="py-16">
+        <div className="text-center">
+        <h2 className="mb-10 text-5xl font-black">Nuestros Últimos Trabajos Realizados</h2>
+        </div>
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+          {nodes?.length ? (
+            nodes.map((node) => (
+              <div key={node.id}>
+                <NodeArticleTeaser node={node} />
+                <hr className="my-20" />
+              </div>
+            ))
+            
+          ) : (
+            <p className="py-4">No nodes found</p>
+          )}
+        </div>
+          <div className="flex justify-center">
+            <VermasButton/>
+          </div>
+        </div>
     </Layout>
   )
 }
@@ -54,6 +63,7 @@ export async function getStaticProps(
         "fields[node--article]": "title,path,field_article_image,uid,created,field_body",
         include: "field_article_image,uid",
         sort: "-created",
+        "page[limit]":"4",
       },
     }
   )
