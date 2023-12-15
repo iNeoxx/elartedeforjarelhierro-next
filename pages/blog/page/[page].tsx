@@ -45,20 +45,22 @@ interface BlogPageProps {
   }
   export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
     // Use SSG for the first pages, then fallback to SSR for other pages.
-    const params = new DrupalJsonApiParams().addFilter("status", "1")
-    const articles = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    const params = new DrupalJsonApiParams().addFilter("status", "1").addPageLimit(1)
+    const result = await drupal.getResourceCollectionFromContext<JsonApiResponse>(
       "node--article",
       context,
       {
+        deserialize: false,
         params: params.getQueryObject(), 
       }
     )
-    const totalPages = articles.slice(0, Math.ceil(articles.length/2));
-    const paths = totalPages.map((_, page) => ({
+    const totalPages = Math.ceil(result.meta.count / ARTICLES_PER_PAGE);
+    console.log("Paginas totales: " + totalPages)
+    const paths = Array.from({ length: totalPages }, (_, page) => ({
       params: {
         page: `${page + 1}`,
       },
-    }))
+    }));
     console.log(paths)
     return {
       paths,
