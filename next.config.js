@@ -6,6 +6,10 @@ const nextConfig = {
         source: '/blog',
         destination: '/blog/page/0',
       },
+      {
+        source: '/catalogo',
+        destination: '/catalogo/page/0'
+      },
     ]
   },
   images: {
