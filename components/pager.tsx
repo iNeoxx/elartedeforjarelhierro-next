@@ -1,7 +1,7 @@
-
+import classNames from "classnames"
 
 import { usePagination, usePaginationProps } from "hooks/use-pagination"
-import { Link } from "components/link"
+import { Link } from "./link"
 
 export interface PagerProps extends React.HTMLAttributes<HTMLElement> {
   current: number
@@ -43,10 +43,12 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
             {link.type === "page" && (
               <Link href={link.href as string} passHref>
                 <div
-                  className=
-                    "flex items-center justify-center w-12 h-12 hover:text-blue-500"
-                    
-                  
+                  className={classNames(
+                    "flex items-center justify-center w-12 h-12 hover:text-blue-500",
+                    {
+                      "text-gray-500": link.isCurrent,
+                    }
+                  )}
                 >
                   {link.display}
                 </div>
