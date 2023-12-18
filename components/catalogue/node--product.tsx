@@ -12,13 +12,13 @@ interface NodeArticleProps {
 
 export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
   const router = useRouter();
-  
+
   const openWhatsApp = () => {
     const currentUrl = router.asPath;
     const message = `Hola, me interesa este producto del catálogo: ${currentUrl}`;
     const whatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`;
 
-window.open(whatsappLink, '_blank');
+    window.open(whatsappLink, '_blank');
   };
   return (
     <section {...props}>
@@ -40,7 +40,10 @@ window.open(whatsappLink, '_blank');
               {node.title}
             </h2>
             <h4 className="text-center">Aqui iria un subtitulo xd</h4>
-            <p className="text-center"> AQUI VAN LAS TAGS</p>
+            {node.field_product_type.map((tag) => (
+              <p key={tag.name}>{tag.name}</p>
+            )
+            )}
             {node.field_product_body?.processed && (
               <div className="pt-8 text-start mx-20 max-[1024px]:m-auto">
                 <h4
