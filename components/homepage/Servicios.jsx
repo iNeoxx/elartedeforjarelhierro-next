@@ -8,7 +8,7 @@ export default function Servicios(){
             </div>
             <div className=" pt-20 grid justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
                 {data.map((card =>
-                        <div className="mb-10 cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
+                        <div className="mb-10 cursor-pointer block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" key={card.title}>
                         <div className="py-5">
                         <h5 className="mb-2 text-3xl font-bold tracking-tight text-gray-900 dark:text-white">{card.title}</h5>
                         </div>
