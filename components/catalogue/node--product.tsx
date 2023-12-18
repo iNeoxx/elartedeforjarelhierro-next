@@ -4,12 +4,22 @@ import Link from "next/link";
 import { absoluteUrl } from "lib/utils";
 import styles from "./Catalogue.module.css";
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/router";
 
 interface NodeArticleProps {
   node: DrupalNode;
 }
 
 export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
+  const router = useRouter();
+  
+  const openWhatsApp = () => {
+    const currentUrl = router.asPath;
+    const message = encodeURIComponent(`Hola, me interesa este producto del catálogo: ${currentUrl}`);
+    const whatsappLink = `https://web.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${message}`;
+
+window.open(whatsappLink, '_blank');
+  };
   return (
     <section {...props}>
       <div className="bg-[#EEEDED] pb-10">
@@ -44,7 +54,7 @@ export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
           </div>
         </div>
         <div className="flex justify-center">
-          <Button className={styles.button_consultar}>
+          <Button className={styles.button_consultar} onClick={openWhatsApp}>
             Consultar este producto
             <svg
               xmlns="http://www.w3.org/2000/svg"
