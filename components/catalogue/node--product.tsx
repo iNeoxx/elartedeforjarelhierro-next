@@ -15,8 +15,8 @@ export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
   
   const openWhatsApp = () => {
     const currentUrl = router.asPath;
-    const message = encodeURIComponent(`Hola, me interesa este producto del catálogo: ${currentUrl}`);
-    const whatsappLink = `https://web.whatsapp.com/send?phone=${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}&text=${message}`;
+    const message = `Hola, me interesa este producto del catálogo: ${currentUrl}`;
+    const whatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`;
 
 window.open(whatsappLink, '_blank');
   };
