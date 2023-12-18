@@ -13,7 +13,8 @@ export default function QuienesSomos(){
                     src="/assets/Nosotros.png"
                     width={750}   
                     height={512}
-                    className="rounded-2xl"            
+                    className="rounded-2xl"
+                    alt="Nosotros"            
                 />
             </div>
             </div>
