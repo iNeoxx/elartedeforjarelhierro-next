@@ -83,15 +83,17 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
     const current = parseInt(context.params.page)
   
     const params = new DrupalJsonApiParams()
-      .addInclude(["uid", "field_product_image"])
+      .addInclude(["uid", "field_product_image","field_product_type"])
       .addFields("node--product", [
         "title",
         "field_product_body",
         "uid",
         "created",
         "field_product_image",
-        "path"
+        "path",
+        "field_product_type"
       ])
+      .addFields("taxonomy_term--product_type", ["name", "path"])
       .addFields("user--user", ["field_name"])
       .addFilter("status", "1")
       .addSort("created", "DESC")
@@ -117,6 +119,8 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
       }
     }
     const nodes = deserialize(result) as DrupalNode[]
+    console.log("**************************************************")
+    console.log(result.included)
     return {
       props: {
         nodes,

@@ -2,18 +2,16 @@ import * as React from "react"
 import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 import { NodeCatalogueTeaser } from "./node--product--teaser"
 
-export interface TaxonomyTermTagsProps {
+export interface TaxonomyProductTypeProps {
   term: DrupalTaxonomyTerm
   additionalContent: {
     termContent: DrupalNode[]
   }
 }
 
-export function ProductType({
-  term,
+export function TaxonomyProductType({
   additionalContent,
-}: TaxonomyTermTagsProps) {
-
+}: TaxonomyProductTypeProps) {
   return (
     <div className="container">
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
