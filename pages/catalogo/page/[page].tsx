@@ -13,8 +13,6 @@ interface CatalogPageProps {
 }
 const PRODUCTS_PER_PAGE = 2
 export default function IndexPage({ nodes, page }: CatalogPageProps) {
-    console.log("Pagina actual: " + page.current)
-    console.log("Paginas totales: " + page.total)
     return (
       <Layout>
         <Head>
@@ -69,7 +67,6 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
         page: `${page + 1}`,
       },
     }));
-    console.log(paths)
     return {
       paths,
       fallback: "blocking",
@@ -83,16 +80,18 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
     const current = parseInt(context.params.page)
   
     const params = new DrupalJsonApiParams()
-      .addInclude(["uid", "field_product_image"])
+      .addInclude(["uid", "field_product_image", "field_product_type"])
       .addFields("node--product", [
         "title",
         "field_product_body",
         "uid",
         "created",
         "field_product_image",
-        "path"
+        "path",
+        "field_product_type"
       ])
       .addFields("user--user", ["field_name"])
+      .addFields("taxonomy_term--product_type", ["name", "path"])
       .addFilter("status", "1")
       .addSort("created", "DESC")
   
@@ -117,6 +116,7 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
       }
     }
     const nodes = deserialize(result) as DrupalNode[]
+
     return {
       props: {
         nodes,
