@@ -39,7 +39,7 @@ export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
             <h2 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10 max-[1024px]:pt-10 max-[640px]:text-2xl">
               {node.title}
             </h2>
-            <h4 className="text-center">Aqui iria un subtitulo xd</h4>
+            <h4 className="text-center">Aqui iria un subtitulo si</h4>
             {node.field_product_type.map((tag) => (
               <p key={tag.name}>{tag.name}</p>
             )
