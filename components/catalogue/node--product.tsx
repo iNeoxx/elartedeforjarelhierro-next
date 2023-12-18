@@ -4,13 +4,22 @@ import Link from "next/link";
 import { absoluteUrl } from "lib/utils";
 import styles from "./Catalogue.module.css";
 import { Button } from "@nextui-org/react";
+import { useRouter } from "next/router";
 
 interface NodeArticleProps {
   node: DrupalNode;
 }
 
 export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
-  console.log(node)
+  const router = useRouter();
+
+  const openWhatsApp = () => {
+    const currentUrl = router.asPath;
+    const message = `Hola, me interesa este producto del catálogo: ${currentUrl}`;
+    const whatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`;
+
+    window.open(whatsappLink, '_blank');
+  };
   return (
     <section {...props}>
       <div className="bg-[#EEEDED] pb-10">
@@ -31,19 +40,10 @@ export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
               {node.title}
             </h2>
             <h4 className="text-center">Aqui iria un subtitulo xd</h4>
-            {/* <p className="text-center"> AQUI VAN LAS TAGS</p> */}
-            {node.field_product_type?.length ? (
-            <div className="flex space-x-2">
-              <span className="font-semibold">{("tags")}: </span>
-              {node.field_product_type.map((tag) => (
-                <Link key={tag.id} href="/" passHref>
-                  <p className="underline transition-colors text-link hover:text-primary hover:bg-border">
-                    {tag.name}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          ) : null}
+            {node.field_product_type.map((tag) => (
+              <p key={tag.name}>{tag.name}</p>
+            )
+            )}
             {node.field_product_body?.processed && (
               <div className="pt-8 text-start mx-20 max-[1024px]:m-auto">
                 <h4
@@ -57,7 +57,7 @@ export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
           </div>
         </div>
         <div className="flex justify-center">
-          <Button className={styles.button_consultar}>
+          <Button className={styles.button_consultar} onClick={openWhatsApp}>
             Consultar este producto
             <svg
               xmlns="http://www.w3.org/2000/svg"

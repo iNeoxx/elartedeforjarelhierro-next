@@ -63,7 +63,7 @@ export async function getStaticProps(
   }
   if (type === "node--product") {
     params = {
-      include: "field_product_image,uid",
+      include: "field_product_image,uid,field_product_type",
     }
   }
 

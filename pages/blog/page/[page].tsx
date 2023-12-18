@@ -14,8 +14,6 @@ interface BlogPageProps {
   }
   const ARTICLES_PER_PAGE = 2
   export default function IndexPage({ nodes, page }: BlogPageProps) {
-    console.log("Pagina Actual: " + page.current)
-    console.log("Total de paginas: " + page.total)
     return (
       <Layout>
         <Head>
@@ -60,13 +58,11 @@ interface BlogPageProps {
       }
     )
     const totalPages = Math.ceil(result.meta.count / ARTICLES_PER_PAGE);
-    console.log("Paginas totales: " + totalPages)
     const paths = Array.from({ length: totalPages }, (_, page) => ({
       params: {
         page: `${page + 1}`,
       },
     }));
-    console.log(paths)
     return {
       paths,
       fallback: "blocking",
