@@ -5,6 +5,7 @@ import Section1 from '../components/Section1'
 import { drupal } from "lib/drupal"
 import { Layout } from "components/layout"
 import { NodeArticleTeaser } from "components/article/node--article--teaser"
+import ContactSection from "../components/contact-section/ContactSection"
 
 interface IndexPageProps {
   nodes: DrupalNode[]
@@ -34,6 +35,7 @@ export default function IndexPage({ nodes }: IndexPageProps) {
           <p className="py-4">No nodes found</p>
         )}
       </div>
+      <ContactSection/>
     </Layout>
   )
 }
