@@ -90,7 +90,6 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
         "path",
         "field_product_type"
       ])
-      .addFields("taxonomy_term--product_type", ["name", "path"])
       .addFields("user--user", ["field_name"])
       .addFields("taxonomy_term--product_type", ["name", "path"])
       .addFilter("status", "1")

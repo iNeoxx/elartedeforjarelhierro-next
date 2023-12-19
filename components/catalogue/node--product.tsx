@@ -3,7 +3,7 @@ import { DrupalNode } from "next-drupal";
 import Link from "next/link";
 import { absoluteUrl } from "lib/utils";
 import styles from "./Catalogue.module.css";
-import { Button } from "@nextui-org/react";
+import { Button, Chip } from "@nextui-org/react";
 import { useRouter } from "next/router";
 
 interface NodeArticleProps {
@@ -40,10 +40,14 @@ export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
               {node.title}
             </h2>
             <h4 className="text-center">Aqui iria un subtitulo xd</h4>
+            <div className="flex gap-5 justify-center">
             {node.field_product_type.map((tag) => (
-              <p key={tag.name}>{tag.name}</p>
+              <Link key={tag.id} href={tag.path.alias}>
+                  <Chip className={styles.tagButton} key={tag.name}>{tag.name}</Chip>
+              </Link>
             )
             )}
+            </div>
             {node.field_product_body?.processed && (
               <div className="pt-8 text-start mx-20 max-[1024px]:m-auto">
                 <h4

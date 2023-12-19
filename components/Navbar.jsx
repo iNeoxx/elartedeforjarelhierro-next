@@ -3,7 +3,7 @@ import Link from "next/link"
 import Image from "next/image"
 import React from "react";
 import styles from "./Navbar.module.css"
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem} from "@nextui-org/react";
+import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, MenuItem} from "@nextui-org/react";
 
 export default function App() {
     const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -11,7 +11,7 @@ export default function App() {
     const menuItems = [
       "Blog",
       "Catalogo",
-      "Acerca de",
+      "Acerca de Nosotros",
     ];
   
     return (
@@ -72,7 +72,7 @@ export default function App() {
                   index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
                 }
                 className="w-full"
-                href="#"
+                href={`/${item.toLowerCase().replace(/\s/g, '-')}`}  // Modificado para generar el href basado en el nombre del elemento
                 size="lg"
               >
                 {item}
