@@ -5,14 +5,19 @@ import { absoluteUrl } from "lib/utils";
 import styles from "./Catalogue.module.css";
 import { Button, Chip } from "@nextui-org/react";
 import { useRouter } from "next/router";
+import { NodeCatalogueTeaser } from "./node--product--teaser";
 
-interface NodeArticleProps {
-  node: DrupalNode;
+export interface NodeProductProps {
+  node: DrupalNode,
+  additionalContent: { 
+    relatedProducts: DrupalNode[]
+  }
 }
 
-export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
+export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductProps) {
   const router = useRouter();
-
+  console.log("********************** CONTENIDO ADICIONAL ************************")
+  console.log(additionalContent)
   const openWhatsApp = () => {
     const currentUrl = router.asPath;
     const message = `Hola, me interesa este producto del catálogo: ${currentUrl}`;
@@ -101,6 +106,28 @@ export function NodeCatalogo({ node, ...props }: NodeArticleProps) {
               </defs>
             </svg>
           </Button>
+        </div>
+      </div>
+      {/* Seccion de productos relacionados, hay que manejar que esto podria venir vacio, o menos de 3 (nunca se va a pasar de 3 porque asi esta en la query) */}
+      <div className="bg-slate-50 mt-20 md:mt-40">
+        <hr className={styles.related_separator} />
+      <div className="py-16">
+        <div className="text-center">
+        <h2 className="mb-10 text-base font-black md:text-5xl md:mb-10 max-[1024px]:pt-10 max-[640px]:text-2xl">Productos Relacionados</h2>
+        </div>
+        <div
+            className={`grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 2xl:grid-cols-3`}
+          >
+            {additionalContent["relatedProducts"]?.length ? (
+              additionalContent["relatedProducts"].map((node) => (
+                <div key={node.id}>
+                  <NodeCatalogueTeaser node={node} />
+                </div>
+              ))
+            ) : (
+              <p className="py-4">No nodes found</p>
+            )}
+          </div>
         </div>
       </div>
     </section>

@@ -3,7 +3,7 @@ import Head from "next/head"
 import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 import { drupal } from "lib/drupal"
 import { NodeArticle } from "components/article/node--article"
-import {NodeCatalogo} from "components/catalogue/node--product"
+import {NodeCatalogo, NodeProductProps} from "components/catalogue/node--product"
 import { Layout } from "components/layout"
 import { TaxonomyProductTypeProps, TaxonomyProductType } from "components/catalogue/taxonomy-term--product_type"
 import { PageProps } from "@/types"
@@ -29,7 +29,7 @@ export default function NodePage({ resource, additionalContent }: NodePageProps)
         <meta name="description" content="A Next.js site powered by Drupal." />
       </Head>
       {resource.type === "node--article" && <NodeArticle node={resource as DrupalNode}/>}
-      {resource.type === "node--product" && <NodeCatalogo node={resource as DrupalNode}/>}
+      {resource.type === "node--product" && <NodeCatalogo node={resource as DrupalNode} additionalContent = {additionalContent as NodeProductProps["additionalContent"]}/>}
       {resource.type === "taxonomy_term--product_type" && <TaxonomyProductType term={resource as DrupalTaxonomyTerm} additionalContent={additionalContent as TaxonomyProductTypeProps["additionalContent"]}/>}
     </Layout>
   )
@@ -111,10 +111,27 @@ export async function getStaticProps(
     ]
   }
 
+  if (resource.type === "node--product") {
+
+   additionalContent["relatedProducts"] = [
+    ...(await drupal.getResourceCollectionFromContext(
+      "node--product",
+      context,
+      {
+        params: getParams("node--product")
+        .addFilter("id", resource.id, "<>")
+        .addFilter("field_product_type.id")
+        .addPageLimit(3)
+        .getQueryObject(),
+      }
+    )),
+   ]
+  }
+
   return {
     props: {
       resource,
-      additionalContent
+      additionalContent,
     },
   }
 }
