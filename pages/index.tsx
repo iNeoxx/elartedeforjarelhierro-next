@@ -6,7 +6,8 @@ import { Layout } from "components/layout"
 import { drupal } from "lib/drupal"
 import { GetStaticPropsResult } from "next"
 import { DrupalNode } from "next-drupal"
-import { NodeArticleTeaser } from "@/components/article/node--article--teaser"
+import { NodeArticleTeaser } from "components/article/node--article--teaser"
+import ContactSection from "../components/contact-section/ContactSection"
 import Link from "next/link"
 import { NodeCatalogueTeaser } from "@/components/catalogue/node--product--teaser"
 import { Button } from "@nextui-org/react"
@@ -41,7 +42,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
                 <NodeArticleTeaser node={node} />
               </div>
             ))
-            
+
           ) : (
             <p className="py-4">No nodes found</p>
           )}
@@ -64,7 +65,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
                 <NodeCatalogueTeaser node={catalogue} />
               </div>
             ))
-            
+
           ) : (
             <p className="py-4">No nodes found</p>
           )}
@@ -78,6 +79,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
         </Button>
           </div>
       </div>
+      <ContactSection/>
     </Layout>
   )
 }
