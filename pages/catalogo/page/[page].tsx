@@ -28,8 +28,10 @@ export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
           <h1 className="mb-10 text-2xl font-bold text-center md:text-5xl">
             Nuestros Productos
           </h1>
+          <div className="flex justify-center pb-8">
           <CatalogueDropdown
           tags={tags}/>
+          </div>
           {/* Grid de las cards */}
           <div
             className={`grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 2xl:grid-cols-4`}
