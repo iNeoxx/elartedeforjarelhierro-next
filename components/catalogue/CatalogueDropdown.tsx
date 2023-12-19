@@ -14,8 +14,6 @@ export default function CatalogueDropdown({tags, ...props}: DropdownInterface) {
       path: tag.path.alias
     }
   ))
-  console.log("************ TAGS DESDE EL ITEMS *********************")
-    console.log(items)
 
   return (
     <Dropdown>

@@ -120,7 +120,7 @@ export async function getStaticProps(
       {
         params: getParams("node--product")
         .addFilter("id", resource.id, "<>")
-        .addFilter("field_product_type.id")
+        .addFilter("field_product_type.id", resource.field_product_type.id)
         .addPageLimit(3)
         .getQueryObject(),
       }

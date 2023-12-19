@@ -15,9 +15,7 @@ export interface NodeProductProps {
 }
 
 export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductProps) {
-  const router = useRouter();
-  console.log("********************** CONTENIDO ADICIONAL ************************")
-  console.log(additionalContent)
+  const router = useRouter()
   const openWhatsApp = () => {
     const currentUrl = router.asPath;
     const message = `Hola, me interesa este producto del catálogo: ${currentUrl}`;

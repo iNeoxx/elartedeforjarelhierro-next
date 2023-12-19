@@ -15,8 +15,6 @@ interface CatalogPageProps {
 }
 const PRODUCTS_PER_PAGE = 2
 export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
-  console.log("************** TAGS YA EN LA PAGINA *********************")
-  console.log(tags[0])
     return (
       <Layout>
         <Head>
