@@ -116,7 +116,6 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
       }
     }
     const nodes = deserialize(result) as DrupalNode[]
-
     return {
       props: {
         nodes,

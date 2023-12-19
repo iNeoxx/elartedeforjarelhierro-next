@@ -1,22 +1,25 @@
 import { GetStaticPathsResult, GetStaticPropsResult } from "next"
 import Head from "next/head"
-import { DrupalNode } from "next-drupal"
-
+import { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 import { drupal } from "lib/drupal"
 import { NodeArticle } from "components/article/node--article"
 import {NodeCatalogo} from "components/catalogue/node--product"
 import { Layout } from "components/layout"
+import { TaxonomyProductTypeProps, TaxonomyProductType } from "components/catalogue/taxonomy-term--product_type"
+import { PageProps } from "@/types"
+import { getParams } from "@/lib/get-params"
 
 const RESOURCE_TYPES = [
   "node--article",
   "node--product",
+  "taxonomy_term--product_type",
 ]
 
-interface NodePageProps {
-  resource: DrupalNode
+interface NodePageProps extends PageProps{
+  resource: DrupalNode | DrupalTaxonomyTerm
 }
 
-export default function NodePage({ resource }: NodePageProps) {
+export default function NodePage({ resource, additionalContent }: NodePageProps) {
   if (!resource) return null
 
   return (
@@ -25,8 +28,9 @@ export default function NodePage({ resource }: NodePageProps) {
         <title>{resource.title}</title>
         <meta name="description" content="A Next.js site powered by Drupal." />
       </Head>
-      {resource.type === "node--article" && <NodeArticle node={resource}/>}
-      {resource.type === "node--product" && <NodeCatalogo node={resource} />}
+      {resource.type === "node--article" && <NodeArticle node={resource as DrupalNode}/>}
+      {resource.type === "node--product" && <NodeCatalogo node={resource as DrupalNode}/>}
+      {resource.type === "taxonomy_term--product_type" && <TaxonomyProductType term={resource as DrupalTaxonomyTerm} additionalContent={additionalContent as TaxonomyProductTypeProps["additionalContent"]}/>}
     </Layout>
   )
 }
@@ -87,9 +91,30 @@ export async function getStaticProps(
     }
   }
 
+  // Fetch additional content for pages.
+  let additionalContent: PageProps["additionalContent"] = {}
+
+  if (resource.type === "taxonomy_term--product_type") {
+    // Fetch the term content.
+    // Tags can show both recipes and articles.
+    additionalContent["termContent"] = [
+      ...(await drupal.getResourceCollectionFromContext(
+        "node--product",
+        context,
+        {
+          params: getParams("node--product")
+            .addSort("created", "DESC")
+            .addFilter("field_product_type.id", resource.id, "IN")
+            .getQueryObject(),
+        }
+      )),
+    ]
+  }
+
   return {
     props: {
       resource,
+      additionalContent
     },
   }
 }
