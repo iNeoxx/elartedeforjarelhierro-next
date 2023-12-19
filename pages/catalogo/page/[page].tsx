@@ -24,7 +24,7 @@ export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
             content="The catalogue page of El Arte de Forjar el Hierro"
           />
         </Head>
-        <div className=" bg-[#EEEDED] pt-7 pb-7 md:pt-14">
+        <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-14">
           <h1 className="mb-10 text-2xl font-bold text-center md:text-5xl">
             Nuestros Productos
           </h1>
