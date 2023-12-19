@@ -1,10 +1,9 @@
-'use-client'
 import Image from "next/image"
 import styles from './Section1.module.css'
 export default function Section1(){
     return(
-        <section className="container max-w-full inline-flex items-center bg-slate-100">
-            <div className="p-4 w-3/4 hidden sm:block">
+        <section className="container max-w-full inline-flex items-center bg-[#EEEDED]">
+            <div className="p-4 w-3/4 hidden lg:block">
                 <Image
                     src="/assets/homesection.png"
                     width={790}
