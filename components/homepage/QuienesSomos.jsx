@@ -10,7 +10,7 @@ export default function QuienesSomos(){
             </div>
             <div className="w-max pr-5 hidden lg:block">
                 <Image
-                    src="/assets/Nosotros.png"
+                    src="/assets/nosotros.png"
                     width={750}   
                     height={512}
                     className="rounded-2xl"
