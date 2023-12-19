@@ -6,13 +6,17 @@ import { Layout } from "components/layout"
 import { NodeCatalogueTeaser } from "@/components/catalogue/node--product--teaser"
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { PagerProps, Pager } from "components/pager"
+import CatalogueDropdown from "@/components/catalogue/CatalogueDropdown"
 
 interface CatalogPageProps {
     nodes: DrupalNode[]
+    tags: DrupalTaxonomyTerm[]
     page: Pick<PagerProps, "current" | "total">
 }
 const PRODUCTS_PER_PAGE = 2
-export default function IndexPage({ nodes, page }: CatalogPageProps) {
+export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
+  console.log("************** TAGS YA EN LA PAGINA *********************")
+  console.log(tags[0])
     return (
       <Layout>
         <Head>
@@ -26,6 +30,8 @@ export default function IndexPage({ nodes, page }: CatalogPageProps) {
           <h1 className="mb-10 text-2xl font-bold text-center md:text-5xl">
             Nuestros Productos
           </h1>
+          <CatalogueDropdown
+          tags={tags}/>
           {/* Grid de las cards */}
           <div
             className={`grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 2xl:grid-cols-4`}
@@ -109,16 +115,33 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
         },
       }
     )
-  
+    const tagParams = new DrupalJsonApiParams().addFields("taxonomy_term--prduct_type", [
+      "name",
+      "path",
+    ])
+    const tagsResult = await getResourceCollectionFromContext<JsonApiResponse>(
+      "taxonomy_term--product_type",
+      context,
+      {
+        deserialize: false,
+        params: {
+          ...tagParams.getQueryObject(),
+        }
+      }
+    )
+
     if (!result.data?.length) {
       return {
         notFound: true,
       }
     }
     const nodes = deserialize(result) as DrupalNode[]
+    const tags = deserialize(tagsResult) as DrupalTaxonomyTerm[]
+
     return {
       props: {
         nodes,
+        tags,
         page: {
           current,
           total: Math.ceil(result.meta.count / PRODUCTS_PER_PAGE),
