@@ -13,6 +13,7 @@ module.exports = {
         footerColor: '#768692',
         contactSectionColor: '#497EDA',
         colorInputsForm: '#6D98E1',
+        colorSubtitleContact: 'rgba(0, 11, 40, 0.60);',
       },
       boxShadow: {
         contactShadow: '10px 10px 15px 0px rgba(73, 126, 218, 0.40), -10px -10px 15px 0px rgba(73, 126, 218, 0.40)'

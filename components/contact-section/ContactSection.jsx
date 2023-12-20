@@ -73,8 +73,8 @@ export default function ContactSection() {
   };
 
   return (
-    <div className="bg-contactSectionColor max-w-4xl  mx-auto max-[930px]:mx-3 rounded-3xl pb-8 shadow-contactShadow">
-      <h2 className="font-bold text-2xl sm:text-5xl text-white text-center pt-10 my-7">
+    <div className="bg-contactSectionColor max-w-4xl  mx-auto max-[930px]:mx-3 rounded-3xl pb-8 shadow-contactShadow mt-[6rem] mb-10">
+      <h2 className="font-bold text-2xl sm:text-5xl text-white text-center pt-10 ">
         Contacta con nosotros
       </h2>
       <form

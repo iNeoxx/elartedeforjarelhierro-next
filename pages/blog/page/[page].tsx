@@ -7,6 +7,7 @@ import { NodeArticleTeaser } from "components/article/node--article--teaser"
 import styles from '../blog.module.css'
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { PagerProps, Pager } from "components/pager"
+import ContactSection from "@/components/contact-section/ContactSection"
 
 interface BlogPageProps {
     nodes: DrupalNode[]
@@ -37,12 +38,13 @@ interface BlogPageProps {
             <p className="py-4">No nodes found</p>
           )}
           </div>
-        </div>
-        <Pager
+          <Pager
         current = {page.current}
         total = {page.total}
         href={(page) => (page === 0 ? `/blog` : `/blog/page/${page}`)}
         />
+        </div>
+        <ContactSection/>
       </Layout>
     )
   }
@@ -54,7 +56,7 @@ interface BlogPageProps {
       context,
       {
         deserialize: false,
-        params: params.getQueryObject(), 
+        params: params.getQueryObject(),
       }
     )
     const totalPages = Math.ceil(result.meta.count / ARTICLES_PER_PAGE);
@@ -73,7 +75,7 @@ interface BlogPageProps {
     context
   ): Promise<GetStaticPropsResult<BlogPageProps>> {
     const current = parseInt(context.params.page)
-  
+
     const params = new DrupalJsonApiParams()
       .addInclude(["uid", "field_article_image"])
       .addFields("node--article", [
@@ -87,7 +89,7 @@ interface BlogPageProps {
       .addFields("user--user", ["field_name"])
       .addFilter("status", "1")
       .addSort("created", "DESC")
-  
+
     const result = await getResourceCollectionFromContext<JsonApiResponse>(
       "node--article",
       context,
@@ -102,13 +104,13 @@ interface BlogPageProps {
         },
       }
     )
-  
+
     if (!result.data?.length) {
       return {
         notFound: true,
       }
     }
-  
+
     const nodes = deserialize(result) as DrupalNode[]
     return {
       props: {
