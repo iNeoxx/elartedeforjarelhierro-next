@@ -7,6 +7,8 @@ import { NodeCatalogueTeaser } from "@/components/catalogue/node--product--tease
 import { DrupalJsonApiParams } from "drupal-jsonapi-params"
 import { PagerProps, Pager } from "components/pager"
 import CatalogueDropdown from "@/components/catalogue/CatalogueDropdown"
+import ContactSection from "@/components/contact-section/ContactSection"
+import styles from "../../../components/contact-section/contactSection.module.css"
 
 interface CatalogPageProps {
     nodes: DrupalNode[]
@@ -46,12 +48,18 @@ export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
               <p className="py-4">No nodes found</p>
             )}
           </div>
-        </div>
-        <Pager
+          <Pager
         current = {page.current}
         total = {page.total}
         href={(page) => (page === 0 ? `/catalogo` : `/catalogo/page/${page}`)}
         />
+        </div>
+
+        <div className="mt-16">
+          <h2 className="sm:text-5xl w-64 sm:w-9/12 text-2xl mx-auto text-black font-bold text-center lg:leading-6 mb-9">¿No encuentras lo que buscas?</h2>
+          <p className="text-base sm:w-auto w-64 mx-auto text-colorSubtitleContact font-normal text-center">¡Cotiza algo que no esté en nuestro catálogo sin compromiso alguno!</p>
+          <ContactSection/>
+        </div>
       </Layout>
     );
 }
@@ -63,7 +71,7 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
       context,
       {
         deserialize: false,
-        params: params.getQueryObject(), 
+        params: params.getQueryObject(),
       }
     )
     const totalPages = Math.ceil(result.meta.count / PRODUCTS_PER_PAGE);
@@ -84,7 +92,7 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
   ): Promise<GetStaticPropsResult<CatalogPageProps>> {
 
     const current = parseInt(context.params.page)
-  
+
     const params = new DrupalJsonApiParams()
       .addInclude(["uid", "field_product_image", "field_product_type"])
       .addFields("node--product", [
@@ -100,7 +108,7 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
       .addFields("taxonomy_term--product_type", ["name", "path"])
       .addFilter("status", "1")
       .addSort("created", "DESC")
-  
+
     const result = await getResourceCollectionFromContext<JsonApiResponse>(
       "node--product",
       context,
