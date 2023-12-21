@@ -14,7 +14,7 @@ export default function Carousel({ images }) {
         }}
       >
         {
-    images.map((image)=> (
+    images.map((image, key)=> (
         <Image
         src={absoluteUrl(image.uri.url)}
         alt={image.resourceIdObjMeta.alt}
