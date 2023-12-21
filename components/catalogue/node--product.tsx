@@ -6,6 +6,7 @@ import styles from "./Catalogue.module.css";
 import { Button, Chip } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { NodeCatalogueTeaser } from "./node--product--teaser";
+import Carousel from "../Carousel";
 
 export interface NodeProductProps {
   node: DrupalNode,
@@ -28,15 +29,9 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
       <div className="bg-[#EEEDED] pb-10">
         <div className="flex justify-center py-10 max-[1024px]:grid max-[1024px]:justify-items-center ">
           <div className="max-w-full w-2/4 max-[1024px]:w-full">
-            {node.field_product_image && (
-              <Image
-                src={absoluteUrl(node.field_product_image[0].uri.url)}
-                alt={node.field_product_image[0].resourceIdObjMeta.alt}
-                width={640}
-                height={640}
-                className={`mx-auto w-80 md:w-auto rounded-xl ${styles.product_image}`}
-              />
-            )}
+            <div className=" w-[90%] m-auto pt-11">
+            <Carousel images={node.field_product_image}/>
+            </div>
           </div>
           <div className="w-3/4">
             <h2 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10 max-[1024px]:pt-10 max-[640px]:text-2xl">
