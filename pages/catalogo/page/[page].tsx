@@ -9,6 +9,7 @@ import { PagerProps, Pager } from "components/pager"
 import CatalogueDropdown from "@/components/catalogue/CatalogueDropdown"
 import ContactSection from "@/components/contact-section/ContactSection"
 import styles from "../../../components/contact-section/contactSection.module.css"
+import { FormSearch } from "@/components/form--search"
 
 interface CatalogPageProps {
     nodes: DrupalNode[]
@@ -33,6 +34,7 @@ export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
           <div className="flex justify-center pb-8">
           <CatalogueDropdown
           tags={tags}/>
+         <FormSearch/> 
           </div>
           {/* Grid de las cards */}
           <div
