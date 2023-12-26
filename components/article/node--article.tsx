@@ -33,6 +33,8 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
             width={800}
             height={800}
             className="mx-auto w-80 md:w-auto"
+            placeholder="blur"
+            blurDataURL={"/assets/placeholder.png"}
           />  
       )}
       <hr className={`w-4/5 h-1 m-auto mt-10 ${styles.separator}`}/>

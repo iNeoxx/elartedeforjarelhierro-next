@@ -1,4 +1,5 @@
 import Image from "next/image";
+import section from "@/public/assets/nosotros.png"
 
 export default function QuienesSomos(){
     return(
@@ -10,11 +11,12 @@ export default function QuienesSomos(){
             </div>
             <div className="w-max pr-5 hidden lg:block">
                 <Image
-                    src="/assets/nosotros.png"
+                    src={section}
                     width={750}   
                     height={512}
                     className="rounded-2xl"
-                    alt="Nosotros"            
+                    alt="Nosotros"
+                    placeholder="blur"         
                 />
             </div>
             </div>
