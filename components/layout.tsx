@@ -7,8 +7,8 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 const roboto = Roboto ({
-  weight: '400',
   subsets: ['latin'],
+  weight: ['100','400','900']
 })
 
 export function Layout({ children }) {
