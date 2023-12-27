@@ -20,6 +20,8 @@ export function NodeCatalogueTeaser({node, ...props}: NodeCatalogueTeaserProps){
             height={400}
             src={absoluteUrl(node.field_product_image[0].uri.url)}
             alt={node.field_product_image[0].resourceIdObjMeta.alt}
+            placeholder="blur"
+            blurDataURL={"/assets/placeholder.png"}
           />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{node.title}</div>
