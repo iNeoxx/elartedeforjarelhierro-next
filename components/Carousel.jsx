@@ -2,6 +2,7 @@ import Image from "next/image";
 import styles from "./catalogue/Catalogue.module.css";
 import { absoluteUrl } from "../lib/utils";
 import { useState } from "react";
+import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl";
 export default function Carousel({ images }) {
   let [current, setCurrent] = useState(0);
 
@@ -23,7 +24,7 @@ export default function Carousel({ images }) {
         height="1000"
         className={`mx-auto w-80 md:w-auto rounded-xl ${styles.product_image}`}
         placeholder="blur"
-        blurDataURL={"/assets/placeholder.png"}
+        blurDataURL={StaticBLurDataUrl()}
       />
     ))
 }

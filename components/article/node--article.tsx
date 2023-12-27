@@ -4,6 +4,7 @@ import { DrupalNode } from "next-drupal"
 import { absoluteUrl, formatDate } from "lib/utils"
 
 import styles from './node-article.module.css'
+import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl"
 
 interface NodeArticleProps {
   node: DrupalNode
@@ -34,7 +35,7 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
             height={800}
             className="mx-auto w-80 md:w-auto"
             placeholder="blur"
-            blurDataURL={"/assets/placeholder.png"}
+            blurDataURL={StaticBLurDataUrl()}
           />  
       )}
       <hr className={`w-4/5 h-1 m-auto mt-10 ${styles.separator}`}/>

@@ -2,16 +2,15 @@ import Image from "next/image"
 import Link from "next/link"
 import { DrupalNode } from "next-drupal"
 import {Card, CardHeader, CardBody} from "@nextui-org/react";
-
+import {StaticBLurDataUrl} from "@/utils/staticBlurDataUrl"
 import { absoluteUrl, formatDate } from "lib/utils"
-
 import styles from "./node-article-teaser.module.css"
 
 interface NodeArticleTeaserProps {
   node: DrupalNode
 }
 
-export function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps) {
+export  function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps){
   return (
     <div className="pb-10">
     <Link href={node.path.alias}>
@@ -28,7 +27,7 @@ export function NodeArticleTeaser({ node, ...props }: NodeArticleTeaserProps) {
           alt="home"
           className={`m-auto rounded-xl ${styles.imagestyle}`}
           placeholder="blur"
-          blurDataURL={"/assets/placeholder.png"}
+          blurDataURL={StaticBLurDataUrl()}
         />
       </CardBody>
     </Card>
