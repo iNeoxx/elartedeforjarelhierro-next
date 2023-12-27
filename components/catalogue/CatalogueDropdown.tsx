@@ -16,7 +16,7 @@ export default function CatalogueDropdown({tags, ...props}: DropdownInterface) {
   ))
 
   return (
-    <div className="flex">
+    <div className="flex max-[1024px]:order-last">
     <Dropdown backdrop="blur">
       <DropdownTrigger>
         <Button className={styles.categoryDropdown} variant="bordered">

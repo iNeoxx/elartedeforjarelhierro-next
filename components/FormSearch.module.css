@@ -5,12 +5,10 @@
 .form_input {
     border-radius: 14px 0px 0px 14px;
     border: 1px solid rgba(255, 255, 255, 0.20);
-    background: #FFF;
     margin: 0px 0 10px 20px;
 }
 .form_button {
     color: #FFFFFF;
     border-radius: 0px 14px 14px 0px;
     background: #C93400;
-    margin: 0px 0 10px 0px;    
 }

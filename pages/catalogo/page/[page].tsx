@@ -28,10 +28,10 @@ export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
           />
         </Head>
         <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-14">
-          <h1 className="mb-10 text-2xl font-bold text-center md:text-5xl">
+          <h1 className="max-[1024px]:pb-0 pb-10 text-2xl font-bold text-center md:text-5xl">
             Nuestros Productos
           </h1>
-          <div className="flex justify-center pb-8">
+          <div className="max-[1024px]:grid max-[1024px]:justify-items-center flex justify-center pb-8">
           <CatalogueDropdown
           tags={tags}/>
          <FormSearch/> 
