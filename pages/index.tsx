@@ -33,9 +33,9 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
       <Servicio/>
       <div className="py-16">
         <div className="text-center">
-        <h2 className="mb-10 text-5xl font-black">Nuestros Últimos Trabajos Realizados</h2>
+        <h2 className="mb-10 max-[1024px]:text-2xl lg:text-5xl font-black">Nuestros Últimos Trabajos Realizados</h2>
         </div>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+        <div className="grid justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
           {nodes?.length ? (
             nodes.map((node) => (
               <div key={node.id}>
@@ -57,7 +57,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
           </div>
       </div>
       <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-14">
-        <h2 className="mb-10 text-5xl font-black text-center">Consulta Nuestro Catálogo</h2>
+        <h2 className="mb-10 max-[1024px]:text-2xl lg:text-5xl font-black text-center">Consulta Nuestro Catálogo</h2>
         <div className="grid justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
       {catalogues?.length ? (
             catalogues.map((catalogue) => (

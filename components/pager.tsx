@@ -17,14 +17,14 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
   })
 
   return (
-    <nav role="navigation" aria-labelledby="pagination-heading" {...props}>
+    <nav className="pt-10" role="navigation" aria-labelledby="pagination-heading" {...props}>
       <h4 className="sr-only">Pagination</h4>
-      <ul className="flex items-center justify-center w-auto">
+      <ul className="flex items-center justify-center w-auto gap-3">
         {items.map((link, index) => (
           <li key={index}>
             {link.type === "previous" && (
               <Link href={link.href as string}>
-                <div className="flex items-center justify-center w-12 h-12 hover:text-blue-500">
+                <div className="flex items-center justify-center w-12 h-12 bg-white rounded-xl hover:text-red-500">
                   <span className="sr-only">Previous page</span>
                   <svg
                     viewBox="0 0 24 24"
@@ -44,9 +44,9 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
               <Link href={link.href as string} passHref>
                 <div
                   className={classNames(
-                    "flex items-center justify-center w-12 h-12 hover:text-blue-500",
+                    "flex items-center justify-center w-12 h-12 font-bold border-2 rounded-xl border-gray-300 bg-white hover:text-red-500",
                     {
-                      "text-gray-500": link.isCurrent,
+                      "text-red-500 font-bold border-2 border-red-500": link.isCurrent,
                     }
                   )}
                 >
@@ -56,7 +56,7 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
             )}
             {link.type === "next" && (
               <Link href={link.href as string}>
-                <div className="flex items-center justify-center w-12 h-12 hover:text-blue-500">
+                <div className="flex items-center justify-center w-12 h-12 bg-white rounded-xl hover:text-red-500">
                   <span className="sr-only">Next page</span>
                   <svg
                     viewBox="0 0 24 24"
@@ -76,5 +76,5 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
         ))}
       </ul>
     </nav>
-  )
+  );
 }

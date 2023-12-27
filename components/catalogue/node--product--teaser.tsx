@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./Catalogue.module.css"
 import { Button } from "@nextui-org/react";
 import { absoluteUrl } from "@/lib/utils";
+import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl";
 
 interface NodeCatalogueTeaserProps{
     node: DrupalNode
@@ -20,6 +21,8 @@ export function NodeCatalogueTeaser({node, ...props}: NodeCatalogueTeaserProps){
             height={400}
             src={absoluteUrl(node.field_product_image[0].uri.url)}
             alt={node.field_product_image[0].resourceIdObjMeta.alt}
+            placeholder="blur"
+            blurDataURL={StaticBLurDataUrl()}
           />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{node.title}</div>

@@ -6,10 +6,18 @@
     font-weight: 700;
     border: 1px solid #C93400;
 }
-
 .contact_button:hover{
     border-radius: 16px;
     border: 1px solid #C93400;
     background: transparent;
     color: #C93400;
 }
+.contact_button:hover svg path {
+    /* Cambiar el color del path del SVG cuando el botón está en estado de hover */
+    stroke: #C93400; /* Cambia esto al color que desees */
+  }
+
+  .contact_button:hover svg path {
+    /* Cambiar el color del path del SVG cuando el botón está en estado de hover */
+    stroke: #C93400; /* Cambia esto al color que desees */
+  }

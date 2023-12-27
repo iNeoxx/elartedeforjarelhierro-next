@@ -24,10 +24,10 @@ interface BlogPageProps {
             content="The blog page of El Arte de Forjar el Hierro"
           />
         </Head>
-        <div className={`pt-7 pb-7 ${styles.pagecontainer} md:pt-14`}>
+        <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-14">
           <h1 className="mb-10 text-2xl font-bold text-center md:text-5xl">Nuestro Blog</h1>
           {/* Grid de las cards */}
-          <div className={`grid grid-cols-1 justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 2xl:grid-cols-4`}>
+          <div className={`grid grid-cols-1 justify-items-center items-center justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 2xl:grid-cols-4`}>
           {nodes?.length ? (
             nodes.map((node) => (
               <div key={node.id}>

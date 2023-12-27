@@ -1,86 +1,116 @@
 "use client"
-import Link from "next/link"
-import Image from "next/image"
+import Link from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
 import React from "react";
-import styles from "./Navbar.module.css"
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenuToggle, NavbarMenu, NavbarMenuItem, MenuItem} from "@nextui-org/react";
+import styles from "./Navbar.module.css";
+import {
+  Navbar,
+  NavbarBrand,
+  NavbarContent,
+  NavbarItem,
+  Button,
+  NavbarMenuToggle,
+  NavbarMenu,
+  NavbarMenuItem,
+} from "@nextui-org/react";
 
 export default function App() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
-  
-    const menuItems = [
-      "Blog",
-      "Catalogo",
-      "Acerca de Nosotros",
-    ];
-  
-    return (
-      <Navbar maxWidth="full" className="pt-3" onMenuOpenChange={setIsMenuOpen}>
-        <NavbarContent>
-          <NavbarMenuToggle
-            aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-            className="sm:hidden"
-          />
-          <Link href="/">
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const router = useRouter();
+
+  const menuItems = [
+    "Blog",
+    "Catalogo",
+    "Acerca de Nosotros",
+  ];
+
+  return (
+    <Navbar maxWidth="full" className="pt-3" onMenuOpenChange={setIsMenuOpen}>
+      <NavbarContent>
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          className="sm:hidden"
+        />
+        <Link href="/">
           <NavbarBrand>
             <Image
-            src= "/logonavbar.svg"
-            width={93}
-            height={100}
-            alt="icon"
+              src="/logonavbar.svg"
+              width={93}
+              height={100}
+              alt="icon"
             />
           </NavbarBrand>
+        </Link>
+      </NavbarContent>
+      <NavbarContent className="font-bold gap-10" justify="end">
+        {menuItems.map((item, index) => (
+          <NavbarItem
+          key={`${item}-${index}`}
+          className={`hover:text-[#C93400] hidden sm:flex ${
+            router.asPath === `/${item.toLowerCase().replace(/\s/g, '-')}` ||
+              router.asPath.startsWith(`/${item.toLowerCase().replace(/\s/g, '-')}/`)
+              ? "text-[#C93400]"
+              : ""
+          }`}
+        >
+          <Link
+            color="foreground"
+            className="w-full"
+            href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
+            size="lg"
+          >
+            {item}
           </Link>
-        </NavbarContent>
-        <NavbarContent className="font-bold gap-10" justify="end">
-        <NavbarItem className="hidden sm:flex">
-            <Link color="foreground" href="/blog">
-              Blog
-            </Link>
-          </NavbarItem>
-          <NavbarItem className="hidden sm:flex">
-          <Link color="foreground" href="/catalogo">
-              Catalogo
-            </Link>
-          </NavbarItem>
-          <NavbarItem className="hidden sm:flex">
-            <Link color="foreground" href="/acerca-de-nosotros">
-              Acerca De Nosotros
-            </Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Button as={Link} className={styles.contact_button} href="/contacto">
-            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="19" viewBox="0 0 22 19" fill="none">
-            <g clip-path="url(#clip0_184_546)">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.5012 4.81135V12.3585C19.5012 12.8589 19.2831 13.3388 18.8949 13.6927C18.5068 14.0465 17.9803 14.2453 17.4314 14.2453H12.2568L7.08226 18.0189V14.2453H5.01245C4.4635 14.2453 3.93703 14.0465 3.54886 13.6927C3.1607 13.3388 2.94263 12.8589 2.94263 12.3585V4.81135C2.94263 4.31094 3.1607 3.83103 3.54886 3.47719C3.93703 3.12335 4.4635 2.92456 5.01245 2.92456H17.4314C17.9803 2.92456 18.5068 3.12335 18.8949 3.47719C19.2831 3.83103 19.5012 4.31094 19.5012 4.81135ZM8.11717 7.64154H6.04736V9.52833H8.11717V7.64154ZM10.187 7.64154H12.2568V9.52833H10.187V7.64154ZM16.3965 7.64154H14.3266V9.52833H16.3965V7.64154Z" fill="white"/>
-            </g>
-            <defs>
-            <clipPath id="clip0_184_546">
-            <rect width="20.6982" height="18.8679" fill="white" transform="translate(0.872803 0.0943604)"/>
-            </clipPath>
-            </defs>
+        </NavbarItem>
+        ))}
+        <NavbarItem>
+          <Button
+            as={Link}
+            className={styles.contact_button}
+            href="/contacto"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="22"
+              height="19"
+              viewBox="0 0 22 19"
+              fill="none"
+            >
+              <path
+                d="M6.97728 7.58491H6.98763M11.1169 7.58491H11.1273M15.2566 7.58491H15.2669M8.01219 13.2453H3.87255C3.3236 13.2453 2.79714 13.0465 2.40897 12.6927C2.0208 12.3388 1.80273 11.8589 1.80273 11.3585V3.81133C1.80273 3.31092 2.0208 2.83101 2.40897 2.47717C2.79714 2.12332 3.3236 1.92454 3.87255 1.92454H18.3613C18.9102 1.92454 19.4367 2.12332 19.8249 2.47717C20.213 2.83101 20.4311 3.31092 20.4311 3.81133V11.3585C20.4311 11.8589 20.213 12.3388 19.8249 12.6927C19.4367 13.0465 18.9102 13.2453 18.3613 13.2453H13.1867L8.01219 17.9623V13.2453Z"
+                fill="white"
+                stroke="#C93400"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
             </svg>
-              Contacto
-            </Button>
-          </NavbarItem>
-        </NavbarContent>
-        <NavbarMenu className="pt-10">
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem key={`${item}-${index}`}>
-              <Link
-                color={
-                  index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-                }
-                className="w-full"
-                href={`/${item.toLowerCase().replace(/\s/g, '-')}`}  // Modificado para generar el href basado en el nombre del elemento
-                size="lg"
-              >
-                {item}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
-      </Navbar>
-    );
-  }
-  
+            Contacto
+          </Button>
+        </NavbarItem>
+      </NavbarContent>
+      <NavbarMenu className="pt-10">
+        {menuItems.map((item, index) => (
+          <NavbarMenuItem key={`${item}-${index}`}>
+            <Link
+              color={
+                index === 2
+                  ? "primary"
+                  : index === menuItems.length - 1
+                  ? "danger"
+                  : "foreground"
+              }
+              className="w-full"
+              href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarMenuItem>
+        ))}
+      </NavbarMenu>
+    </Navbar>
+  )
+}
+
