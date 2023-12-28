@@ -1,25 +1,20 @@
 [
     {
-        "title": "Construccion",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "footer": "Antonio Ordoñez"
+        "title": "Servicios de electricista",
+        "content": "Además de nuestra habilidad en la forja, también nos destacamos como expertos electricistas. Ofrecemos servicios eléctricos confiables y seguros, asegurando que tu hogar o negocio cuente con instalaciones eléctricas eficientes.",
+        "footer": "Contacto"
     },
 
     {
-        "title": "Mecanica",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "footer": "Antonio Ordoñez"
+        "title": "Trabajos en Hierro",
+        "content": "Nuestra destreza en la forja se refleja en la creación de piezas únicas y personalizadas. Desde portones majestuosos hasta detallados candelabros y muebles de hierro, damos vida a tus ideas con maestría artesanal.",
+        "footer": "Catalogo"
     },
 
     {
-        "title": "Medicina",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "footer": "Antonio Ordoñez"
-    },
-
-    {
-        "title": "Electricidad",
-        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-        "footer": "Antonio Ordoñez"
+        "title": "Servicios de Construcción",
+        "content": "En \"El Arte de Forjar el Hierro\", no nos limitamos a la forja; extendemos nuestras habilidades al ámbito de la construcción. Realizamos trabajos de construcción con el mismo nivel de compromiso y calidad que aplicamos a nuestras creaciones de hierro.",
+        "footer": "Contacto"
     }
+
 ]
