@@ -1,0 +1,88 @@
+.catalbtn {
+    border-radius: 20px;
+    font-size: 24px;
+    height:40px;
+    background: #C93400;
+    color: white;
+    width: 35%;
+    line-height: 119.187%;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(201, 52, 0, 0.40);
+    border: 2px solid transparent;
+}
+.catalbtn:hover{
+    border: 2px solid #C93400;
+    background: transparent;
+    color: #C93400;
+}
+.catalbtn:hover svg path {
+    /* Cambiar el color del path del SVG cuando el botón está en estado de hover */
+    stroke: #C93400; /* Cambia esto al color que desees */
+    fill: #C93400;
+}
+
+
+.contactbtn {
+    border-radius: 20px;
+    font-size: 24px;
+    height:40px;
+    background: #497EDA;
+    color: white;
+    width: 40%;
+    line-height: 119.187%;
+    filter: drop-shadow(0px 4px 4px rgba(73, 126, 218, 0.40)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05));
+    border: 2px solid transparent;
+}
+.contactbtn:hover{
+    border: 2px solid #497EDA;
+    background: transparent;
+    color: #497EDA;
+}
+.contactbtn:hover svg path {
+    /* Cambiar el color del path del SVG cuando el botón está en estado de hover */
+    stroke: #497EDA; /* Cambia esto al color que desees */
+}
+.icons path {
+    width: 80%;
+    height: 80%;
+}
+
+
+
+@media only screen and (max-width: 640px) {
+    .catalbtn {
+        height: 40px;
+        font-size: 12px;
+        width: 50%;
+        padding-top: 3%;
+    }
+    .contactbtn {
+        height: 40px;
+        font-size: 12px;
+        width: 60%;
+        padding-top: 3%;
+    }
+    .icons {
+        width: 90%;
+        height: 90%;
+       
+    }
+
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+    .catalbtn {
+        width: 70%;
+    }
+    .contactbtn {
+        width: 70%;
+    }
+
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1280px) {
+    .catalbtn {
+        width: 80%;
+    }
+    .contactbtn {
+        width: 70%;
+    }
+}
