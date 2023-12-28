@@ -1,0 +1,87 @@
+.textcontainer{
+    position: relative;
+}
+.textcontainer::before,
+.textcontainer::after {
+    content: "";
+    position: absolute;
+    width: 150px; /* Ancho del borde de las esquinas */
+    height: 150px; /* Altura del borde de las esquinas */
+}
+.textcontainer::before {
+    top: 0;
+    left: 0;
+    border-top: 4px solid #356E82;
+    border-left: 4px solid #356E82;
+    filter: drop-shadow(0px 4px 4px rgba(53, 110, 130, 0.74));
+    animation-duration: 2.5s;
+    animation-name: slideinbefore;
+}
+
+@keyframes slideinbefore {
+  from {
+    margin-left: 50%;
+    width: 150px;
+  }
+
+  to {
+    margin-left: 0%;
+    width: 150px;
+  }
+}
+.textcontainer::after {
+    bottom: 0%;
+    right: 0%;
+    border-right: 4px solid #F85800;
+    border-bottom: 4px solid #F85800;
+    filter: drop-shadow(0px 4px 4px rgba(248, 88, 0, 0.74));
+    animation-duration: 2.5s;
+    animation-name: slideinafter;
+}
+@keyframes slideinafter {
+    from {
+      margin-right: 50%;
+      width: 150px;
+    }
+  
+    to {
+      margin-right: 0%;
+      width: 150px;
+    }
+  }
+@media screen and (max-width: 1120px) {
+    .textcontainer::after,
+    .textcontainer::before {
+        width: 150px;
+        height: 150px;
+    }
+    .textcontainer::before {
+        top: 1%;
+        left: -2%;
+        margin: auto
+    }
+}
+@media screen and (max-width: 748px) {
+    .textcontainer::after,
+    .textcontainer::before {
+        width: 100px;
+        height: 100px;
+    }
+    .textcontainer::before {
+        top: 5%;
+        left: 0%;
+        margin: auto
+    }
+}
+@media screen and (max-width: 480px) {
+    .textcontainer::after,
+    .textcontainer::before {
+        width: 100px;
+        height: 100px;
+    }
+    .textcontainer::before {
+        top: 1%;
+        left: 0%;
+        margin: auto
+    }
+}
