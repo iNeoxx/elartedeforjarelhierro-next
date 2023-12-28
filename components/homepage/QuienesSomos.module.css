@@ -72,6 +72,28 @@
         left: 0%;
         margin: auto
     }
+    @keyframes slideinafter {
+        from {
+          margin-right: 50%;
+          width: 100px;
+        }
+      
+        to {
+          margin-right: 0%;
+          width: 100px;
+        }
+      }
+      @keyframes slideinbefore {
+        from {
+          margin-left: 50%;
+          width: 100px;
+        }
+      
+        to {
+          margin-left: 0%;
+          width: 100px;
+        }
+      }
 }
 @media screen and (max-width: 480px) {
     .textcontainer::after,
