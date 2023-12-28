@@ -47,7 +47,7 @@ export default function App() {
         {menuItems.map((item, index) => (
           <NavbarItem
           key={`${item}-${index}`}
-          className={`hover:text-[#C93400] hidden sm:flex ${
+          className={`hover:text-[#C93400] hover:transition duration-100 hidden sm:flex ${
             router.asPath === `/${item.toLowerCase().replace(/\s/g, '-')}` ||
               router.asPath.startsWith(`/${item.toLowerCase().replace(/\s/g, '-')}/`)
               ? "text-[#C93400]"
