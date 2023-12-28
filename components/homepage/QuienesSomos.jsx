@@ -6,7 +6,7 @@ export default function QuienesSomos(){
     return(
         <section className="container max-w-full pt-16 pb-16 text-center">
             <h2 className="font-bold max-[1024px]:text-2xl lg:text-5xl">¿Quiénes Somos?</h2>
-            <p className="hidden md:block w-2/4 text-xl mx-auto mt-3 text-center font-normal not-italic decoration-black">En "El Arte de Forjar el Hierro", somos artesanos apasionados dedicados a transformar tus ideas en obras de arte duraderas.</p>
+            <p className="hidden md:block w-2/4 text-xl mx-auto mt-3 text-center font-normal not-italic decoration-black">En &quot;El Arte de Forjar el Hierro&quot;, somos artesanos apasionados dedicados a transformar tus ideas en obras de arte duraderas.</p>
             <div className="pt-8 container max-w-full flex justify-center">
             <div className={`text-left block items-center m-auto p-10 text-base font-normal bg-white md:text-lg lg:text-2xl rounded-xl max-[1024px]:w-11/12 lg:w-4/12 xl:w-4/12 2xl:w-1/2 ${styles.textcontainer}`}>
                 <p className="font-bold">Visión:</p>
