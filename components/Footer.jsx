@@ -5,8 +5,8 @@ export default function Footer(){
     return (
       <footer class="bg-footerColor rounded-t-3xl shadow dark:bg-gray-900">
         <div class="w-full mx-auto p-4 md:py-8">
-          <div class="lg:flex lg:items-center lg:justify-between">
-            <div className="sm:order-1 lg:order-1">
+          <div class="max-[1024px]:flex max-[1024px]:flex-col lg:flex lg:items-center lg:justify-between">
+            <div className="max-[768px]:order-1 lg:order-1">
               <Link href="/" class="flex justify-center items-center">
                 <Image
                   src="/logofooter.svg"
@@ -16,7 +16,7 @@ export default function Footer(){
                 />
               </Link>
             </div>
-            <div class="text-lg mt-5 lg:m-0 sm:order-3 lg:order-2">
+            <div class="text-lg mt-5 lg:m-0 max-[1024px]:order-3 lg:order-2">
               <p class="text-white font-medium text-center">CONTACTA CON NOSOTROS</p>
               <div class="grid-cols-2 flex gap-5 justify-center mt-5 mb-5">
                 <Link href="/">
@@ -134,7 +134,7 @@ export default function Footer(){
                 </p>
               </div>
             </div>
-            <div className="mt-8 lg:mt-0 sm:order-2 lg:order-3">
+            <div className="mt-8 lg:mt-0 max-[1024px]:order-2 lg:order-3">
               <ul class="lg:flex lg:flex-wrap items-center mb-6 text-lg font-medium text-white text-center lg:leading-none leading-10">
                 <li className="">
                   <a href="#" class="hover:underline lg:me-6">
