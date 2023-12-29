@@ -9,32 +9,7 @@
 .card{
     border: 2px solid #497EDA;
 }
-/* .textfirst {
-    animation-duration: 1.5s;
-    animation-name: slidefirst;
-} */
-/* .textsecond {
-    animation-duration: 2.5s;
-    animation-name: slidesecond;
-} */
-@keyframes slidefirst {
-    from {
-        margin-right: 100%;
-    }
-    to {
-        margin-right: 15%;
-    }
-}
-@keyframes slidesecond {
-    from{
-        position: relative;
-        margin-bottom: 100%;
-    }
-    to{
-        margin-bottom: 0%;
-        margin-left: 0%;
-    }
-}
+
 
 @media screen and (max-width: 640px) {
     .card {
