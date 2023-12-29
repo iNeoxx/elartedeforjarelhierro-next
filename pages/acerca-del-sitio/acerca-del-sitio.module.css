@@ -1,0 +1,78 @@
+.separator {
+    width: 80%;
+    stroke-width: 3px;
+    background: #497EDA;
+    height: 4px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05)) drop-shadow(0px 4px 4px rgba(73, 126, 218, 0.40));
+}
+
+.card{
+    border: 2px solid #497EDA;
+}
+/* .textfirst {
+    animation-duration: 1.5s;
+    animation-name: slidefirst;
+} */
+/* .textsecond {
+    animation-duration: 2.5s;
+    animation-name: slidesecond;
+} */
+@keyframes slidefirst {
+    from {
+        margin-right: 100%;
+    }
+    to {
+        margin-right: 15%;
+    }
+}
+@keyframes slidesecond {
+    from{
+        position: relative;
+        margin-bottom: 100%;
+    }
+    to{
+        margin-bottom: 0%;
+        margin-left: 0%;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .card {
+        height: 356px;
+        border: solid 1px #497EDA;
+    }
+    .developerimage {
+        /* width: 90%; */
+        height: 170px;
+        object-fit: cover;
+    }
+}
+@media screen and (min-width: 640px) and (max-width: 768px){
+    .developerimage{
+        height: 240px;
+    }
+    .card {
+        height: 400px;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .developerimage {
+        height: 200px;
+        object-fit: cover;
+    }
+    .card {
+        height: auto;
+    }
+
+}
+@media screen and (min-width: 1024px) {
+    .separator{
+        /* display: none; */
+        width: 4px;
+        height: 100%;
+    }
+    .developerimage {
+        height: 280px;
+        object-fit: cover;
+    }
+}

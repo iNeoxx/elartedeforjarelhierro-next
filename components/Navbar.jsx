@@ -22,7 +22,7 @@ export default function App() {
   const menuItems = [
     "Blog",
     "Catalogo",
-    "Acerca de Nosotros",
+    "Acerca del Sitio",
   ];
 
   return (
