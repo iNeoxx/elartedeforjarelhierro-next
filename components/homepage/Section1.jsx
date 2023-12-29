@@ -14,7 +14,7 @@ export default function Section1() {
                 />
             </div>
             <div className=" h-full m-auto lg:w-3/5">
-                <p className={`mx-auto text-center text-4xl font-black lg:text-start lg:text-9xl lg:w-3/4 lg:mx-3 lg:mb-15 ${styles.titulo1}`}>El arte de forjar el Hierro</p>
+                <p className={`mx-auto text-center text-4xl font-black lg:text-start lg:text-9xl lg:w-4/5 lg:mx-3 lg:mb-15 ${styles.titulo1}`}>El arte de forjar el Hierro</p>
                 <p className={`mx-auto text-center text-4xl font-black lg:text-start lg:text-5xl lg:w-3/4 lg:mx-3 lg:mt-10 ${styles.titulo2}`}>Convierte tus ideas en <span className={`"font-black" ${styles.gradient}`}>productos de alta calidad</span></p>
                 <div className="grid grid-cols-2 w-full mt-4 items-center lg:mt-10">
 
