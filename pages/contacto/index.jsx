@@ -77,7 +77,7 @@ export default function Contacto() {
 
   return (
     <Layout className="my-0">
-      <div className="pb-14 pt-10">
+      <div className="pt-10">
         <div>
           <h1 className="md:text-5xl text-2xl font-bold text-center mx-auto text-contactSectionColor">
             Contáctenos
@@ -87,7 +87,7 @@ export default function Contacto() {
             comunicación de preferencia
           </p>
         </div>
-        <div className="2xl:grid pb-20 2xl:grid-cols-[590px,900px] max-w-[800px] mx-auto justify-center mt-14 ">
+        <div className="2xl:grid 2xl:grid-cols-[590px,900px] max-w-[800px] mx-auto justify-center mt-14 ">
           <div className="bg-contactSectionColor 2xl:rounded-l-[50px] 2xl:rounded-none rounded-3xl lg:mx-0 mx-5 shadow-[2px_0px_38px_0px_rgba(120,116,116,0.65)]">
             <div className="">
                 <div className={styles.backgroundWhite}/>
