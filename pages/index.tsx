@@ -30,8 +30,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
       </Head>
       <Section1/>
       <QuienesSomos/>
-      <Servicio/>
-      <div className="py-16">
+      <div className="py-16 bg-[#EEEDED] ">
         <div className="text-center">
         <h2 className="mb-10 max-[1024px]:text-2xl lg:text-5xl font-black">Nuestros Últimos Trabajos Realizados</h2>
         </div>
@@ -56,6 +55,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
         </Button>
           </div>
       </div>
+      <Servicio/>
       <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-14">
         <h2 className="mb-10 max-[1024px]:text-2xl lg:text-5xl font-black text-center">Consulta Nuestro Catálogo</h2>
         <div className="grid justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
