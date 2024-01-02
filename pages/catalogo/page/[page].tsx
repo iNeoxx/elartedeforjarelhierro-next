@@ -16,7 +16,7 @@ interface CatalogPageProps {
     tags: DrupalTaxonomyTerm[]
     page: Pick<PagerProps, "current" | "total">
 }
-const PRODUCTS_PER_PAGE = 2
+const PRODUCTS_PER_PAGE = 16
 export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
     return (
       <Layout>

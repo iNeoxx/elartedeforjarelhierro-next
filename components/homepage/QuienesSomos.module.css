@@ -7,6 +7,7 @@
     position: absolute;
     width: 150px; /* Ancho del borde de las esquinas */
     height: 150px; /* Altura del borde de las esquinas */
+    margin: 10px;
 }
 .textcontainer::before {
     top: 0;
