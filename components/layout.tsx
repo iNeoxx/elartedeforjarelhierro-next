@@ -18,7 +18,7 @@ export function Layout({ children }) {
         <header>
           <Navbar/>
         </header>
-        <main className="py-10 mx-auto">{children}</main>
+        <main className="pt-6 mx-auto">{children}</main>
         <Footer />
       </NextUIProvider>
   )

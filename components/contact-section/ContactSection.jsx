@@ -2,12 +2,14 @@ import React, { useState, useRef } from "react";
 import emailjs from "@emailjs/browser"
 import { Button, Checkbox } from "@nextui-org/react";
 import toast, { Toaster } from 'react-hot-toast';
+import styles from './ContactSection.module.css'
 import Link from "next/link";
 
 
 export default function ContactSection() {
   const form = useRef();
-  const [isSelected, setIsSelected] = useState(false)
+  const [isSelected, setIsSelected] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const [formData, setFormData] = useState({
     form_user_name: '',
@@ -74,7 +76,7 @@ export default function ContactSection() {
 
   return (
     <div className="bg-contactSectionColor max-w-4xl  mx-auto max-[930px]:mx-3 rounded-3xl pb-8 shadow-contactShadow mt-[6rem] mb-10">
-      <h2 className="font-bold text-2xl sm:text-5xl text-white text-center pt-10 ">
+      <h2 className="font-bold text-2xl sm:text-5xl text-white text-center pt-5 sm:pt-12 pb-6 sm:pb-10">
         Contacta con nosotros
       </h2>
       <form
@@ -173,7 +175,9 @@ export default function ContactSection() {
           type="submit"
           value="Send"
           onChange={handleChange}
-          className="text-black rounded-2xl bg-white flex mx-auto mt-8 font-bold text-sm max-w-[248px] w-full h-14"
+          className="text-black rounded-2xl hover:text-white bg-white hover:bg-transparent hover:border-white hover:border-2 flex mx-auto mt-8 font-bold text-sm max-w-[248px] w-full h-14"
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
         >
           <svg
             width="18"
@@ -186,7 +190,7 @@ export default function ContactSection() {
               fill-rule="evenodd"
               clip-rule="evenodd"
               d="M16.6653 9.99996C16.6653 14.4182 13.2368 17.9999 9.00806 17.9999C7.64894 18.0067 6.30845 17.6226 5.09998 16.8799L1.3508 17.9999L2.63148 14.4308C1.82268 13.1622 1.3508 11.6388 1.3508 9.99996C1.3508 5.58169 4.77934 2 9.00806 2C13.2368 2 16.6653 5.58169 16.6653 9.99996ZM6.13659 8.8571H4.22227V11.1428H6.13659V8.8571ZM13.7938 8.8571H11.8795V11.1428H13.7938V8.8571ZM8.0509 8.8571H9.96522V11.1428H8.0509V8.8571Z"
-              fill="black"
+              className={hover ? styles.svgFillHover : styles.svgFillNormal}
             />
           </svg>
           Enviar mensaje

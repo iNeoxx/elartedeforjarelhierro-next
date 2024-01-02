@@ -4,10 +4,12 @@ import React, { useRef, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import emailjs from "@emailjs/browser";
 import { Button, Checkbox } from "@nextui-org/react";
+import  styles  from "./contacto.module.css"
 
 export default function Contacto() {
   const form = useRef();
   const [isSelected, setIsSelected] = useState(false);
+  const [hover, setHover] = useState(false);
 
   const [formData, setFormData] = useState({
     form_user_name: "",
@@ -74,24 +76,27 @@ export default function Contacto() {
   };
 
   return (
-    <Layout>
-      <div className="mb-14 mt-8">
+    <Layout className="my-0">
+      <div className="pb-14 pt-10">
         <div>
           <h1 className="md:text-5xl text-2xl font-bold text-center mx-auto text-contactSectionColor">
             Contáctenos
           </h1>
-          <p className="text-center text-base md:max-w-none w-full max-w-[350px] justify-center mx-auto font-normal text-colorSubtitleContact mt-4">
+          <p className="text-center md:text-base text-sm md:max-w-none w-full max-w-[300px] justify-center mx-auto font-normal text-colorSubtitleContact mt-4">
             ¿Tienes alguna pregunta? Envíanos un mensaje en tu medio de
             comunicación de preferencia
           </p>
         </div>
-        <div className="2xl:grid 2xl:grid-cols-[590px,900px] max-w-[800px] mx-auto justify-center mt-14">
-          <div className="bg-contactSectionColor rounded-xl lg:mx-0 mx-5">
-            <div className="text-center 2xl:pt-28 mx-auto pt-10">
-              <h2 className="text-white font-semibold text-[28px] text-center">
+        <div className="2xl:grid pb-20 2xl:grid-cols-[590px,900px] max-w-[800px] mx-auto justify-center mt-14 ">
+          <div className="bg-contactSectionColor 2xl:rounded-l-[50px] 2xl:rounded-none rounded-3xl lg:mx-0 mx-5 shadow-[2px_0px_38px_0px_rgba(120,116,116,0.65)]">
+            <div className="">
+                <div className={styles.backgroundWhite}/>
+            </div>
+            <div className="text-center 2xl:pt-28 mx-auto pt-10 sm:max-w-none max-w-[200px]">
+              <h2 className="text-white font-semibold md:text-[28px] text-2xl text-center">
                 Ponte en contacto con nosotros
               </h2>
-              <p className="text-[#C9C9C9] text-lg font-normal text-center sm:mt-5">
+              <p className="text-[#C9C9C9] md:text-lg text-sm font-normal text-center sm:mt-5">
                 En distintos medios sociales
               </p>
             </div>
@@ -166,6 +171,9 @@ export default function Contacto() {
                   <p>Sardinal de Carrillo</p>
                 </div>
               </div>
+            </div>
+            <div className="flex justify-end">
+              <div className={styles.backgroundWhite2}/>
             </div>
             <div className="flex gap-9 2xl:ml-10 2xl:mt-[200px] mt-28 2xl:pb-12 pb-10 2xl:justify-normal justify-center">
               <Link href="/">
@@ -244,7 +252,7 @@ export default function Contacto() {
               </Link>
             </div>
           </div>
-          <div className="bg-white m-10">
+          <div className="2xl:bg-[#EEEDED] bg-none p-10 2xl:shadow-[0px_0px_38px_0px_rgba(120,116,116,0.65)] 2xl:rounded-r-[50px] rounded-r-none">
             <form ref={form} onSubmit={sendEmail}>
               <div className="mx-auto justify-center 2xl:mt-0 mt-12 sm:inline-flex sm:gap-10 w-full">
                 <div className="w-full">
@@ -257,7 +265,7 @@ export default function Contacto() {
                       name="form_user_name"
                       radius="lg"
                       required
-                      className="peer text-sm m-0 block sm:h-[58px] w-full rounded-3xl border-2 border-solid border-contactSectionColor bg-white  px-6 py-4 font-normal leading-tight text-contactSectionColor transition duration-200  placeholder:text-contactSectionColor focus:border-contactSectionColor focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-contactSectionColor focus:outline-none peer-focus:text-contactSectionColor dark:focus:border-primary dark:peer-focus:text-contactSectionColor [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] h-[48px]"
+                      className="peer text-sm m-0 block sm:h-[58px] w-full rounded-3xl border-2 border-solid border-contactSectionColor bg-transparent  px-6 py-4 font-normal leading-tight text-contactSectionColor transition duration-200  placeholder:text-contactSectionColor focus:border-contactSectionColor focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-contactSectionColor focus:outline-none peer-focus:text-contactSectionColor dark:focus:border-primary dark:peer-focus:text-contactSectionColor [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] h-[48px]"
                       id="floatingInput"
                       placeholder=""
                       value={formData.form_user_name}
@@ -283,7 +291,7 @@ export default function Contacto() {
                       name="user_email"
                       radius="lg"
                       required
-                      className="peer text-sm m-0 block sm:h-[58px] h-[48px] w-full rounded-3xl border-2 border-solid border-contactSectionColor bg-white px-6 py-4 font-normal leading-tight text-contactSectionColor transition duration-200  placeholder:text-contactSectionColor focus:border-contactSectionColor focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-contactSectionColor focus:outline-none peer-focus:text-contactSectionColor dark:focus:border-primary dark:peer-focus:text-contactSectionColor [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
+                      className="peer text-sm m-0 block sm:h-[58px] h-[48px] w-full rounded-3xl border-2 border-solid border-contactSectionColor bg-transparent px-6 py-4 font-normal leading-tight text-contactSectionColor transition duration-200  placeholder:text-contactSectionColor focus:border-contactSectionColor focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-contactSectionColor focus:outline-none peer-focus:text-contactSectionColor dark:focus:border-primary dark:peer-focus:text-contactSectionColor [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
                       id="floatingInput"
                       placeholder=""
                       value={formData.user_email}
@@ -299,14 +307,14 @@ export default function Contacto() {
                 </div>
               </div>
               <div className="mx-auto sm:mt-16 mt-10">
-                <h3 className="text-colorInputsForm font-medium text-sm mb-2">
+                <h3 className="text-contactSectionColor font-medium text-sm mb-2">
                   Mensaje
                 </h3>
                 <div className="relative">
                   <textarea
                     name="message"
                     radius="lg"
-                    className="peer text-sm m-0 block h-[130px] w-full rounded-3xl border-2 border-solid border-colorInputsForm bg-white  px-6 py-4 font-normal leading-tight text-colorInputsForm transition duration-200  placeholder:text-colorInputsForm focus:border-colorInputsForm focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-colorInputsForm focus:outline-none peer-focus:text-colorInputsForm dark:focus:border-primary dark:peer-focus:text-colorInputsForm [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] resize-y"
+                    className="peer text-sm m-0 block h-[130px] w-full rounded-3xl border-2 border-solid border-contactSectionColor bg-transparent  px-6 py-4 font-normal leading-tight text-contactSectionColor transition duration-200  placeholder:text-contactSectionColor focus:border-contactSectionColor focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-contactSectionColor focus:outline-none peer-focus:text-contactSectionColor dark:focus:border-primary dark:peer-focus:text-contactSectionColor [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] resize-y"
                     id="floatingInput"
                     placeholder=""
                     required
@@ -353,9 +361,10 @@ export default function Contacto() {
                 type="submit"
                 value="Send"
                 onChange={handleChange}
-                className="text-white rounded-2xl bg-colorInputsForm flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14"
-              >
-                <svg
+                className="text-white rounded-2xl bg-contactSectionColor hover:bg-transparent hover:text-contactSectionColor hover:border-contactSectionColor hover:border flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14"
+                onMouseEnter={() => setHover(true)}
+                onMouseLeave={() => setHover(false)}
+                startContent={<svg
                   width="20"
                   height="20"
                   viewBox="0 0 20 20"
@@ -366,9 +375,10 @@ export default function Contacto() {
                     fill-rule="evenodd"
                     clip-rule="evenodd"
                     d="M19 9.99996C19 14.4182 14.9703 17.9999 10 17.9999C8.40255 18.0067 6.827 17.6226 5.40662 16.8799L1 17.9999L2.50525 14.4308C1.55463 13.1622 1 11.6388 1 9.99996C1 5.58169 5.02975 2 10 2C14.9703 2 19 5.58169 19 9.99996ZM6.625 8.8571H4.375V11.1428H6.625V8.8571ZM15.625 8.8571H13.375V11.1428H15.625V8.8571ZM8.875 8.8571H11.125V11.1428H8.875V8.8571Z"
-                    fill="white"
+                    className={hover ? styles.svgHover : styles.svgNormal}
                   />
-                </svg>
+                </svg>}
+              >
                 Enviar mensaje
               </Button>
               <Toaster />
