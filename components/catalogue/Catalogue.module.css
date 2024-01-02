@@ -79,6 +79,26 @@
     margin: auto;
     border: 1px solid #768692;
 }
+.iniciobtn{
+    border-radius: 16px;
+    background: #C93400;
+    padding: 1.5rem 1.5rem 1.5rem 1.5rem;
+    color: #FFF;
+    font-weight: 700;
+    border: 2px solid #C93400;
+    font-size: 16px;
+}
+
+.iniciobtn:hover{
+    border-radius: 16px;
+    border: 2px solid #C93400;
+    background: white;
+    color: #C93400;
+}
+
+.iniciobtn:hover svg path{
+    fill: #C93400;
+}
 @media only screen and (max-width: 640px) {
     .product_image{
         height: 400px;
