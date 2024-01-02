@@ -15,11 +15,13 @@ export function Layout({ children }) {
   return (
       <NextUIProvider className={roboto.className}>
       <PreviewAlert/>
-        <header>
-          <Navbar/>
-        </header>
-        <main className="pt-6 mx-auto">{children}</main>
-        <Footer />
+        <div className="flex flex-col min-h-screen">
+          <header>
+            <Navbar/>
+          </header>
+          <main className="pt-6 flex-1 w-full mx-auto">{children}</main>
+          <Footer />
+        </div>
       </NextUIProvider>
   )
 }
