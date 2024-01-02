@@ -13,7 +13,7 @@ interface BlogPageProps {
     nodes: DrupalNode[]
     page: Pick<PagerProps, "current" | "total">
   }
-  const ARTICLES_PER_PAGE = 2
+  const ARTICLES_PER_PAGE = 12
   export default function IndexPage({ nodes, page }: BlogPageProps) {
     return (
       <Layout>

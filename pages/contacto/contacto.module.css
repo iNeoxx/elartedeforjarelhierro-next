@@ -1,0 +1,25 @@
+.backgroundWhite {
+    background: rgba(255, 255, 255, 0.12);
+    filter: blur(2px);
+    width: 120px;
+    height: 120px;
+    position: absolute;
+    border-bottom-right-radius: 250px;
+}
+
+.backgroundWhite2 {
+  background: rgba(255, 255, 255, 0.12);
+  filter: blur(2px);
+  width: 280px;
+  height: 280px;
+  position: absolute;
+  border-top-left-radius: 300px;
+}
+
+.svgNormal {
+  fill: white;
+}
+
+.svgHover {
+  fill: #497EDA;
+}

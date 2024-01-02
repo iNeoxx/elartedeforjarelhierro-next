@@ -22,7 +22,7 @@ export default function App() {
   const menuItems = [
     "Blog",
     "Catalogo",
-    "Acerca de Nosotros",
+    "Acerca del Sitio",
   ];
 
   return (
@@ -44,25 +44,29 @@ export default function App() {
         </Link>
       </NavbarContent>
       <NavbarContent className="font-bold gap-10" justify="end">
+        <NavbarItem className={`hover:text-[#C93400] hover:transition duration-100 hidden sm:flex`}>
+          <Link href="/">
+            Inicio
+          </Link>
+        </NavbarItem>
         {menuItems.map((item, index) => (
           <NavbarItem
-          key={`${item}-${index}`}
-          className={`hover:text-[#C93400] hover:transition duration-100 hidden sm:flex ${
-            router.asPath === `/${item.toLowerCase().replace(/\s/g, '-')}` ||
+            key={`${item}-${index}`}
+            className={`hover:text-[#C93400] hover:transition duration-100 hidden sm:flex ${router.asPath === `/${item.toLowerCase().replace(/\s/g, '-')}` ||
               router.asPath.startsWith(`/${item.toLowerCase().replace(/\s/g, '-')}/`)
               ? "text-[#C93400]"
               : ""
-          }`}
-        >
-          <Link
-            color="foreground"
-            className="w-full"
-            href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
-            size="lg"
+              }`}
           >
-            {item}
-          </Link>
-        </NavbarItem>
+            <Link
+              color="foreground"
+              className="w-full"
+              href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
+              size="lg"
+            >
+              {item}
+            </Link>
+          </NavbarItem>
         ))}
         <NavbarItem>
           <Button
@@ -91,6 +95,11 @@ export default function App() {
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className="pt-10">
+        <NavbarMenuItem>
+          <Link href="/">
+            Inicio
+          </Link>
+        </NavbarMenuItem>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
@@ -98,8 +107,8 @@ export default function App() {
                 index === 2
                   ? "primary"
                   : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
+                    ? "danger"
+                    : "foreground"
               }
               className="w-full"
               href={`/${item.toLowerCase().replace(/\s/g, '-')}`}

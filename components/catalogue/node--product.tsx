@@ -19,7 +19,7 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
   const router = useRouter()
   const openWhatsApp = () => {
     const currentUrl = router.asPath;
-    const message = `Hola, me interesa este producto del catálogo: ${currentUrl}`;
+    const message = `Hola, me interesa este producto del catálogo: ${'https://www.elartedeforjarelhierro.com'+currentUrl}`;
     const whatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`;
 
     window.open(whatsappLink, '_blank');
@@ -37,7 +37,6 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
             <h2 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10 max-[1024px]:pt-10 max-[640px]:text-2xl">
               {node.title}
             </h2>
-            <h4 className="text-center">Aqui iria un subtitulo xd</h4>
             <div className="flex gap-5 justify-center">
             {node.field_product_type.map((tag) => (
               <Link key={tag.id} href={tag.path.alias}>

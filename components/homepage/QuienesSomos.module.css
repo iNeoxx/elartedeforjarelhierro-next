@@ -7,6 +7,7 @@
     position: absolute;
     width: 150px; /* Ancho del borde de las esquinas */
     height: 150px; /* Altura del borde de las esquinas */
+    margin: 10px;
 }
 .textcontainer::before {
     top: 0;
@@ -25,7 +26,7 @@
   }
 
   to {
-    margin-left: 0%;
+    margin-left: 1%;
     width: 150px;
   }
 }
@@ -45,7 +46,7 @@
     }
   
     to {
-      margin-right: 0%;
+      margin-right: 1%;
       width: 150px;
     }
   }
@@ -72,6 +73,28 @@
         left: 0%;
         margin: auto
     }
+    @keyframes slideinafter {
+        from {
+          margin-right: 50%;
+          width: 100px;
+        }
+      
+        to {
+          margin-right: 0%;
+          width: 100px;
+        }
+      }
+      @keyframes slideinbefore {
+        from {
+          margin-left: 50%;
+          width: 100px;
+        }
+      
+        to {
+          margin-left: 0%;
+          width: 100px;
+        }
+      }
 }
 @media screen and (max-width: 480px) {
     .textcontainer::after,
