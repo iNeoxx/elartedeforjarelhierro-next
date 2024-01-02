@@ -10,6 +10,33 @@
     border: 2px solid #497EDA;
 }
 
+.textfirst {
+    animation-name: slideinleft;
+    animation-duration: 1s;
+}
+
+.textsecond{
+    animation-name: slideinright;
+    animation-duration: 1s;
+}
+
+@keyframes slideinleft {
+    from {
+        transform: translateX(-300px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+@keyframes slideinright {
+    from {
+        transform: translateX(300px);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
 
 @media screen and (max-width: 640px) {
     .card {

@@ -9,13 +9,9 @@ const AcercaDelSitio = () => {
             <section className="container max-w-full grid bg-[#EEEDED] py-10">
                 <h1 className="text-4xl font-bold mx-auto text-center md:text-9xl">Acerca del Sitio</h1>
                 <div className="block mt-10 lg:grid lg:grid-cols-11 lg:gap-0 lg:mx-auto md:mt-16">
-                    <div className="animate__animated animate__backInLeft">
                         <p className={`mx-auto w-3/4 text-base font-bold text-center mb-10 md:text-3xl md:mb-16 lg:w-5/5 lg:text-start lg:col-span-5 ${styles.textfirst}`}>En el corazón de la web, El Arte de Forjar el Hierro cobra vida gracias al trabajo incansable de nuestro equipo de desarrollo. Este espacio es mucho más que líneas de código y diseño; es la amalgama de nuestras ideas, habilidades y la pasión compartida por la herrería.</p>
-                    </div>
                     <div className={`mx-auto lg:col-span-1 ${styles.separator}`}></div>
-                    <div className="animate__animated animate__backInRight">
                         <p className={`mx-auto w-3/4 text-base font-bold text-center mt-10 mb-10 md:text-3xl md:mt-0 md:mb-16 lg:text-start lg:w-6/6 lg:col-span-5 ${styles.textsecond}`}>Sumergidos en el mundo tecnológico, exploramos y adoptamos Next-Drupal. Cada elección técnica refleja nuestro compromiso con la innovación y la eficiencia.</p>
-                    </div>
                 </div>
             </section>
             <section className="container max-w-full grid bg-white py-10">
