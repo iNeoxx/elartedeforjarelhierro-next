@@ -36,10 +36,10 @@ export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
           tags={tags}/>
          <FormSearch/> 
           </div>
-          {/* Grid de las cards */}
-          <div
-            className={`grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 lg:grid-cols-3 md:col-auto md:gap-3 2xl:grid-cols-4`}
-          >
+            {/* Grid de las cards */}
+            <div
+            className={`grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-3 min-[1550px]:grid-cols-4`}
+            >
             {nodes?.length ? (
               nodes.map((node) => (
                 <div key={node.id}>
