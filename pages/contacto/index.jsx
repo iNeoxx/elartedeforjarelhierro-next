@@ -361,7 +361,7 @@ export default function Contacto() {
                 type="submit"
                 value="Send"
                 onChange={handleChange}
-                className="text-white rounded-2xl bg-contactSectionColor hover:bg-transparent hover:text-contactSectionColor hover:border-contactSectionColor hover:border flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14"
+                className="text-white rounded-2xl bg-contactSectionColor hover:bg-transparent hover:text-contactSectionColor hover:border-contactSectionColor hover:border-2 flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14"
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 startContent={<svg
