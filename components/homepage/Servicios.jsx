@@ -22,7 +22,7 @@ export default function Servicios() {
                         <div className="py-5 flex items-start">
                             {
                                 card.footer === "Contacto" ? (
-                                    <Button as={Link} href="/contact" className={`grid grid-cols-5 py-1 mx-2 gap-x-0 ${styles.contactbtn}`}>
+                                    <Button as={Link} href="/contacto" className={`grid grid-cols-5 py-1 mx-2 gap-x-0 ${styles.contactbtn}`}>
                                         <span className='col-span-4 text-sm font-bold sm:pt-0.5 h-5/6 lg:text-base lg:mb-1'>¡Contáctanos!</span>
                                         <svg
                                         xmlns="http://www.w3.org/2000/svg"
