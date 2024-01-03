@@ -2,6 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer(){
+
+  const footerItems  = [
+    "BLOG",
+    "CATALOGO",
+    "ACERCA DEL SITIO",
+    "CONTACTO"
+  ]
     return (
       <footer class="bg-footerColor mt-24 rounded-t-3xl shadow dark:bg-gray-900">
         <div class="w-full mx-auto p-4 md:py-8">
@@ -136,26 +143,13 @@ export default function Footer(){
             </div>
             <div className="mt-8 lg:mt-0 max-[1024px]:order-2 lg:order-3">
               <ul class="lg:flex lg:flex-wrap items-center mb-6 text-lg font-medium text-white text-center lg:leading-none leading-10">
-                <li className="">
-                  <a href="#" class="hover:underline lg:me-6">
-                    BLOG
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:underline lg:me-6">
-                    CATALOGO
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:underline lg:me-6">
-                    ACERCA DE
-                  </a>
-                </li>
-                <li>
-                  <a href="#" class="hover:underline lg:me-6">
-                    CONTACTOS
-                  </a>
-                </li>
+                {footerItems.map((item, i) => (
+                  <li key={`${item}-${i}`}>
+                    <Link className="hover:underline lg:me-6" href={`/${item.toLowerCase().replace(/\s/g, '-')}`}>
+                      {item}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           </div>
