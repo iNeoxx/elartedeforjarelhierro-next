@@ -9,9 +9,9 @@ export default function Servicios() {
             <div className="text-center">
                 <h2 className="font-bold max-[1024px]:text-2xl  lg:text-5xl">Nuestros Servicios</h2>
             </div>
-            <div className="pt-10 grid justify-items-center sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 mx-auto">
+            <div className="pt-10 grid justify-items-center sm:grid-cols-1 md:grid-cols-2 mx-auto">
                 {data.map((card =>
-                    <div className="mb-10 grid items-center w-5/6 p-6 bg-[#EEEDED] border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700" key={card.title}>
+                    <div className="mb-10 grid items-center w-5/6 p-6 bg-[#EEEDED] border border-gray-200 rounded-lg shadow hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700 md:w-3/5" key={card.title}>
                         {/* title */}
                         <div className="py-5">
                             <h3 className="mb-2 text-xl font-bold min-[1024px]:text-2xl tracking-tight text-gray-900 dark:text-white">{card.title}</h3>
