@@ -23,7 +23,7 @@ Asegúrate de tener instalado lo siguiente antes de comenzar:
 - [npm](https://www.npmjs.com/) (viene con Node.js)
 
 ## Configuración del Proyecto
-1. Clona este repositorio: git clone https://github.com/iNeoxx/elartedeforjarelhierro-next.git
+1. Clona este repositorio: `git clone https://github.com/iNeoxx/elartedeforjarelhierro-next.git`
 2. Navega al directorio del proyecto: cd elartedeforjarelhierro-next
 3. Instala las dependencias: `npm install`
 ## Ejecución Local
@@ -36,6 +36,6 @@ Esto iniciará el servidor de desarrollo de Next.js y podrás acceder al sitio e
 Este proyecto está bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
 
 ## Contacto
-Para preguntas o comentarios, no dudes en contactarnos a través de [correo electrónico](hilder2805@gmail.com) o [abrir un problema.](https://github.com/iNeoxx/elartedeforjarelhierro-next/issues)
+Para preguntas o comentarios, no dudes en contactarnos a través de [correo electrónico](mailto:hilder2805@gmail.com) o [abrir un problema.](https://github.com/iNeoxx/elartedeforjarelhierro-next/issues)
 
 ## ¡Gracias por contribuir al arte de forjar el hierro con nosotros!
