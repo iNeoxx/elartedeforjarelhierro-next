@@ -5,12 +5,15 @@ import toast, { Toaster } from "react-hot-toast";
 import emailjs from "@emailjs/browser";
 import { Button, Checkbox } from "@nextui-org/react";
 import  styles  from "./contacto.module.css"
+import ReCAPTCHA from "react-google-recaptcha";
 import Head from "next/head"
 
 export default function Contacto() {
   const form = useRef();
   const [isSelected, setIsSelected] = useState(false);
   const [hover, setHover] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const recaptchaRef = useRef(null);
 
   const [formData, setFormData] = useState({
     form_user_name: "",
@@ -22,8 +25,27 @@ export default function Contacto() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const handleRecaptcha = (token) => {
+    setRecaptchaToken(token);
+  };
+
   const sendEmail = (e) => {
     e.preventDefault();
+
+    if(!recaptchaToken) {
+      toast("Por favor, completa el reCAPTCHA!", {
+        style: {
+          border: "2px solid #f39200",
+          borderRadius: "1rem",
+          backgroundColor: "white",
+          color: "#f39200",
+          fontWeight: "bold",
+          padding: "15px",
+          fontSize: "1.1rem",
+        }
+      });
+      return;
+    }
 
     if (
       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
@@ -40,7 +62,7 @@ export default function Contacto() {
           process.env.NEXT_PUBLIC_EMAILJS_USER_ID
         )
         .then(
-          toast.success("Formulario enviado correctamente!", {
+          toast.success("Se envió el formulario con exito!", {
             style: {
               border: "2px solid #43ce14",
               borderRadius: "1rem",
@@ -58,7 +80,7 @@ export default function Contacto() {
             user_email: "",
             message: "",
           }),
-          setIsSelected(false)
+          setIsSelected(false),
         );
     } else {
       toast.error("No se pudo enviar el formulario!", {
@@ -73,6 +95,10 @@ export default function Contacto() {
         },
         duration: 3200,
       });
+    }
+    if (recaptchaRef.current) {
+      recaptchaRef.current.reset();
+      setRecaptchaToken(null);
     }
   };
 
@@ -364,6 +390,13 @@ export default function Contacto() {
                   </Link>
                 </Checkbox>
                 <p className="text-default-500"></p>
+              </div>
+              <div className="justify-center mx-auto flex mt-5">
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                  onChange={handleRecaptcha}
+                />
               </div>
               <Button
                 type="submit"
