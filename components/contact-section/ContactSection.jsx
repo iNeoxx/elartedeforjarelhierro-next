@@ -4,12 +4,15 @@ import { Button, Checkbox } from "@nextui-org/react";
 import toast, { Toaster } from 'react-hot-toast';
 import styles from './ContactSection.module.css'
 import Link from "next/link";
+import ReCAPTCHA from "react-google-recaptcha"
 
 
 export default function ContactSection() {
   const form = useRef();
   const [isSelected, setIsSelected] = useState(false);
   const [hover, setHover] = useState(false);
+  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const recaptchaReft = useRef(null);
 
   const [formData, setFormData] = useState({
     form_user_name: '',
@@ -21,8 +24,27 @@ export default function ContactSection() {
     setFormData({...formData, [e.target.name]: e.target.value});
   }
 
+  const handleRecaptcha = (token) => {
+    setRecaptchaToken(token);
+  }
+
   const sendEmail = (e) => {
     e.preventDefault();
+
+    if(!recaptchaToken) {
+      toast("Por favor, completa el reCAPTCHA!", {
+        style: {
+          border: "2px solid #f39200",
+          borderRadius: "1rem",
+          backgroundColor: "white",
+          color: "#f39200",
+          fontWeight: "bold",
+          padding: "15px",
+          fontSize: "1.1rem",
+        }
+      });
+      return;
+    }
 
     if (
       process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID &&
@@ -38,7 +60,7 @@ export default function ContactSection() {
           form.current,
           process.env.NEXT_PUBLIC_EMAILJS_USER_ID
         )
-        .then(toast.success("Se envio el formulario correctamente",{
+        .then(toast.success("Se envió el formulario con exito!",{
           style: {
             border: "2px solid #43ce14",
             borderRadius: "1rem",
@@ -71,6 +93,10 @@ export default function ContactSection() {
         },
         duration: 3200
       });
+    }
+    if (recaptchaReft.current) {
+      recaptchaReft.current.reset();
+      setRecaptchaToken(null);
     }
   };
 
@@ -170,6 +196,13 @@ export default function ContactSection() {
             Estoy de acuerdo con las <Link href="/" className="font-black">Politicas de Privacidad</Link> y <Link href="/" className="font-black">Términos de Uso.</Link>
           </Checkbox>
           <p className="text-default-500"></p>
+        </div>
+        <div className="justify-center mx-auto flex mt-5">
+            <ReCAPTCHA
+              ref={recaptchaReft}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              onChange={handleRecaptcha}
+            />
         </div>
         <Button
           type="submit"
