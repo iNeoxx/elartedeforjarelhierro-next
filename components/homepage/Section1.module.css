@@ -1,0 +1,104 @@
+.gradient {
+    background: linear-gradient(120deg, #C93400 0%, #345E87 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.titulo1 {
+    color: #1D2721;
+}
+.titulo2{
+    color: #1D2721;
+}
+.catalbtn {
+    border-radius: 20px;
+    font-size: 24px;
+    height:70px;
+    background: #C93400;
+    color: white;
+    width: 65%;
+    animation: tilt-shaking 0.5s ease-in-out 4;
+    box-shadow: 0px 4px 6px -2px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(201, 52, 0, 0.40);
+}
+.catalbtn svg {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+.catalbtn:hover{
+    border: 2px solid #C93400;
+    background: transparent;
+    color: #C93400;
+}
+.catalbtn:hover svg path {
+    /* Cambiar el color del path del SVG cuando el botón está en estado de hover */
+    stroke: #C93400; /* Cambia esto al color que desees */
+    fill: #C93400;
+}
+
+.contactbtn {
+    border-radius: 20px;
+    font-size: 24px;
+    height:70px;
+    background: #497EDA;
+    color: white;
+    width: 65%;
+    line-height: 119.187%;
+    animation: tilt-shaking 0.5s ease-in-out 4;
+    filter: drop-shadow(0px 4px 4px rgba(73, 126, 218, 0.40)) drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.05));
+}
+.contactbtn svg {
+    width: 50px;
+    height: 50px;
+    margin: auto;
+}
+.contactbtn:hover{
+    border: 2px solid #497EDA;
+    background: transparent;
+    color: #497EDA;
+}
+.contactbtn:hover svg path {
+    /* Cambiar el color del path del SVG cuando el botón está en estado de hover */
+    stroke: #497EDA; /* Cambia esto al color que desees */
+}
+
+@keyframes tilt-shaking {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(5deg); }
+    50% { transform: rotate(0eg); }
+    75% { transform: rotate(-5deg); }
+    100% { transform: rotate(0deg); }
+}
+
+@media only screen and (max-width: 640px) { 
+    .catalbtn {
+        height: 45px;
+        width: 95%;
+    }
+    .contactbtn {
+        height:45px;
+        width: 95%;
+    }
+    .contactbtn svg {
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
+    .catalbtn svg {
+        width: auto;
+        height: auto;
+        margin: auto;
+    }
+    
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1855px) {
+    .catalbtn {
+        height: 70px;
+        width: 95%;
+    }
+    .contactbtn {
+        height:70px;
+        width: 95%;
+    }
+}

@@ -1,0 +1,20 @@
+.vermas_Button{
+    border-radius: 16px;
+    background: #C93400;
+    padding: 1.7rem 1.5rem 1.7rem 1.5rem;
+    color: #FFF;
+    font-weight: 700;
+    border: 1px solid #C93400;
+}
+
+.vermas_Button:hover{
+    border-radius: 16px;
+    border: 1px solid #C93400;
+    background: white;
+    color: #C93400;
+}
+
+
+.vermas_Button:hover svg path{
+    fill: #C93400;
+}
