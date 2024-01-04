@@ -1,8 +1,8 @@
 # Sitio de Arte de Forja en Hierro
-Bienvenido a IronForgeArt, un proyecto que combina la belleza del arte de forjar el hierro con la potencia de Next.js y Drupal en un enfoque headless. Este repositorio contiene el código fuente y la estructura para el desarrollo y despliegue de nuestro sitio web.
+Bienvenido a El Arte de Forjar el Hierro - NextJs, un proyecto que combina la belleza de los articulos basados en hierro con la potencia de Next.js y Drupal en un enfoque headless. Este repositorio contiene el código fuente y la estructura para el desarrollo y despliegue de nuestro sitio web.
 
 # Descripción del Proyecto
-IronForgeArt es un sitio web dedicado a exhibir y promover el arte de forjar el hierro. Desde esculturas hasta herramientas, nuestro objetivo es destacar la habilidad y creatividad de los artesanos del hierro a través de una plataforma visualmente atractiva y fácil de explorar.
+El Arte de Forjar el Hierro es un sitio web dedicado a exhibir y promover la variedad de productos que se pueden hacer con el hierro. Desde esculturas hasta herramientas, nuestro objetivo es destacar la habilidad y creatividad de los artesanos del hierro a través de una plataforma visualmente atractiva y fácil de explorar.
 
 # Tecnologías Utilizadas
 Next.js: Plataforma de desarrollo web React de alto rendimiento y fácil de usar, ideal para aplicaciones y sitios web modernos.
