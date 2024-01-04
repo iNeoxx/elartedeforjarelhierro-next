@@ -23,8 +23,8 @@ const AcercaDelSitio = () => {
                         <CardHeader>
                             <Image
                                 src="/assets/hilder.jpg"
-                                width={240}
-                                height={240}
+                                width={500}
+                                height={500}
                                 alt="Hilder Ordonez"
                                 className={`rounded-lg m-auto w-11/12  ${styles.developerimage}`}
                             />
@@ -50,8 +50,8 @@ const AcercaDelSitio = () => {
                         <CardHeader>
                             <Image
                                 src="/assets/domingo.jpg"
-                                width={240}
-                                height={240}
+                                width={500}
+                                height={500}
                                 alt="Domingo Molina"
                                 className={`rounded-lg m-auto w-11/12 ${styles.developerimage}`}
                             />
@@ -77,8 +77,8 @@ const AcercaDelSitio = () => {
                         <CardHeader>
                             <Image
                                 src="/assets/kevin.jpg"
-                                width={240}
-                                height={240}
+                                width={500}
+                                height={500}
                                 alt="Kevin Garcia"
                                 className={`rounded-lg m-auto w-11/12 ${styles.developerimage}`}
                             />
