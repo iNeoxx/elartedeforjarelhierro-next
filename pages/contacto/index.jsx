@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import emailjs from "@emailjs/browser";
 import { Button, Checkbox } from "@nextui-org/react";
 import  styles  from "./contacto.module.css"
+import Head from "next/head"
 
 export default function Contacto() {
   const form = useRef();
@@ -77,6 +78,13 @@ export default function Contacto() {
 
   return (
     <Layout className="my-0">
+      <Head>
+        <title>Contacto | El Arte de Forjar el Hierro</title>
+        <meta
+          name="description"
+          content="Ponte en contacto con nosotros para realizar tus trabajos."
+        />
+      </Head>
       <div className="pt-10">
         <div>
           <h1 className="md:text-5xl text-2xl font-bold text-center mx-auto text-contactSectionColor">
