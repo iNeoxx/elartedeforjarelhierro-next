@@ -1,4 +1,4 @@
-# Sitio de Arte de Forja en Hierro
+# Sitio de **El Arte de Forja en Hierro**
 Bienvenido a El Arte de Forjar el Hierro - NextJs, un proyecto que combina la belleza de los articulos basados en hierro con la potencia de Next.js y Drupal en un enfoque headless. Este repositorio contiene el código fuente y la estructura para el desarrollo y despliegue de nuestro sitio web.
 
 ## Descripción del Proyecto
