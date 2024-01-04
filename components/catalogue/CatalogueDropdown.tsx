@@ -26,7 +26,7 @@ export default function CatalogueDropdown({tags, ...props}: DropdownInterface) {
           </svg>
         </Button>
       </DropdownTrigger>
-      <DropdownMenu aria-label="Dynamic Actions" items={items}>
+      <DropdownMenu aria-label="Dynamic Actions" items={items} className="overflow-y-auto max-h-60">
         {(item) => (
           <DropdownItem key={item.name} style={{ width: '100%' }}>
             <Link href={item.path} style={{ display: 'block', width: '100%', padding: '8px' }}>
