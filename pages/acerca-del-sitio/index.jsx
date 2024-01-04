@@ -1,3 +1,4 @@
+import Head from "next/head"
 import { Layout } from "components/layout"
 import styles from "./acerca-del-sitio.module.css"
 import { Card, CardHeader, CardBody } from "@nextui-org/react";
@@ -7,6 +8,13 @@ import Image from "next/image"
 const AcercaDelSitio = () => {
     return (
         <Layout>
+            <Head>
+            <title>Acerca del sitio | El Arte de Forjar el Hierro</title>
+            <meta
+            name="Catalogo"
+            content="The catalogue page of El Arte de Forjar el Hierro"
+        />
+        </Head>
             <section className="container max-w-full grid bg-[#EEEDED] py-10">
                 <h1 className="text-4xl font-bold mx-auto text-center md:text-9xl">Acerca del Sitio</h1>
                 <div className="block mt-10 overflow-hidden lg:grid lg:grid-cols-11 lg:gap-0 lg:mx-auto md:mt-16">
