@@ -1,15 +1,42 @@
-# Basic Starter
+# Sitio de Arte de Forja en Hierro
+Bienvenido a IronForgeArt, un proyecto que combina la belleza del arte de forjar el hierro con la potencia de Next.js y Drupal en un enfoque headless. Este repositorio contiene el código fuente y la estructura para el desarrollo y despliegue de nuestro sitio web.
 
-A simple starter for building your site with Next.js and Drupal.
+# Descripción del Proyecto
+IronForgeArt es un sitio web dedicado a exhibir y promover el arte de forjar el hierro. Desde esculturas hasta herramientas, nuestro objetivo es destacar la habilidad y creatividad de los artesanos del hierro a través de una plataforma visualmente atractiva y fácil de explorar.
 
-## How to use
+# Tecnologías Utilizadas
+Next.js: Plataforma de desarrollo web React de alto rendimiento y fácil de usar, ideal para aplicaciones y sitios web modernos.
 
-`npx create-next-app -e https://github.com/chapter-three/next-drupal-basic-starter`
+Drupal (Headless): CMS robusto que sirve como backend headless para gestionar el contenido del sitio.
 
-## Deploy to Vercel
+# Características Principales
+Interfaz Atractiva: Diseño atractivo y responsivo para una experiencia de usuario óptima.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fchapter-three%2Fnext-drupal-basic-starter&env=NEXT_PUBLIC_DRUPAL_BASE_URL,NEXT_IMAGE_DOMAIN,DRUPAL_PREVIEW_SECRET,DRUPAL_CLIENT_ID,DRUPAL_CLIENT_SECRET&envDescription=Learn%20more%20about%20environment%20variables&envLink=https%3A%2F%2Fnext-drupal.org%2Fdocs%2Fenvironment-variables&project-name=next-drupal&demo-title=Next.js%20for%20Drupal&demo-description=A%20next-generation%20front-end%20for%20your%20Drupal%20site.&demo-url=https%3A%2F%2Fdemo.next-drupal.org&demo-image=https%3A%2F%2Fnext-drupal.org%2Fimages%2Fdemo-screenshot.jpg)
+Exploración de Obras de Arte: Galería interactiva para explorar diversas obras de arte de forja en hierro.
 
-## Documentation
+Contenido Dinámico: Utilización de Drupal como backend headless para gestionar y actualizar fácilmente el contenido del sitio.
 
-See https://next-drupal.org
+# Requisitos del Sistema
+Asegúrate de tener instalado lo siguiente antes de comenzar:
+
+Node.js
+npm (viene con Node.js)
+
+# Configuración del Proyecto
+Clona este repositorio: git clone https://github.com/iNeoxx/elartedeforjarelhierro-next.git
+Navega al directorio del proyecto: cd elartedeforjarelhierro-next
+Instala las dependencias: 
+`npm install`
+Ejecución Local
+Para ejecutar el proyecto localmente, utiliza el siguiente comando:
+`npm run dev`
+
+Esto iniciará el servidor de desarrollo de Next.js y podrás acceder al sitio en http://localhost:3000.
+
+# Licencia
+Este proyecto está bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
+
+# Contacto
+Para preguntas o comentarios, no dudes en contactarnos a través de [correo electrónico(hilder2805@gmail.com)] o [abrir un problema.(https://github.com/iNeoxx/elartedeforjarelhierro-next/issues)]
+
+## ¡Gracias por contribuir al arte de forjar el hierro con nosotros!
