@@ -26,7 +26,7 @@ export default function NodePage({ resource, additionalContent }: NodePageProps)
     <Layout>
       <Head>
         <title>{resource.title}</title>
-        <meta name="description" content="A Next.js site powered by Drupal." />
+        <meta name="description" content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"/>
       </Head>
       {resource.type === "node--article" && <NodeArticle node={resource as DrupalNode}/>}
       {resource.type === "node--product" && <NodeCatalogo node={resource as DrupalNode} additionalContent = {additionalContent as NodeProductProps["additionalContent"]}/>}

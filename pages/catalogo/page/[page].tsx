@@ -24,7 +24,7 @@ export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
           <title>Catalogo | El Arte de Forjar el Hierro</title>
           <meta
             name="Catalogo"
-            content="The catalogue page of El Arte de Forjar el Hierro"
+            content="Pagina de catalogo de El Arte de Forjar el Hierro"
           />
         </Head>
         <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-14">

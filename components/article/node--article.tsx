@@ -5,6 +5,7 @@ import { absoluteUrl, formatDate } from "lib/utils"
 
 import styles from './node-article.module.css'
 import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl"
+import CarouselBlog from "../CarouselBlog"
 
 interface NodeArticleProps {
   node: DrupalNode
@@ -28,15 +29,9 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
       </div> */}
       
       {node.field_article_image && (
-          <Image
-            src={absoluteUrl(node.field_article_image[0].uri.url)}
-            alt={node.field_article_image[0].resourceIdObjMeta.alt}
-            width={800}
-            height={800}
-            className="mx-auto w-80 md:w-auto"
-            placeholder="blur"
-            blurDataURL={StaticBLurDataUrl()}
-          />  
+          <CarouselBlog
+          images={node.field_article_image}
+          />
       )}
       <hr className={`w-4/5 h-1 m-auto mt-10 ${styles.separator}`}/>
       {node.field_body?.processed && (
