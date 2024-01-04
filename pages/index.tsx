@@ -25,7 +25,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
         <title>El Arte de Forjar el Hierro</title>
         <meta
           name="description"
-          content="A Next.js site powered by a Drupal backend."
+          content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"
         />
       </Head>
       <Section1/>
