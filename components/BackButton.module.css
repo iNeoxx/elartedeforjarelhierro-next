@@ -1,0 +1,17 @@
+.goback_btn {
+    width: fit-content;
+    border-radius: 16px;
+    background: #497EDA;
+    color: #FFF;
+    font-weight: 700;
+    border: 1px solid #497EDA;
+}
+.goback_btn:hover{
+    border-radius: 16px;
+    border: 1px solid #497EDA;
+    background: white;
+    color: #497EDA;
+}
+.goback_btn:hover svg path{
+    fill: #497EDA;
+}
