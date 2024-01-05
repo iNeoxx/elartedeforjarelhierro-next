@@ -30,12 +30,12 @@ export default function NodePage({ resource, additionalContent }: NodePageProps)
         <meta name="description" content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"/>
         {
           resource.type=="node--article" 
-          ?(<meta name="og:image" content={absoluteUrl(resource.field_article_image[0].uri.url)}/> )
+          ?(<meta name="og:image:secure_url" content={absoluteUrl(resource.field_article_image[0].uri.url)}/>)
           :("")
         }
         {
           resource.type=="node--product"
-          ?(<meta name="og:image" content={absoluteUrl(resource.field_product_image[0].uri.url)}/> )
+          ?(<meta name="og:image:secure_url" content={absoluteUrl(resource.field_product_image[0].uri.url)}/> )
           :("")
         }
       </Head>
