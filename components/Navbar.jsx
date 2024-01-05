@@ -26,7 +26,7 @@ export default function App() {
   ];
 
   return (
-    <Navbar maxWidth="full" className="pt-3" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar maxWidth="full" className="pt-3" isBlurred={false} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
