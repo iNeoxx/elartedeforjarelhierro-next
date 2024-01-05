@@ -94,9 +94,9 @@ export default function App() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu className="pt-10">
+      <NavbarMenu className="font-semibold mt-9">
         <NavbarMenuItem>
-          <Link href="/">
+          <Link className="hover:text-[#C93400] hover:transition duration-100" href="/">
             Inicio
           </Link>
         </NavbarMenuItem>
@@ -110,7 +110,7 @@ export default function App() {
                     ? "danger"
                     : "foreground"
               }
-              className="w-full"
+              className="hover:text-[#C93400] hover:transition duration-100 w-full"
               href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
               size="lg"
             >
