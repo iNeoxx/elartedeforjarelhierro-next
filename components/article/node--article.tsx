@@ -44,7 +44,7 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
         {/* ShareBtns */}
         <div className="flex gap-5">
           <WhatsappShareButton
-            url={'https://elartedeforjarlehierro.com' + currentUrl}
+            url={'https://www.elartedeforjarelhierro.com' + currentUrl}
             title={'Mira esta increíble publicación! '+ node.title}
             separator=":: "
           >
@@ -54,7 +54,7 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
             </svg>
           </WhatsappShareButton>
           <FacebookShareButton
-            url={'https://elartedeforjarlehierro.com' + currentUrl}
+            url={'https://www.elartedeforjarelhierro.com' + currentUrl}
             title={'Mira esta increíble publicación! '+ node.title}
             hashtag={'#elartedeforjarelhierro'}
           >
