@@ -81,5 +81,6 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
 
       </div>
     </article>
+    </div>
   )
 }
