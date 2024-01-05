@@ -87,7 +87,7 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
         shortname='el-arte-de-forjar-el-hierro'
         config={
           {
-            url: process.env.NEXT_PUBLIC_DOMAIN_BASE_URL + '/blog' + node.path.alias,
+            url: process.env.DISQUS_PUBLIC_DOMAIN_BASE_URL + '/blog' + node.path.alias,
             identifier: node.path.alias,
             title: node.title,
             language: 'es_LA'
