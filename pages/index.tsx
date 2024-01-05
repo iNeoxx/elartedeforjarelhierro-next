@@ -44,7 +44,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
         />
           <meta
           property="og:image"
-          content="../public/assets/homesection.png"
+          content="https://www.elartedeforjarelhierro.com/assets/homesection.png"
         />
       </Head>
       <Section1/>
