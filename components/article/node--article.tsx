@@ -82,7 +82,7 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
         </div>
       </div>
       </article>
-      <div className="px-20 py-10 mt-10">
+      <div className="px-20 py-10 mt-10 max-[1024px]:px-5">
         <DiscussionEmbed
         shortname='el-arte-de-forjar-el-hierro'
         config={
@@ -90,7 +90,7 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
             url: process.env.DISQUS_PUBLIC_DOMAIN_BASE_URL + '/blog' + node.path.alias,
             identifier: node.path.alias,
             title: node.title,
-            language: 'es_LA'
+            language: 'es_'
           }
         }
         />
