@@ -111,7 +111,7 @@ export default function Contacto() {
           content="Ponte en contacto con nosotros para realizar tus trabajos."
         />
       </Head>
-      <div className="pt-10">
+      <div className="pt-10 sm:mb-32 mb-20">
         <div>
           <h1 className="md:text-5xl text-2xl font-bold text-center mx-auto text-contactSectionColor">
             Contáctenos
