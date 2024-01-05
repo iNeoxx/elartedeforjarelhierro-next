@@ -90,7 +90,7 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
             url: process.env.DISQUS_PUBLIC_DOMAIN_BASE_URL + '/blog' + node.path.alias,
             identifier: node.path.alias,
             title: node.title,
-            language: 'es_'
+            language: 'es_LA'
           }
         }
         />
