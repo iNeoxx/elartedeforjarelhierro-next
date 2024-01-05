@@ -12,10 +12,25 @@ import Link from "next/link"
 import { NodeCatalogueTeaser } from "@/components/catalogue/node--product--teaser"
 import { Button } from "@nextui-org/react"
 import styles from "@/components/VermasButton.module.css"
+import { Metadata } from "next"
 
 interface IndexPageProps {
   nodes: DrupalNode[]
   catalogues: DrupalNode[]
+}
+
+export const metadata:Metadata = {
+  openGraph: {
+    title: "El Arte de Forjar el Hierro",
+    description:"El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad",
+    images: [
+      {
+        url:"/assets/homesection.png",
+        width:800,
+        height:800,
+      }
+    ]
+  }
 }
 
 export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
@@ -29,7 +44,7 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
         />
           <meta
           property="og:image"
-          content="/assets/homesection.png"
+          content="../public/assets/homesection.png"
         />
       </Head>
       <Section1/>
