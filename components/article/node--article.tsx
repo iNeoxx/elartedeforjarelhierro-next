@@ -15,6 +15,7 @@ import {
   WhatsappIcon,
 } from 'next-share'
 import { useRouter } from "next/router";
+import BackButton from "../BackButton";
 
 interface NodeArticleProps {
   node: DrupalNode
@@ -23,8 +24,14 @@ interface NodeArticleProps {
 export function NodeArticle({ node, ...props }: NodeArticleProps) {
   const currentUrl = useRouter().asPath;
   return (
-    <article {...props} className={`pt-10 m-auto grid w-11/12 justify-center items-center ${styles.visual}`}>
-      <h1 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10">{node.title}</h1>
+    <div>
+      <div className="my-6 mx-2 lg:mx-16">
+        <BackButton
+          route="/blog" 
+          text="Volver al blog"/>
+      </div>
+      <article {...props} className={`pt-10 m-auto grid w-11/12 justify-center items-center ${styles.visual}`}>
+        <h1 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10">{node.title}</h1>
 
       {node.field_article_image && (
         <CarouselBlog
