@@ -46,8 +46,11 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
           property="og:image"
           content="https://www.elartedeforjarelhierro.com/assets/homesection.png"
         />
-        <meta property="og:image:width" content="600" />
-        <meta property="og:image:height" content="315" />
+        <meta property="og:title" content="El Arte de Forjar el Hierro" />
+        <meta property="og:description" content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad" />
+        <meta property="og:url" content="https://www.elartedeforjarelhierro.com/" />
+        <meta property="og:image:width" content="800" />
+        <meta property="og:image:height" content="600" />
       </Head>
       <Section1 />
       <QuienesSomos />
