@@ -27,6 +27,10 @@ export default function IndexPage({ nodes, catalogues }: IndexPageProps) {
           name="description"
           content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"
         />
+          <meta
+          property="og:image"
+          content="/assets/homesection.png"
+        />
       </Head>
       <Section1/>
       <QuienesSomos/>
