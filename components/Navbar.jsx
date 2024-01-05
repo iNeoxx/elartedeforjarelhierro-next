@@ -26,7 +26,7 @@ export default function App() {
   ];
 
   return (
-    <Navbar maxWidth="full" className="pt-3" onMenuOpenChange={setIsMenuOpen}>
+    <Navbar maxWidth="full" className="pt-3" isBlurred={false} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -94,9 +94,9 @@ export default function App() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu className="pt-10">
+      <NavbarMenu className="font-semibold mt-9">
         <NavbarMenuItem>
-          <Link href="/">
+          <Link className="hover:text-[#C93400] hover:transition duration-100" href="/">
             Inicio
           </Link>
         </NavbarMenuItem>
@@ -110,7 +110,7 @@ export default function App() {
                     ? "danger"
                     : "foreground"
               }
-              className="w-full"
+              className="hover:text-[#C93400] hover:transition duration-100 w-full"
               href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
               size="lg"
             >
