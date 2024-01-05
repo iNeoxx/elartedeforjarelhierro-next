@@ -76,7 +76,7 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
       {/* Seccion de productos relacionados, hay que manejar que esto podria venir vacio, o menos de 3 (nunca se va a pasar de 3 porque asi esta en la query) */}
       <div className="bg-slate-50 mt-20 md:mt-40">
         <hr className={styles.related_separator} />
-        <div className="py-16">
+        <div className={styles.related_products_container}>
           <div className="text-center">
             <h2 className="mb-10 text-base font-black md:text-5xl md:mb-10 max-[1024px]:pt-10 max-[640px]:text-2xl">Productos Relacionados</h2>
           </div>

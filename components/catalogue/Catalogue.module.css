@@ -7,6 +7,12 @@
     border: 1px solid #C93400;
 }
 
+.related_products_container {
+    padding: 4rem 0 4rem 0;
+    background: radial-gradient(30% 40% at 50% 50%, rgba(73, 126, 218, 0.35) 0%, rgba(201, 52, 0, 0.00) 100%),
+    radial-gradient(60% 60% at 50% 50%, rgba(244, 177, 114, 0.35) 0%, rgba(244, 80, 20, 0) 100%);
+}
+
 .vermas_Button:hover{
     border-radius: 16px;
     border: 1px solid #C93400;
@@ -102,5 +108,29 @@
 @media only screen and (max-width: 640px) {
     .product_image{
         height: 400px;
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .related_products_container {
+        padding: 4rem 0 4rem 0;
+        background: radial-gradient(20% 20% at 50% 50%, rgba(73, 126, 218, 0.35) -40%, rgba(201, 52, 0, 0.00) 100%),
+        radial-gradient(60% 60% at 50% 50%, rgba(244, 177, 114, 0.35) 0%, rgba(244, 80, 20, 0) 100%);
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .related_products_container {
+        padding: 4rem 0 4rem 0;
+        background: radial-gradient(40% 30% at 50% 50%, rgba(73, 126, 218, 0.35) -40%, rgba(201, 52, 0, 0.00) 100%),
+        radial-gradient(60% 60% at 50% 50%, rgba(244, 177, 114, 0.35) 0%, rgba(244, 80, 20, 0) 100%);
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .related_products_container {
+        padding: 4rem 0 4rem 0;
+        background: radial-gradient(50% 30% at 50% 50%, rgba(73, 126, 218, 0.35) -40%, rgba(201, 52, 0, 0.00) 100%),
+        radial-gradient(70% 70% at 50% 50%, rgba(244, 177, 114, 0.35) 0%, rgba(244, 80, 20, 0) 100%);
     }
 }

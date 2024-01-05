@@ -16,12 +16,14 @@ import {
 } from 'next-share'
 import { useRouter } from "next/router";
 import BackButton from "../BackButton";
+import { DiscussionEmbed } from 'disqus-react';
+
 
 interface NodeArticleProps {
   node: DrupalNode
 }
 
-export function NodeArticle({ node, ...props }: NodeArticleProps) {
+export function NodeArticle({ node, ...props}: NodeArticleProps) {
   const currentUrl = useRouter().asPath;
   return (
     <div>
@@ -78,9 +80,21 @@ export function NodeArticle({ node, ...props }: NodeArticleProps) {
             </svg>
           </FacebookShareButton>
         </div>
-
       </div>
-    </article>
+      </article>
+      <div className="px-20 py-10 mt-10 max-[1024px]:px-5">
+        <DiscussionEmbed
+        shortname='el-arte-de-forjar-el-hierro'
+        config={
+          {
+            url: process.env.DISQUS_PUBLIC_DOMAIN_BASE_URL + '/blog' + node.path.alias,
+            identifier: node.path.alias,
+            title: node.title,
+            language: 'es_LA'
+          }
+        }
+        />
+      </div>
     </div>
   )
 }
