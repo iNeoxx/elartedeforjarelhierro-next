@@ -17,8 +17,8 @@ export default function Contacto() {
 
   const [formData, setFormData] = useState({
     form_user_name: "",
-    user_email: "",
-    message: "",
+    form_user_email: "",
+    form_message: "",
   });
 
   const handleChange = (e) => {
@@ -77,8 +77,8 @@ export default function Contacto() {
           }),
           setFormData({
             form_user_name: "",
-            user_email: "",
-            message: "",
+            form_user_email: "",
+            form_message: "",
           }),
           setIsSelected(false),
         );
@@ -322,13 +322,13 @@ export default function Contacto() {
                   <div className="relative">
                     <input
                       type="email"
-                      name="user_email"
+                      name="form_user_email"
                       radius="lg"
                       required
                       className="peer text-sm m-0 block sm:h-[58px] h-[48px] w-full rounded-3xl border-2 border-solid border-contactSectionColor bg-transparent px-6 py-4 font-normal leading-tight text-contactSectionColor transition duration-200  placeholder:text-contactSectionColor focus:border-contactSectionColor focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-contactSectionColor focus:outline-none peer-focus:text-contactSectionColor dark:focus:border-primary dark:peer-focus:text-contactSectionColor [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
                       id="floatingInput"
                       placeholder=""
-                      value={formData.user_email}
+                      value={formData.form_user_email}
                       onChange={handleChange}
                     />
                     <label
@@ -346,13 +346,13 @@ export default function Contacto() {
                 </h3>
                 <div className="relative">
                   <textarea
-                    name="message"
+                    name="form_message"
                     radius="lg"
                     className="peer text-sm m-0 block h-[130px] w-full rounded-3xl border-2 border-solid border-contactSectionColor bg-transparent  px-6 py-4 font-normal leading-tight text-contactSectionColor transition duration-200  placeholder:text-contactSectionColor focus:border-contactSectionColor focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-contactSectionColor focus:outline-none peer-focus:text-contactSectionColor dark:focus:border-primary dark:peer-focus:text-contactSectionColor [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] resize-y"
                     id="floatingInput"
                     placeholder=""
                     required
-                    value={formData.message}
+                    value={formData.form_message}
                     onChange={handleChange}
                     title="Por favor introduzca un mínimo de 5 caracteres"
                     pattern=".{5,}"
