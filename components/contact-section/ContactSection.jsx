@@ -16,8 +16,8 @@ export default function ContactSection() {
 
   const [formData, setFormData] = useState({
     form_user_name: '',
-    user_email: '',
-    message: '',
+    form_user_email: '',
+    form_message: '',
   });
 
   const handleChange = (e) => {
@@ -74,8 +74,8 @@ export default function ContactSection() {
         }),
         setFormData({
           form_user_name: '',
-          user_email: '',
-          message: '',
+          form_user_email: '',
+          form_message: '',
         }),
         setIsSelected(false),
         );
@@ -139,13 +139,13 @@ export default function ContactSection() {
           <div className="relative">
             <input
               type="email"
-              name="user_email"
+              name="form_user_email"
               radius="lg"
               required
               className="peer text-sm m-0 block sm:h-[58px] h-[48px] w-full rounded-3xl border-2 border-solid border-white bg-colorInputsForm  px-6 py-4 font-normal leading-tight text-white transition duration-200  placeholder:text-white focus:border-white focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-white focus:outline-none peer-focus:text-white dark:focus:border-primary dark:peer-focus:text-white [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
               id="floatingInput"
               placeholder=""
-              value={formData.user_email}
+              value={formData.form_user_email}
               onChange={handleChange}
             />
             <label
@@ -160,13 +160,13 @@ export default function ContactSection() {
           <h3 className="text-white font-medium text-sm mb-2">Mensaje</h3>
           <div className="relative">
             <textarea
-              name="message"
+              name="form_message"
               radius="lg"
               className="peer text-sm m-0 block h-[110px] w-full rounded-3xl border-2 border-solid border-white bg-colorInputsForm  px-6 py-4 font-normal leading-tight text-white transition duration-200  placeholder:text-white focus:border-white focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-white focus:outline-none peer-focus:text-white dark:focus:border-primary dark:peer-focus:text-white [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] resize-y"
               id="floatingInput"
               placeholder=""
               required
-              value={formData.message}
+              value={formData.form_message}
               onChange={handleChange}
               title="Por favor introduzca un mínimo de 5 caracteres"
               pattern=".{5,}"
