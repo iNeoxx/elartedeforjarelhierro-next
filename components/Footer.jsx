@@ -10,11 +10,11 @@ export default function Footer(){
     "CONTACTO"
   ]
     return (
-      <footer class="bg-footerColor rounded-t-3xl shadow dark:bg-gray-900">
-        <div class="w-full mx-auto p-4 md:py-8">
-          <div class="max-[1024px]:flex max-[1024px]:flex-col lg:flex lg:items-center lg:justify-between">
+      <footer className="bg-footerColor rounded-t-3xl shadow dark:bg-gray-900">
+        <div className="w-full mx-auto p-4 md:py-8">
+          <div className="max-[1024px]:flex max-[1024px]:flex-col lg:flex lg:items-center lg:justify-between">
             <div className="max-[768px]:order-1 lg:order-1">
-              <Link href="/" class="flex justify-center items-center">
+              <Link href="/" className="flex justify-center items-center">
                 <Image
                   src="/logofooter.svg"
                   width={233}
@@ -23,9 +23,9 @@ export default function Footer(){
                 />
               </Link>
             </div>
-            <div class="text-lg mt-5 lg:m-0 max-[1024px]:order-3 lg:order-2">
-              <p class="text-white font-medium text-center">CONTACTA CON NOSOTROS</p>
-              <div class="grid-cols-2 flex gap-5 justify-center mt-5 mb-5">
+            <div className="text-lg mt-5 lg:m-0 max-[1024px]:order-3 lg:order-2">
+              <p className="text-white font-medium text-center">CONTACTA CON NOSOTROS</p>
+              <div className="grid-cols-2 flex gap-5 justify-center mt-5 mb-5">
                 <Link href="/">
                   <svg
                     width="29"
@@ -34,7 +34,7 @@ export default function Footer(){
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0_44_664)">
+                    <g clipPath="url(#clip0_44_664)">
                       <path
                         d="M28.0609 16.1956C28.0609 7.26471 21.8102 0.0246582 14.0997 0.0246582C6.38921 0.0246582 0.138489 7.26471 0.138489 16.1956C0.138489 23.7791 4.64629 30.1427 10.7272 31.8905V21.1374H7.84843V16.1956H10.7272V14.0662C10.7272 8.56227 12.8778 6.01114 17.5431 6.01114C18.4277 6.01114 19.9539 6.21231 20.5783 6.41283V10.8922C20.2488 10.8521 19.6764 10.832 18.9655 10.832C16.6764 10.832 15.7918 11.8366 15.7918 14.4478V16.1956H20.3521L19.5686 21.1374H15.7918V32.2482C22.7048 31.2811 28.0615 24.4635 28.0615 16.1956H28.0609Z"
                         fill="white"
@@ -64,7 +64,7 @@ export default function Footer(){
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                   >
-                    <g clip-path="url(#clip0_44_657)">
+                    <g clipPath="url(#clip0_44_657)">
                       <path
                         d="M1.61525 32.3665C1.45846 32.3665 1.30593 32.2947 1.19281 32.1622C1.04369 31.9875 0.986167 31.7339 1.04219 31.4967L2.85743 23.8189C1.7273 21.4518 1.13145 18.7741 1.13231 16.0559C1.1355 7.21616 7.34621 0.0246582 14.9774 0.0246582C18.6788 0.0263854 22.1568 1.69638 24.7709 4.72646C27.3845 7.75678 28.8233 11.785 28.8223 16.0688C28.8189 24.9088 22.6082 32.1008 14.9774 32.1008C14.9774 32.1008 14.9716 32.1008 14.9714 32.1008C12.7425 32.0998 10.5327 31.4706 8.56517 30.2788L1.76586 32.3441C1.71601 32.3591 1.66531 32.3665 1.61525 32.3665Z"
                         fill="#E5E5E5"
@@ -82,8 +82,8 @@ export default function Footer(){
                         fill="white"
                       />
                       <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
+                        fillRule="evenodd"
+                        clipRule="evenodd"
                         d="M11.6659 9.64187C11.4179 9.00328 11.1567 8.99045 10.9207 8.97935C10.7277 8.96973 10.5068 8.97022 10.2863 8.97022C10.0656 8.97022 9.70684 9.06645 9.40349 9.45015C9.09992 9.83384 8.24438 10.7616 8.24438 12.6485C8.24438 14.5357 9.43097 16.3589 9.59649 16.615C9.76202 16.8709 11.887 20.8668 15.2522 22.404C18.0491 23.6817 18.6181 23.4276 19.2253 23.3637C19.8324 23.2997 21.1841 22.4359 21.46 21.5404C21.7361 20.645 21.7361 19.8776 21.6532 19.7169C21.5703 19.5573 21.3496 19.4613 21.0186 19.2696C20.6875 19.0778 19.0597 18.1498 18.7562 18.022C18.4526 17.8939 18.2319 17.8303 18.0112 18.2142C17.7903 18.5977 17.1563 19.4613 16.9631 19.7169C16.7699 19.9733 16.5767 20.0054 16.2456 19.8134C15.9146 19.6212 14.8481 19.2165 13.5831 17.91C12.5989 16.8936 11.9343 15.6381 11.7411 15.2542C11.5481 14.8708 11.7379 14.6813 11.8866 14.4718C12.1544 14.0945 12.6036 13.4162 12.714 13.1605C12.8243 12.9044 12.7692 12.6806 12.6865 12.4886C12.6036 12.2969 11.9601 10.4004 11.6659 9.64187Z"
                         fill="white"
                       />
@@ -101,7 +101,7 @@ export default function Footer(){
                   </svg>
                 </Link>
               </div>
-              <div class="grid-cols-2 flex gap-2 items-center lg:justify-start justify-center">
+              <div className="grid-cols-2 flex gap-2 items-center lg:justify-start justify-center">
                 <div>
                   <svg
                     width="29"
@@ -116,12 +116,12 @@ export default function Footer(){
                     />
                   </svg>
                 </div>
-                <div class="text-white font-regular flex flex-col">
+                <div className="text-white font-regular flex flex-col">
                   <p>+(506) 88888888</p>
                   <p>+(506) 88888888</p>
                 </div>
               </div>
-              <div class="flex gap-2 mt-5 justify-center">
+              <div className="flex gap-2 mt-5 justify-center">
                 <div>
                   <svg
                     width="29"
@@ -136,13 +136,13 @@ export default function Footer(){
                     />
                   </svg>
                 </div>
-                <p class="text-white font-normal">
+                <p className="text-white font-normal">
                   elartedeforjar@gmail.com
                 </p>
               </div>
             </div>
             <div className="mt-8 lg:mt-0 max-[1024px]:order-2 lg:order-3">
-              <ul class="lg:flex lg:flex-wrap items-center mb-6 text-lg font-medium text-white text-center lg:leading-none leading-10">
+              <ul className="lg:flex lg:flex-wrap items-center mb-6 text-lg font-medium text-white text-center lg:leading-none leading-10">
                 {footerItems.map((item, i) => (
                   <li key={`${item}-${i}`}>
                     <Link className="hover:underline lg:me-6" href={`/${item.toLowerCase().replace(/\s/g, '-')}`}>

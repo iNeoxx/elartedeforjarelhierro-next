@@ -4,7 +4,7 @@ export function StaticBLurDataUrl(){
     <filter id="b" color-interpolation-filters="sRGB">
     <feGaussianBlur stdDeviation="1" />
     </filter>
-    <rect preserveAspectRatio="none" filter="url(#b)" x="0" y="0" height="100%" width="100%" stroke-width="3" stroke="#9fbabf" fill="#c9e8f2"/>
+    <rect preserveAspectRatio="none" filter="url(#b)" x="0" y="0" height="100%" width="100%" strokeWidth="3" stroke="#9fbabf" fill="#c9e8f2"/>
     </svg>
     `
     const toBase64 = (str) =>
