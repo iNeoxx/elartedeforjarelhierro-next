@@ -28,7 +28,7 @@ export default function NotFound(){
                 <div className="pt-3">
                 <Button as={Link} href="/" className={styles.iniciobtn}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 15 15" fill="none">
-                <path fill-rule="evenodd" clip-rule="evenodd" d="M13 7.57371L7.5 2.37591L2 7.57371V12.6241H13V7.57371ZM6.81314 0.273208L0 6.712V14.6241H15V6.712L8.18686 0.273209C7.8014 -0.0910692 7.1986 -0.0910698 6.81314 0.273208Z" fill="white"/>
+                <path fillRule="evenodd" clipRule="evenodd" d="M13 7.57371L7.5 2.37591L2 7.57371V12.6241H13V7.57371ZM6.81314 0.273208L0 6.712V14.6241H15V6.712L8.18686 0.273209C7.8014 -0.0910692 7.1986 -0.0910698 6.81314 0.273208Z" fill="white"/>
                 </svg>
                     Volver al inicio
                     </Button>

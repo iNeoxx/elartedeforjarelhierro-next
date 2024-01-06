@@ -127,7 +127,7 @@ export default function ContactSection() {
               pattern=".{5,}"
             />
             <label
-              for="floatingInput"
+              htmlFor="floatingInput"
               className="pointer-events-none absolute left-3 top-0 origin-[0_0] border border-solid border-transparent px-3 py-2.5 sm:py-4  text-white transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-white peer-[:not(:placeholder-shown)]:-translate-y-2  peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
             >
               Ingrese su nombre
@@ -149,7 +149,7 @@ export default function ContactSection() {
               onChange={handleChange}
             />
             <label
-              for="floatingInput"
+              htmlFor="floatingInput"
               className="pointer-events-none absolute left-3 top-0 origin-[0_0] border border-solid border-transparent px-3 py-2.5 sm:py-4  text-white transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-white peer-[:not(:placeholder-shown)]:-translate-y-2  peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
             >
               Ingrese su email
@@ -172,7 +172,7 @@ export default function ContactSection() {
               pattern=".{5,}"
             />
             <label
-              for="floatingInput"
+              htmlFor="floatingInput"
               className="pointer-events-none absolute left-3 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-white transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-white peer-[:not(:placeholder-shown)]:-translate-y-2  peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
             >
               Ingrese su mensaje
@@ -220,8 +220,8 @@ export default function ContactSection() {
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              fill-rule="evenodd"
-              clip-rule="evenodd"
+              fillRule="evenodd"
+              clipRule="evenodd"
               d="M16.6653 9.99996C16.6653 14.4182 13.2368 17.9999 9.00806 17.9999C7.64894 18.0067 6.30845 17.6226 5.09998 16.8799L1.3508 17.9999L2.63148 14.4308C1.82268 13.1622 1.3508 11.6388 1.3508 9.99996C1.3508 5.58169 4.77934 2 9.00806 2C13.2368 2 16.6653 5.58169 16.6653 9.99996ZM6.13659 8.8571H4.22227V11.1428H6.13659V8.8571ZM13.7938 8.8571H11.8795V11.1428H13.7938V8.8571ZM8.0509 8.8571H9.96522V11.1428H8.0509V8.8571Z"
               className={hover ? styles.svgFillHover : styles.svgFillNormal}
             />
