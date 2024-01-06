@@ -94,14 +94,14 @@ export default function App() {
           </Button>
         </NavbarItem>
       </NavbarContent>
-      <NavbarMenu className="font-semibold mt-9">
-        <NavbarMenuItem>
-          <Link className="hover:text-[#C93400] hover:transition duration-100" href="/">
+      <NavbarMenu className="bg-gradient-to-b from-white via-slate-100 to-red-50 h-screen font-semibold mt-9 text-center">
+        <NavbarMenuItem className="py-3">
+          <Link className="hover:text-[#C93400] hover:transition duration-100 text-2xl" href="/">
             Inicio
           </Link>
         </NavbarMenuItem>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
+          <NavbarMenuItem key={`${item}-${index}`} className="py-3">
             <Link
               color={
                 index === 2
@@ -110,7 +110,7 @@ export default function App() {
                     ? "danger"
                     : "foreground"
               }
-              className="hover:text-[#C93400] hover:transition duration-100 w-full"
+              className="hover:text-[#C93400] hover:transition duration-100 w-full text-2xl"
               href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
               size="lg"
             >
