@@ -10,8 +10,9 @@ const ImgCarousel = ({ ...props }) => {
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-unit-96 w-[90%] m-auto">
       <Carousel slide={false}>
       {
-        props.images.map((image)=> (
+        props.images.map((image, key)=> (
           <Image
+          key={key}
           src={absoluteUrl(image.uri.url)}
           alt={image.resourceIdObjMeta.alt}
           width={700}
