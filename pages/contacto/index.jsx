@@ -176,7 +176,7 @@ export default function Contacto() {
                     />
                   </svg>
                 </div>
-                <Link href="https://mail.google.com/mail/u/0/?fs=1&to=elartedeforjar@gmail.com&tf=cm" target="_blank" className="ml-10 my-auto text-white text-sm font-normal">
+                <Link href="mailto:elartedeforjar@gmail.com" target="_blank" className="ml-10 my-auto text-white text-sm font-normal">
                   elartedeforjar@gmail.com
                 </Link>
               </div>
