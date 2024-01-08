@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./Footer.module.css"
 
 export default function Footer(){
 
@@ -10,8 +11,8 @@ export default function Footer(){
     "CONTACTO"
   ]
     return (
-      <footer className="bg-footerColor rounded-t-3xl shadow dark:bg-gray-900">
-        <div className="w-full mx-auto p-4 md:py-8">
+      <footer className="bg-footerColor rounded-t-[60px] shadow-[0px_-4px_15px_0px_#356E82]">
+        <div className={styles.footer_second_container}>
           <div className="max-[1024px]:flex max-[1024px]:flex-col lg:flex lg:items-center lg:justify-between">
             <div className="max-[768px]:order-1 lg:order-1">
               <Link href="/" className="flex justify-center items-center">
@@ -23,10 +24,10 @@ export default function Footer(){
                 />
               </Link>
             </div>
-            <div className="text-lg mt-5 lg:m-0 max-[1024px]:order-3 lg:order-2">
+            <div className="text-lg mt-5 lg:m-0 lg:ml-60 max-[1024px]:order-3 lg:order-2">
               <p className="text-white font-medium text-center">CONTACTA CON NOSOTROS</p>
               <div className="grid-cols-2 flex gap-5 justify-center mt-5 mb-5">
-                <Link href="/">
+                <Link href="https://www.facebook.com/elartedeforjarelhierro" target="_blank">
                   <svg
                     width="29"
                     height="33"
@@ -41,7 +42,7 @@ export default function Footer(){
                       />
                       <path
                         d="M19.5681 21.1375L20.3516 16.1957H15.7913V14.4479C15.7913 11.8366 16.6759 10.8321 18.9649 10.8321C19.6758 10.8321 20.2483 10.8522 20.5777 10.8923V6.41292C19.9534 6.21175 18.4272 6.01123 17.5426 6.01123C12.8773 6.01123 10.7267 8.56236 10.7267 14.0663V16.1957H7.8479V21.1375H10.7267V31.8906C11.8067 32.201 12.9365 32.3666 14.0992 32.3666C14.6716 32.3666 15.2362 32.3259 15.7907 32.2483V21.1375H19.5675H19.5681Z"
-                        fill="#768692"
+                        fill="#356E82"
                       />
                     </g>
                     <defs>
@@ -75,7 +76,7 @@ export default function Footer(){
                       />
                       <path
                         d="M2.07629 31.1427L3.89111 23.4665C2.77141 21.2201 2.18281 18.6715 2.18345 16.0611C2.18622 7.89373 7.92464 1.24902 14.9753 1.24902C18.3975 1.25075 21.6093 2.79343 24.024 5.59329C26.4394 8.39315 27.7687 12.1149 27.7674 16.0727C27.7644 24.2404 22.0258 30.8858 14.976 30.8858C14.9753 30.8858 14.9762 30.8858 14.976 30.8858H14.9702C12.8295 30.8848 10.7258 30.2625 8.8575 29.083L2.07629 31.1427Z"
-                        fill="#768692"
+                        fill="#356E82"
                       />
                       <path
                         d="M1.61548 31.6783L3.49527 23.7274C2.33574 21.4003 1.72583 18.7606 1.72668 16.0562C1.72966 7.59594 7.67367 0.712891 14.9777 0.712891C18.5221 0.714618 21.849 2.31256 24.3508 5.21284C26.8525 8.11312 28.2297 11.9683 28.2284 16.0685C28.2253 24.5285 22.2804 31.4126 14.9777 31.4126C14.9772 31.4126 14.9779 31.4126 14.9777 31.4126H14.9719C12.7543 31.4116 10.5754 30.7673 8.63998 29.5447L1.61548 31.6783ZM8.96528 26.767L9.3677 27.0432C11.0583 28.2053 12.9967 28.82 14.9734 28.8212H14.9777C21.0478 28.8212 25.9884 23.0996 25.991 16.0675C25.992 12.6597 24.8476 9.45518 22.7682 7.0447C20.6886 4.63422 17.9237 3.30597 14.9817 3.30449C8.9067 3.30449 3.96628 9.02535 3.96394 16.0572C3.96309 18.4669 4.54509 20.8135 5.64774 22.8442L5.90977 23.3269L4.79689 28.0329L8.96528 26.767Z"
@@ -117,8 +118,8 @@ export default function Footer(){
                   </svg>
                 </div>
                 <div className="text-white font-regular flex flex-col">
-                  <p>+(506) 88888888</p>
-                  <p>+(506) 88888888</p>
+                  <p>+(506) 85298206</p>
+                  <p>+(506) 61903637</p>
                 </div>
               </div>
               <div className="flex gap-2 mt-5 justify-center">
@@ -136,16 +137,16 @@ export default function Footer(){
                     />
                   </svg>
                 </div>
-                <p className="text-white font-normal">
+                <Link href="mailto:elartedeforjar@gmail.com" target="_blank" className="text-white font-normal">
                   elartedeforjar@gmail.com
-                </p>
+                </Link>
               </div>
             </div>
             <div className="mt-8 lg:mt-0 max-[1024px]:order-2 lg:order-3">
-              <ul className="lg:flex lg:flex-wrap items-center mb-6 text-lg font-medium text-white text-center lg:leading-none leading-10">
+              <ul className="lg:flex lg:flex-wrap items-center mb-6 text-lg font-medium text-white text-center lg:leading-none leading-10 lg:justify-center gap-y-5">
                 {footerItems.map((item, i) => (
                   <li key={`${item}-${i}`}>
-                    <Link className="hover:underline lg:me-6" href={`/${item.toLowerCase().replace(/\s/g, '-')}`}>
+                    <Link className={`${styles.underline_style} py-[2px]`} href={`/${item.toLowerCase().replace(/\s/g, '-')}`}>
                       {item}
                     </Link>
                   </li>
