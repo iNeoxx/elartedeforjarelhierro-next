@@ -34,7 +34,7 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
           route="/catalogo"
           text="Volver al catálogo"/>
         </div>
-        <div className="flex justify-center pb-10 max-[1024px]:grid max-[1024px]:justify-items-center ">
+        <div className="flex items-center pb-10 max-[1024px]:flex-col max-[1024px]:items-center ">
           <div className="max-w-full w-2/4 max-[1024px]:w-full">
             <div className=" w-[90%] m-auto pt-11">
               <ImgCarousel images={node.field_product_image} />

@@ -36,19 +36,22 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
         <h1 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10">{node.title}</h1>
 
       {node.field_article_image && (
-        <Carousel
+        <div className="w-[60%] m-auto">
+          <Carousel
           images={node.field_article_image}
         />
+        </div>
+        
       )}
       <hr className={`w-4/5 h-1 m-auto mt-10 ${styles.separator}`} />
       {node.field_body?.processed && (
         <div
           dangerouslySetInnerHTML={{ __html: node.field_body?.processed }}
-          className="w-4/5 m-auto text-sm mt-12 font-medium leading-8 text-start md:w-3/5 md:text-xl md:leading-10"
+          className="w-[95%] m-auto text-sm mt-12 font-medium leading-8 text-start md:w-3/5 md:text-xl md:leading-10"
         />
       )}
 
-      <div className="w-4/5 flex gap-3 m-auto text-sm mt-6 font-medium leading-8 text-start md:w-3/5 md:text-xl md:leading-10">
+      <div className="w-[95%] flex gap-3 m-auto text-sm mt-6 font-medium leading-8 text-start md:w-3/5 md:text-xl md:leading-10">
         <span className="font-bold">Compartir: </span>
         {/* ShareBtns */}
         <div className="flex gap-5">
