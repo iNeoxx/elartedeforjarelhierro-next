@@ -26,7 +26,7 @@ export default function NodePage({ resource, additionalContent }: NodePageProps)
   return (
     <Layout>
       <Head>
-        <title>{resource.title}</title>
+        <title>{resource.title || resource.name} | El Arte de Forjar el Hierro</title>
         <meta name="description" content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"/>
         {
           resource.type=="node--article" 
