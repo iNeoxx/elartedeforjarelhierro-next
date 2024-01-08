@@ -101,6 +101,12 @@ export default function Contacto() {
       setRecaptchaToken(null);
     }
   };
+  const openWhatsApp = () => {
+    const message = 'Hola, me gustaria hablar sobre un trabajo';
+    const whatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`;
+
+    window.open(whatsappLink, '_blank');
+  };
 
   return (
     <Layout className="my-0">
@@ -151,8 +157,8 @@ export default function Contacto() {
                   </svg>
                 </div>
                 <div className="my-auto ml-10 text-white text-sm font-normal">
-                  <p>+(506) 88888888</p>
-                  <p>+(506) 88888888</p>
+                  <p>+(506) 85298206</p>
+                  <p>+(506) 61903637</p>
                 </div>
               </div>
               <div className="2xl:my-11 my-8 flex">
@@ -170,9 +176,9 @@ export default function Contacto() {
                     />
                   </svg>
                 </div>
-                <p className="ml-10 my-auto text-white text-sm font-normal">
+                <Link href="https://mail.google.com/mail/u/0/?fs=1&to=elartedeforjar@gmail.com&tf=cm" target="_blank" className="ml-10 my-auto text-white text-sm font-normal">
                   elartedeforjar@gmail.com
-                </p>
+                </Link>
               </div>
               <div className="flex">
                 <div className="my-auto">
@@ -202,7 +208,7 @@ export default function Contacto() {
                   </svg>
                 </div>
                 <div className="ml-10 text-white font-normal text-sm my-auto">
-                  <p>Sardinal de Carrillo</p>
+                  <p>Sardinal de Carrillo, Guanacaste, Costa Rica</p>
                 </div>
               </div>
             </div>
@@ -210,7 +216,7 @@ export default function Contacto() {
               <div className={styles.backgroundWhite2}/>
             </div>
             <div className="flex gap-9 2xl:ml-10 2xl:mt-[200px] mt-28 2xl:pb-12 pb-10 2xl:justify-normal justify-center">
-              <Link href="/">
+              <Link href="https://www.facebook.com/elartedeforjarelhierro" target="_blank">
                 <svg
                   width="29"
                   height="31"
@@ -240,7 +246,7 @@ export default function Contacto() {
                   </defs>
                 </svg>
               </Link>
-              <Link href="/">
+              <a className="cursor-pointer" onClick={openWhatsApp}>
                 <svg
                   width="29"
                   height="30"
@@ -283,7 +289,7 @@ export default function Contacto() {
                     </clipPath>
                   </defs>
                 </svg>
-              </Link>
+              </a>
             </div>
           </div>
           <div className="2xl:bg-[#EEEDED] bg-none p-10 2xl:shadow-[0px_0px_38px_0px_rgba(120,116,116,0.65)] 2xl:rounded-r-[50px] rounded-r-none">
