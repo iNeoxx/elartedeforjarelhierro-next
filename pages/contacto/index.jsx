@@ -408,7 +408,7 @@ export default function Contacto() {
                 type="submit"
                 value="Send"
                 onChange={handleChange}
-                className="text-white rounded-2xl bg-contactSectionColor hover:bg-transparent hover:text-contactSectionColor hover:border-contactSectionColor hover:border-2 flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14"
+                className="text-white rounded-2xl bg-contactSectionColor hover:bg-transparent hover:text-contactSectionColor hover:border-contactSectionColor hover:border-2 flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14 hover:transition duration-200"
                 onMouseEnter={() => setHover(true)}
                 onMouseLeave={() => setHover(false)}
                 startContent={<svg
@@ -422,7 +422,7 @@ export default function Contacto() {
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M19 9.99996C19 14.4182 14.9703 17.9999 10 17.9999C8.40255 18.0067 6.827 17.6226 5.40662 16.8799L1 17.9999L2.50525 14.4308C1.55463 13.1622 1 11.6388 1 9.99996C1 5.58169 5.02975 2 10 2C14.9703 2 19 5.58169 19 9.99996ZM6.625 8.8571H4.375V11.1428H6.625V8.8571ZM15.625 8.8571H13.375V11.1428H15.625V8.8571ZM8.875 8.8571H11.125V11.1428H8.875V8.8571Z"
-                    className={hover ? styles.svgHover : styles.svgNormal}
+                    className={`${hover ? styles.svgHover : styles.svgNormal} hover:transition duration-200`}
                   />
                 </svg>}
               >
