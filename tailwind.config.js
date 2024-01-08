@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        footerColor: '#768692',
+        footerColor: '#356E82',
         contactSectionColor: '#497EDA',
         colorInputsForm: '#6D98E1',
         colorSubtitleContact: 'rgba(0, 11, 40, 0.60);',
