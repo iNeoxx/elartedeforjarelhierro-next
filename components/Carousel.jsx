@@ -7,7 +7,7 @@ import { Carousel } from 'flowbite-react';
 const ImgCarousel = ({ ...props }) => { 
 
   return (
-      <div className="h-56 sm:h-64 xl:h-80 2xl:h-unit-96 w-[90%] m-auto">
+      <div className="h-56 sm:h-64 xl:h-80 2xl:h-unit-96 w-[100%] m-auto">
       <Carousel slide={false}>
       {
         props.images.map((image, key)=> (

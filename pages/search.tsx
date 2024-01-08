@@ -11,6 +11,7 @@ import Image from "next/image"
 import { Button } from "@nextui-org/react"
 import NotFound from "@/public/assets/notfound.jpg"
 import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl";
+import BackButton from "@/components/BackButton"
 
 
 export default function SearchPage() {
@@ -56,6 +57,12 @@ export default function SearchPage() {
         {results?.length ? (
           <div>
             <h1 className="text-center text-5xl max-[768px]:text-2xl">Resultados de la búsqueda: <span className="font-bold text-[#C93400]">{keys}</span></h1>
+            <div className="mx-auto mt-8 w-fit mb-4" >
+        <BackButton
+          text="Volver al Catálogo"
+          route="/catalogo"
+          />
+        </div>
             <div className="grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
               {results.map((result) => (
                 <div
