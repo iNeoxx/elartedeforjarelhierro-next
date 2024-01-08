@@ -6,7 +6,7 @@ import styles from "./Catalogue.module.css";
 import { Button, Chip } from "@nextui-org/react";
 import { useRouter } from "next/router";
 import { NodeCatalogueTeaser } from "./node--product--teaser";
-import Carousel from "../Carousel";
+import ImgCarousel from "../Carousel";
 import BackButton from "../BackButton";
 
 export interface NodeProductProps {
@@ -37,7 +37,7 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
         <div className="flex justify-center pb-10 max-[1024px]:grid max-[1024px]:justify-items-center ">
           <div className="max-w-full w-2/4 max-[1024px]:w-full">
             <div className=" w-[90%] m-auto pt-11">
-              <Carousel images={node.field_product_image} />
+              <ImgCarousel images={node.field_product_image} />
             </div>
           </div>
           <div className="w-3/4">

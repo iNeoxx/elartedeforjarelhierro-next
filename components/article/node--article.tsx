@@ -32,7 +32,7 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
           route="/blog" 
           text="Volver al blog"/>
       </div>
-      <article {...props} className={`pt-10 m-auto grid w-11/12 justify-center items-center ${styles.visual}`}>
+      <article {...props} className={`pt-10 m-auto block w-11/12 justify-center items-center ${styles.visual}`}>
         <h1 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10">{node.title}</h1>
 
       {node.field_article_image && (
