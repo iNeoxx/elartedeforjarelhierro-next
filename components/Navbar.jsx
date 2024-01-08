@@ -45,7 +45,7 @@ export default function App() {
       </NavbarContent>
       <NavbarContent className="font-bold gap-10" justify="end">
         <NavbarItem className={`hover:text-[#C93400] hover:transition duration-100 hidden sm:flex`}>
-          <Link href="/">
+          <Link href="/" className={styles.underline_style}>
             Inicio
           </Link>
         </NavbarItem>
@@ -60,7 +60,7 @@ export default function App() {
           >
             <Link
               color="foreground"
-              className="w-full"
+              className={`w-full ${styles.underline_style}`}
               href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
               size="lg"
             >
@@ -95,13 +95,13 @@ export default function App() {
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu className="bg-gradient-to-b from-white via-slate-100 to-red-50 h-screen font-semibold mt-9 text-center">
-        <NavbarMenuItem className="py-3">
-          <Link className="hover:text-[#C93400] hover:transition duration-100 text-2xl" href="/">
+        <NavbarMenuItem className="py-3 hover:text-[#C93400] hover:transition duration-100 text-2xl">
+          <Link className={`${styles.underline_style} py-[2px]`} href="/">
             Inicio
           </Link>
         </NavbarMenuItem>
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`} className="py-3">
+          <NavbarMenuItem key={`${item}-${index}`} className="py-3 hover:text-[#C93400] hover:transition duration-100">
             <Link
               color={
                 index === 2
@@ -110,7 +110,7 @@ export default function App() {
                     ? "danger"
                     : "foreground"
               }
-              className="hover:text-[#C93400] hover:transition duration-100 w-full text-2xl"
+              className={`w-full text-2xl py-[4px] ${styles.underline_style}`}
               href={`/${item.toLowerCase().replace(/\s/g, '-')}`}
               size="lg"
             >
