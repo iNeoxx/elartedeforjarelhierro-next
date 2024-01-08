@@ -5,7 +5,7 @@ import { absoluteUrl, formatDate } from "lib/utils"
 
 import styles from './node-article.module.css'
 import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl"
-import CarouselBlog from "../CarouselBlog"
+import Carousel from "../Carousel";
 import {
   FacebookShareButton,
   FacebookIcon,
@@ -36,7 +36,7 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
         <h1 className="mt-2 text-base font-bold text-center mb-10 md:text-5xl md:mb-10">{node.title}</h1>
 
       {node.field_article_image && (
-        <CarouselBlog
+        <Carousel
           images={node.field_article_image}
         />
       )}
