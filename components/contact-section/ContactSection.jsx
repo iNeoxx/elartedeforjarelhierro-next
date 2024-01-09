@@ -10,7 +10,6 @@ import ReCAPTCHA from "react-google-recaptcha"
 export default function ContactSection() {
   const form = useRef();
   const [isSelected, setIsSelected] = useState(false);
-  const [hover, setHover] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const recaptchaReft = useRef(null);
 
@@ -38,9 +37,9 @@ export default function ContactSection() {
           borderRadius: "1rem",
           backgroundColor: "white",
           color: "#f39200",
-          fontWeight: "bold",
+          fontWeight: "600",
           padding: "15px",
-          fontSize: "1.1rem",
+          fontSize: "1rem",
         }
       });
       return;
@@ -66,9 +65,9 @@ export default function ContactSection() {
             borderRadius: "1rem",
             backgroundColor: "white",
             color: "#43ce14",
-            fontWeight: "bold",
+            fontWeight: "600",
             padding: "15px",
-            fontSize: "1.1rem"
+            fontSize: "1rem"
           },
           duration: 3200
         }),
@@ -86,9 +85,9 @@ export default function ContactSection() {
           borderRadius: "1rem",
           backgroundColor: "white",
           color: "#ff0000",
-          fontWeight: "bold",
+          fontWeight: "600",
           padding: "15px",
-          fontSize: "1.1rem",
+          fontSize: "1rem",
           boxShadow: "0px 0px 20px 4px rgba(0,0,0,0.78);"
         },
         duration: 3200
@@ -208,22 +207,19 @@ export default function ContactSection() {
           type="submit"
           value="Send"
           onChange={handleChange}
-          className="text-black rounded-2xl hover:text-white bg-white hover:bg-transparent hover:border-white hover:border-2 hover:transition duration-200 flex mx-auto mt-8 font-bold text-sm max-w-[248px] w-full h-14"
-          onMouseEnter={() => setHover(true)}
-          onMouseLeave={() => setHover(false)}
+          className={`text-black rounded-2xl hover:text-white bg-white hover:bg-transparent hover:border-white hover:border-2 hover:transition duration-200 flex mx-auto mt-8 font-bold text-sm max-w-[248px] w-full h-14 ${styles.svgHover}`}
         >
           <svg
             width="18"
             height="20"
             viewBox="0 0 18 20"
-            fill="none"
+            fill="black"
             xmlns="http://www.w3.org/2000/svg"
           >
             <path
               fillRule="evenodd"
               clipRule="evenodd"
               d="M16.6653 9.99996C16.6653 14.4182 13.2368 17.9999 9.00806 17.9999C7.64894 18.0067 6.30845 17.6226 5.09998 16.8799L1.3508 17.9999L2.63148 14.4308C1.82268 13.1622 1.3508 11.6388 1.3508 9.99996C1.3508 5.58169 4.77934 2 9.00806 2C13.2368 2 16.6653 5.58169 16.6653 9.99996ZM6.13659 8.8571H4.22227V11.1428H6.13659V8.8571ZM13.7938 8.8571H11.8795V11.1428H13.7938V8.8571ZM8.0509 8.8571H9.96522V11.1428H8.0509V8.8571Z"
-              className={`hover:transition duration-200 ${hover ? styles.svgFillHover : styles.svgFillNormal}`}
             />
           </svg>
           Enviar mensaje
