@@ -11,7 +11,6 @@ import Head from "next/head"
 export default function Contacto() {
   const form = useRef();
   const [isSelected, setIsSelected] = useState(false);
-  const [hover, setHover] = useState(false);
   const [recaptchaToken, setRecaptchaToken] = useState(null);
   const recaptchaRef = useRef(null);
 
@@ -39,9 +38,9 @@ export default function Contacto() {
           borderRadius: "1rem",
           backgroundColor: "white",
           color: "#f39200",
-          fontWeight: "bold",
+          fontWeight: "600",
           padding: "15px",
-          fontSize: "1.1rem",
+          fontSize: "1rem",
         }
       });
       return;
@@ -68,9 +67,9 @@ export default function Contacto() {
               borderRadius: "1rem",
               backgroundColor: "white",
               color: "#43ce14",
-              fontWeight: "bold",
+              fontWeight: "600",
               padding: "15px",
-              fontSize: "1.1rem",
+              fontSize: "1rem",
               textAlign: "center",
             },
             duration: 3200,
@@ -89,9 +88,9 @@ export default function Contacto() {
           borderRadius: "1rem",
           backgroundColor: "white",
           color: "#ff0000",
-          fontWeight: "bold",
+          fontWeight: "600",
           padding: "15px",
-          fontSize: "1.1rem",
+          fontSize: "1rem",
         },
         duration: 3200,
       });
@@ -365,7 +364,7 @@ export default function Contacto() {
                   />
                   <label
                     for="floatingInput"
-                    className="pointer-events-none absolute left-3 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-colorInputsForm transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-colorInputsForm peer-[:not(:placeholder-shown)]:-translate-y-2  peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
+                    className="pointer-events-none absolute left-3 top-0 origin-[0_0] border border-solid border-transparent px-3 py-4 text-contactSectionColor transition-[opacity,_transform] duration-200 ease-linear peer-focus:-translate-y-2 peer-focus:translate-x-[0.15rem] peer-focus:scale-[0.85] peer-focus:text-contactSectionColor peer-[:not(:placeholder-shown)]:-translate-y-2  peer-[:not(:placeholder-shown)]:scale-[0.85] motion-reduce:transition-none dark:text-neutral-200 dark:peer-focus:text-primary"
                   >
                     Ingrese su mensaje
                   </label>
@@ -408,21 +407,18 @@ export default function Contacto() {
                 type="submit"
                 value="Send"
                 onChange={handleChange}
-                className="text-white rounded-2xl bg-contactSectionColor hover:bg-transparent hover:text-contactSectionColor hover:border-contactSectionColor hover:border-2 flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14 hover:transition duration-200"
-                onMouseEnter={() => setHover(true)}
-                onMouseLeave={() => setHover(false)}
+                className={`text-white rounded-2xl bg-contactSectionColor hover:bg-transparent hover:text-contactSectionColor hover:border-contactSectionColor hover:border-2 flex mx-auto mt-9 font-bold text-sm max-w-[248px] w-full h-14 hover:transition duration-200 ${styles.svgHover}`}
                 startContent={<svg
                   width="20"
                   height="20"
                   viewBox="0 0 20 20"
-                  fill="none"
+                  fill="white"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
                     fillRule="evenodd"
                     clipRule="evenodd"
                     d="M19 9.99996C19 14.4182 14.9703 17.9999 10 17.9999C8.40255 18.0067 6.827 17.6226 5.40662 16.8799L1 17.9999L2.50525 14.4308C1.55463 13.1622 1 11.6388 1 9.99996C1 5.58169 5.02975 2 10 2C14.9703 2 19 5.58169 19 9.99996ZM6.625 8.8571H4.375V11.1428H6.625V8.8571ZM15.625 8.8571H13.375V11.1428H15.625V8.8571ZM8.875 8.8571H11.125V11.1428H8.875V8.8571Z"
-                    className={`${hover ? styles.svgHover : styles.svgNormal} hover:transition duration-200`}
                   />
                 </svg>}
               >

@@ -22,10 +22,6 @@
   transition: background-color 5000s ease-in-out 0s;
 }
 
-.svgNormal {
-  fill: white;
-}
-
-.svgHover {
+.svgHover:hover svg path {
   fill: #497EDA;
 }
