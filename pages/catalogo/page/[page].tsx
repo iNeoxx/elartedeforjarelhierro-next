@@ -79,18 +79,18 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
     )
     const totalPages = Math.ceil(result.meta.count / PRODUCTS_PER_PAGE);
 
-    // const paths = Array.from({ length: totalPages }, (_, page) => ({
-    //   params: {
-    //     page: `${page + 1}`,
-    //   },
-    // }));
-    const paths = Array(2)
-    .fill(0)
-    .map((_, page) => ({
+    const paths = Array.from({ length: totalPages }, (_, page) => ({
       params: {
         page: `${page + 1}`,
       },
-    }))
+    }));
+    // const paths = Array(2)
+    // .fill(0)
+    // .map((_, page) => ({
+    //   params: {
+    //     page: `${page + 1}`,
+    //   },
+    // }))
     return {
       paths,
       fallback: "blocking",
@@ -165,5 +165,6 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
           total: Math.ceil(result.meta.count / PRODUCTS_PER_PAGE),
         }
       },
+      revalidate: 10,
     }
   }
