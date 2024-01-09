@@ -10,7 +10,7 @@ interface NodeArticleTeaserProps {
 }
 
 export function NodeCatalogueTeaser({ node, ...props }: NodeArticleTeaserProps){
-  const bodyExcerpt = node.field_product_body?.processed.slice(0, 100) + "...";
+  const bodyExcerpt = node.field_product_body?.processed.slice(0, 50) + "...";
     return (
       <div className="pb-6">
       <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">

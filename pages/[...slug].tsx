@@ -8,6 +8,7 @@ import { Layout } from "components/layout"
 import { TaxonomyProductTypeProps, TaxonomyProductType } from "components/catalogue/taxonomy-term--product_type"
 import { PageProps } from "@/types"
 import { getParams } from "@/lib/get-params"
+import { absoluteUrl } from "@/lib/utils"
 
 const RESOURCE_TYPES = [
   "node--article",
@@ -25,8 +26,18 @@ export default function NodePage({ resource, additionalContent }: NodePageProps)
   return (
     <Layout>
       <Head>
-        <title>{resource.title}</title>
+        <title>{resource.title || resource.name} | El Arte de Forjar el Hierro</title>
         <meta name="description" content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"/>
+        {
+          resource.type=="node--article" 
+          ?(<meta name="og:image:secure_url" content={absoluteUrl(resource.field_article_image[0].uri.url)}/>)
+          :("")
+        }
+        {
+          resource.type=="node--product"
+          ?(<meta name="og:image:secure_url" content={absoluteUrl(resource.field_product_image[0].uri.url)}/> )
+          :("")
+        }
       </Head>
       {resource.type === "node--article" && <NodeArticle node={resource as DrupalNode}/>}
       {resource.type === "node--product" && <NodeCatalogo node={resource as DrupalNode} additionalContent = {additionalContent as NodeProductProps["additionalContent"]}/>}

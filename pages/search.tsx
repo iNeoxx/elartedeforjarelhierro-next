@@ -11,6 +11,8 @@ import Image from "next/image"
 import { Button } from "@nextui-org/react"
 import NotFound from "@/public/assets/notfound.jpg"
 import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl";
+import BackButton from "@/components/BackButton"
+import Head from "next/head"
 
 
 export default function SearchPage() {
@@ -26,41 +28,52 @@ export default function SearchPage() {
   }, [router])
 
   return (
-    <Layout
-    >
-
+    <Layout>
+      <Head>
+      <title>{keys} | El Arte de Forjar el Hierro</title>
+        <meta
+          name="description"
+          content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"
+        />
+      </Head>
       <div className="justify-center items-center flex">
         {/* LOADING */}
         {isLoading && keys && (
           <div aria-label="Loading..." role="status" className="flex items-center">
             <svg className="h-20 w-20 animate-spin stroke-gray-500" viewBox="0 0 256 256">
-              <line x1="128" y1="32" x2="128" y2="64" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
-              <line x1="195.9" y1="60.1" x2="173.3" y2="82.7" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="24"></line>
-              <line x1="224" y1="128" x2="192" y2="128" stroke-linecap="round" stroke-linejoin="round" stroke-width="24">
+              <line x1="128" y1="32" x2="128" y2="64" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></line>
+              <line x1="195.9" y1="60.1" x2="173.3" y2="82.7" strokeLinecap="round" strokeLinejoin="round"
+                strokeWidth="24"></line>
+              <line x1="224" y1="128" x2="192" y2="128" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24">
               </line>
-              <line x1="195.9" y1="195.9" x2="173.3" y2="173.3" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="24"></line>
-              <line x1="128" y1="224" x2="128" y2="192" stroke-linecap="round" stroke-linejoin="round" stroke-width="24">
+              <line x1="195.9" y1="195.9" x2="173.3" y2="173.3" strokeLinecap="round" strokeLinejoin="round"
+                strokeWidth="24"></line>
+              <line x1="128" y1="224" x2="128" y2="192" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24">
               </line>
-              <line x1="60.1" y1="195.9" x2="82.7" y2="173.3" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="24"></line>
-              <line x1="32" y1="128" x2="64" y2="128" stroke-linecap="round" stroke-linejoin="round" stroke-width="24"></line>
-              <line x1="60.1" y1="60.1" x2="82.7" y2="82.7" stroke-linecap="round" stroke-linejoin="round" stroke-width="24">
+              <line x1="60.1" y1="195.9" x2="82.7" y2="173.3" strokeLinecap="round" strokeLinejoin="round"
+                strokeWidth="24"></line>
+              <line x1="32" y1="128" x2="64" y2="128" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24"></line>
+              <line x1="60.1" y1="60.1" x2="82.7" y2="82.7" strokeLinecap="round" strokeLinejoin="round" strokeWidth="24">
               </line>
             </svg>
-            <span className="text-4xl font-medium text-gray-500">Buscando {keys}</span>
+            <span className="max-[768px]:text-2xl text-4xl font-medium text-gray-500">Buscando {keys}</span>
           </div>
         )}
         {/* LA BUSQUEDA DIO RESULTADOS */}
         {results?.length ? (
-          <div>
-            <h1 className="text-center text-6xl">Resultados de la búsqueda: <span className="font-bold text-[#C93400]">{keys}</span></h1>
+        <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-1 w-full">
+        <div className="ml-10 mt-10 max-[768px]:ml-3 max-[900px]:mt-5 max-[900px]:mb-8" >
+        <BackButton
+          text="Volver al Catálogo"
+          route="/catalogo"
+          />
+        </div>
+            <h1 className="pb-10 text-center text-5xl max-[768px]:text-2xl">Resultados de la búsqueda: <span className="font-bold text-[#C93400]">{keys}</span></h1>
             <div className="grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
               {results.map((result) => (
                 <div
                   key={result.id}
-                  className="grid gap-2 p-4 bg-white"
+                  className="grid gap-2 p-4"
                 >
                 <div className="pb-6">
                 <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
@@ -84,7 +97,7 @@ export default function SearchPage() {
                     <div className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
                     {result.field_product_body?.processed && (
                         <div
-                          dangerouslySetInnerHTML={{ __html: result.field_product_body?.processed.slice(0, 100) + "..."}}
+                          dangerouslySetInnerHTML={{ __html: result.field_product_body?.processed.slice(0, 50) + "..."}}
                           className="text-gray-700 text-medium"
                         ></div>
                       )}
