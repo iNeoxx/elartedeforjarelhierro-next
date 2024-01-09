@@ -207,7 +207,7 @@ export default function ContactSection() {
           type="submit"
           value="Send"
           onChange={handleChange}
-          className={`text-black rounded-2xl hover:text-white bg-white hover:bg-transparent hover:border-white hover:border-2 hover:transition duration-200 flex mx-auto mt-8 font-bold text-sm max-w-[248px] w-full h-14 ${styles.svgHover}`}
+          className={`text-black rounded-2xl hover:text-white bg-white hover:bg-transparent hover:border-white hover:border-2 flex mx-auto mt-8 font-bold text-sm max-w-[248px] w-full h-14 ${styles.svgHover}`}
         >
           <svg
             width="18"

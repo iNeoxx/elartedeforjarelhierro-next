@@ -24,4 +24,6 @@
 
 .svgHover:hover svg path {
   fill: #497EDA;
+  transition: ease;
+  transition-duration: 200ms;
 }
