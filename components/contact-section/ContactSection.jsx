@@ -118,7 +118,7 @@ export default function ContactSection() {
               name="form_user_name"
               radius="lg"
               required
-              className="peer text-sm m-0 block sm:h-[58px] w-full rounded-3xl border-2 border-solid border-white bg-colorInputsForm  px-6 py-4 font-normal leading-tight text-white transition duration-200  placeholder:text-white focus:border-white focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-white focus:outline-none peer-focus:text-white dark:focus:border-primary dark:peer-focus:text-white [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] h-[48px]"
+              className={`peer text-sm m-0 block sm:h-[58px] w-full rounded-3xl border-2 border-solid border-white bg-colorInputsForm  px-6 py-4 font-normal leading-tight text-white transition duration-200  placeholder:text-white focus:border-white focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-white focus:outline-none peer-focus:text-white dark:focus:border-primary dark:peer-focus:text-white [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] h-[48px] ${styles.autofill_bg}`}
               id="floatingInput"
               placeholder=""
               value={formData.form_user_name}
@@ -142,7 +142,7 @@ export default function ContactSection() {
               name="form_user_email"
               radius="lg"
               required
-              className="peer text-sm m-0 block sm:h-[58px] h-[48px] w-full rounded-3xl border-2 border-solid border-white bg-colorInputsForm  px-6 py-4 font-normal leading-tight text-white transition duration-200  placeholder:text-white focus:border-white focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-white focus:outline-none peer-focus:text-white dark:focus:border-primary dark:peer-focus:text-white [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem]"
+              className={`peer text-sm m-0 block sm:h-[58px] h-[48px] w-full rounded-3xl border-2 border-solid border-white bg-colorInputsForm  px-6 py-4 font-normal leading-tight text-white transition duration-200  placeholder:text-white focus:border-white focus:pb-[0.625rem] focus:pt-[1.625rem] focus:text-white focus:outline-none peer-focus:text-white dark:focus:border-primary dark:peer-focus:text-white [&:not(:placeholder-shown)]:pb-[0.625rem] [&:not(:placeholder-shown)]:pt-[1.625rem] ${styles.autofill_bg}`}
               id="floatingInput"
               placeholder=""
               value={formData.form_user_email}

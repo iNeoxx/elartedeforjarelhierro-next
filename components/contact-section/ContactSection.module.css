@@ -5,3 +5,10 @@
 .svgFillHover {
     fill: white;
 }
+
+.autofill_bg:autofill {
+    border: 2px solid white;
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px #6D98E1 inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
