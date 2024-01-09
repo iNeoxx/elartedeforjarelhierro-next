@@ -10,6 +10,7 @@ import CatalogueDropdown from "@/components/catalogue/CatalogueDropdown"
 import ContactSection from "@/components/contact-section/ContactSection"
 import styles from "../../../components/contact-section/contactSection.module.css"
 import { FormSearch } from "@/components/form--search"
+import {useRouter} from "next/router"
 
 interface CatalogPageProps {
     nodes: DrupalNode[]
@@ -18,6 +19,11 @@ interface CatalogPageProps {
 }
 const PRODUCTS_PER_PAGE = 16
 export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
+  const router = useRouter()
+  if (router.isFallback) {
+    return <div>Loading...</div>
+  }
+
     return (
       <Layout>
         <Head>
