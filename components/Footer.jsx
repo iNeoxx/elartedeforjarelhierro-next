@@ -10,6 +10,12 @@ export default function Footer(){
     "ACERCA DEL SITIO",
     "CONTACTO"
   ]
+  const openWhatsApp = () => {
+    const message = 'Hola, me gustaria hablar sobre un trabajo';
+    const whatsappLink = `https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER}?text=${message}`;
+
+    window.open(whatsappLink, '_blank');
+  };
     return (
       <footer className="bg-footerColor rounded-t-[60px] shadow-[0px_-4px_15px_0px_#356E82]">
         <div className={styles.footer_second_container}>
@@ -57,7 +63,7 @@ export default function Footer(){
                     </defs>
                   </svg>
                 </Link>
-                <Link href="/">
+                <a className="cursor-pointer" onClick={openWhatsApp}>
                   <svg
                     width="29"
                     height="33"
@@ -100,7 +106,7 @@ export default function Footer(){
                       </clipPath>
                     </defs>
                   </svg>
-                </Link>
+                </a>
               </div>
               <div className="grid-cols-2 flex gap-2 items-center lg:justify-start justify-center">
                 <div>

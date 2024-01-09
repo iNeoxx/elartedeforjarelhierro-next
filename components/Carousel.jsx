@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image"
 import { absoluteUrl } from "@/lib/utils";
 import { Carousel } from 'flowbite-react';
+import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl";
 
 const ImgCarousel = ({ ...props }) => { 
 
@@ -18,6 +19,8 @@ const ImgCarousel = ({ ...props }) => {
           width={700}
           height={700}
           className="w-full h-full rounded-2xl bg-center bg-cover duration-500"
+          placeholder="blur"
+          blurDataURL={StaticBLurDataUrl()}
           />
         ))
       }
