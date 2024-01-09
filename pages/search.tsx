@@ -12,6 +12,7 @@ import { Button } from "@nextui-org/react"
 import NotFound from "@/public/assets/notfound.jpg"
 import { StaticBLurDataUrl } from "@/utils/staticBlurDataUrl";
 import BackButton from "@/components/BackButton"
+import Head from "next/head"
 
 
 export default function SearchPage() {
@@ -27,9 +28,14 @@ export default function SearchPage() {
   }, [router])
 
   return (
-    <Layout
-    >
-
+    <Layout>
+      <Head>
+      <title>{keys} | El Arte de Forjar el Hierro</title>
+        <meta
+          name="description"
+          content="El arte de forjar el Hierro Convierte tus ideas en productos de alta calidad"
+        />
+      </Head>
       <div className="justify-center items-center flex">
         {/* LOADING */}
         {isLoading && keys && (
@@ -55,19 +61,19 @@ export default function SearchPage() {
         )}
         {/* LA BUSQUEDA DIO RESULTADOS */}
         {results?.length ? (
-          <div>
-            <h1 className="text-center text-5xl max-[768px]:text-2xl">Resultados de la búsqueda: <span className="font-bold text-[#C93400]">{keys}</span></h1>
-            <div className="mx-auto mt-8 w-fit mb-4" >
+        <div className="bg-[#EEEDED] pt-7 pb-7 md:pt-1 w-full">
+        <div className="ml-10 mt-10 max-[768px]:ml-3 max-[900px]:mt-5 max-[900px]:mb-8" >
         <BackButton
           text="Volver al Catálogo"
           route="/catalogo"
           />
         </div>
+            <h1 className="pb-10 text-center text-5xl max-[768px]:text-2xl">Resultados de la búsqueda: <span className="font-bold text-[#C93400]">{keys}</span></h1>
             <div className="grid justify-items-center grid-cols-1 justify-center w-auto md:grid-cols-2 md:col-auto lg:grid-cols-4 gap-4">
               {results.map((result) => (
                 <div
                   key={result.id}
-                  className="grid gap-2 p-4 bg-white"
+                  className="grid gap-2 p-4"
                 >
                 <div className="pb-6">
                 <div className="relative flex flex-col text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
@@ -91,7 +97,7 @@ export default function SearchPage() {
                     <div className="block font-sans text-sm antialiased font-normal leading-normal text-gray-700 opacity-75">
                     {result.field_product_body?.processed && (
                         <div
-                          dangerouslySetInnerHTML={{ __html: result.field_product_body?.processed.slice(0, 100) + "..."}}
+                          dangerouslySetInnerHTML={{ __html: result.field_product_body?.processed.slice(0, 50) + "..."}}
                           className="text-gray-700 text-medium"
                         ></div>
                       )}
