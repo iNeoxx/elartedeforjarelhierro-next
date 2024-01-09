@@ -7,4 +7,6 @@
 
 .svgHover:hover svg path {
     fill: white;
+    transition: ease;
+    transition-duration: 200ms;
 }
