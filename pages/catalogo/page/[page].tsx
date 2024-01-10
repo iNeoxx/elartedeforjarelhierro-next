@@ -19,10 +19,10 @@ interface CatalogPageProps {
 }
 const PRODUCTS_PER_PAGE = 16
 export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
-  // const router = useRouter();
-  // if(router.isFallback) {
-  //   return <h1>Cargando...</h1>
-  // }
+  const router = useRouter();
+  if(router.isFallback) {
+    return <h1>Cargando...</h1>
+  }
 
     return (
       <Layout>
@@ -98,7 +98,7 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
     // }))
     return {
       paths,
-      fallback: 'blocking',
+      fallback: true,
     }
   }
 
@@ -170,6 +170,6 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
           total: Math.ceil(result.meta.count / PRODUCTS_PER_PAGE),
         }
       },
-      // revalidate: 5,
+      revalidate: 5,
     }
   }
