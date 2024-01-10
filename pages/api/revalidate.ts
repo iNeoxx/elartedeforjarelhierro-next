@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next"
-import { revalidatePath } from "next/cache"
 
 export default async function handler(
   request: NextApiRequest,
@@ -20,7 +19,6 @@ export default async function handler(
 
   try {
     await response.revalidate(slug)
-    revalidatePath('/catalogo/page/[slug]')
 
     return response.json({})
   } catch (error) {
