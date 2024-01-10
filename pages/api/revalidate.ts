@@ -20,7 +20,7 @@ export default async function handler(
 
   try {
     await response.revalidate(slug)
-    revalidatePath('/catalogo/page/[page]')
+    revalidatePath('/catalogo/page/[slug]')
 
     return response.json({})
   } catch (error) {
