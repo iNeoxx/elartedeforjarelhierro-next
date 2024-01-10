@@ -10,7 +10,6 @@ import CatalogueDropdown from "@/components/catalogue/CatalogueDropdown"
 import ContactSection from "@/components/contact-section/ContactSection"
 import styles from "../../../components/contact-section/contactSection.module.css"
 import { FormSearch } from "@/components/form--search"
-import { useRouter } from "next/router"
 
 interface CatalogPageProps {
     nodes: DrupalNode[]
@@ -19,10 +18,6 @@ interface CatalogPageProps {
 }
 const PRODUCTS_PER_PAGE = 16
 export default function IndexPage({ nodes, page, tags }: CatalogPageProps) {
-  const router = useRouter();
-  if(router.isFallback) {
-    return <h1>Cargando...</h1>
-  }
 
     return (
       <Layout>
@@ -98,7 +93,7 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
     // }))
     return {
       paths,
-      fallback: true,
+      fallback: 'blocking',
     }
   }
 
@@ -153,11 +148,11 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
       }
     )
 
-    // if (!result.data?.length) {
-    //   return {
-    //     notFound: true,
-    //   }
-    // }
+    if (!result.data?.length) {
+      return {
+        notFound: true,
+      }
+    }
     const nodes = deserialize(result) as DrupalNode[]
     const tags = deserialize(tagsResult) as DrupalTaxonomyTerm[]
 
@@ -170,6 +165,5 @@ export async function getStaticPaths(context): Promise<GetStaticPathsResult> {
           total: Math.ceil(result.meta.count / PRODUCTS_PER_PAGE),
         }
       },
-      revalidate: 5,
     }
   }
