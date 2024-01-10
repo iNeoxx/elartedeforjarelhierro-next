@@ -386,11 +386,11 @@ export default function Contacto() {
 
                 >
                   Estoy de acuerdo con las{" "}
-                  <Link href="/" className="font-black">
+                  <Link href="politicas-de-privacidad-y-terminos-de-uso" className="font-black">
                     Politicas de Privacidad
                   </Link>{" "}
                   y{" "}
-                  <Link href="/" className="font-black">
+                  <Link href="politicas-de-privacidad-y-terminos-de-uso" className="font-black">
                     Términos de Uso.
                   </Link>
                 </Checkbox>
