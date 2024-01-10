@@ -22,7 +22,6 @@ export function TaxonomyProductType({
         <div className="ml-10 mt-10 max-[768px]:ml-3 max-[768px]:mt-0 max-[768px]:mb-8">
         <BackButton
           text="Volver al Catálogo"
-          route="/catalogo"
           />
         </div>
       <div className=" flex w-[100%] justify-center text-center font-bold text-5xl pb-10 max-[768px]:text-2xl">

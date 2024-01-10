@@ -31,7 +31,6 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
         {/* Button */}
         <div className="pt-10 pl-4 md:pl-12">
           <BackButton
-          route="/catalogo"
           text="Volver al catálogo"/>
         </div>
         <div className="flex items-center pb-10 max-[1024px]:flex-col max-[1024px]:items-center ">

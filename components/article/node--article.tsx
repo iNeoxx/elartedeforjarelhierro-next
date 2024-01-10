@@ -29,7 +29,6 @@ export function NodeArticle({ node, ...props}: NodeArticleProps) {
     <div>
       <div className="my-6 mx-2 lg:mx-16">
         <BackButton
-          route="/blog" 
           text="Volver al blog"/>
       </div>
       <article {...props} className={`pt-10 m-auto block w-11/12 justify-center items-center ${styles.visual}`}>

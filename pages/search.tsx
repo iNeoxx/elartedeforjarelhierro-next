@@ -65,7 +65,6 @@ export default function SearchPage() {
         <div className="ml-10 mt-10 max-[768px]:ml-3 max-[900px]:mt-5 max-[900px]:mb-8" >
         <BackButton
           text="Volver al Catálogo"
-          route="/catalogo"
           />
         </div>
             <h1 className="pb-10 text-center text-5xl max-[768px]:text-2xl">Resultados de la búsqueda: <span className="font-bold text-[#C93400]">{keys}</span></h1>
