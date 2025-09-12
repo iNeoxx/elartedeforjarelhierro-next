@@ -281,9 +281,9 @@ const ImgCarousel = ({ ...props }) => {
                 className="max-w-none select-none"
                 style={{
                   transform: `scale(${zoomLevel}) translate(${imagePosition.x / zoomLevel}px, ${imagePosition.y / zoomLevel}px)`,
-                  transition: isDragging ? 'none' : 'transform 0.1s ease-out',
                   touchAction: 'none',
-                  pointerEvents: 'none'
+                  pointerEvents: 'none',
+                  willChange: 'transform'
                 }}
                 onMouseDown={handleMouseDown}
                 onDragStart={(e) => e.preventDefault()}
