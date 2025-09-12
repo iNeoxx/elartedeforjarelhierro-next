@@ -268,7 +268,9 @@ const ImgCarousel = ({ ...props }) => {
               style={{ 
                 touchAction: 'none',
                 userSelect: 'none',
-                WebkitUserSelect: 'none'
+                WebkitUserSelect: 'none',
+                WebkitTouchCallout: 'none',
+                WebkitTapHighlightColor: 'transparent'
               }}
             >
               <Image
@@ -276,10 +278,12 @@ const ImgCarousel = ({ ...props }) => {
                 alt={selectedImage.resourceIdObjMeta.alt}
                 width={800}
                 height={600}
-                className={`max-w-none transition-transform duration-200 select-none ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+                className="max-w-none select-none"
                 style={{
                   transform: `scale(${zoomLevel}) translate(${imagePosition.x / zoomLevel}px, ${imagePosition.y / zoomLevel}px)`,
-                  touchAction: 'none'
+                  transition: isDragging ? 'none' : 'transform 0.1s ease-out',
+                  touchAction: 'none',
+                  pointerEvents: 'none'
                 }}
                 onMouseDown={handleMouseDown}
                 onDragStart={(e) => e.preventDefault()}
