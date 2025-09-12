@@ -37,13 +37,8 @@ const ImgCarousel = ({ ...props }) => {
     setImagePosition({ x: 0, y: 0 });
   }, []);
 
-  const zoomIn = useCallback(() => {
-    setZoomLevel(prev => Math.min(prev + 0.5, 3));
-  }, []);
-
-  const zoomOut = useCallback(() => {
-    setZoomLevel(prev => Math.max(prev - 0.5, 0.5));
-  }, []);
+  const zoomIn = useCallback(() => setZoomLevel(prev => Math.min(prev + 0.5, 3)), []);
+  const zoomOut = useCallback(() => setZoomLevel(prev => Math.max(prev - 0.5, 0.5)), []);
 
   const getDistance = useCallback((touch1, touch2) => {
     return Math.sqrt(
@@ -63,8 +58,12 @@ const ImgCarousel = ({ ...props }) => {
     const imgWidth = img.naturalWidth * zoomLevel;
     const imgHeight = img.naturalHeight * zoomLevel;
 
-    const maxX = Math.max((imgWidth - containerRect.width) / 2, 0);
-    const maxY = Math.max((imgHeight - containerRect.height) / 2, 0);
+    let maxX = (imgWidth - containerRect.width) / 2;
+    let maxY = (imgHeight - containerRect.height) / 2;
+
+    // Si la imagen es más pequeña que el contenedor, permitir arrastre libre
+    if (maxX < 0) maxX = Infinity;
+    if (maxY < 0) maxY = Infinity;
 
     return {
       x: Math.min(Math.max(x, -maxX), maxX),
@@ -80,23 +79,15 @@ const ImgCarousel = ({ ...props }) => {
 
   const handleMouseMove = useCallback((e) => {
     if (!isDragging) return;
-
-    const pos = {
-      x: e.clientX - dragStart.x,
-      y: e.clientY - dragStart.y
-    };
-
+    const pos = { x: e.clientX - dragStart.x, y: e.clientY - dragStart.y };
     setImagePosition(limitPosition(pos.x, pos.y));
   }, [isDragging, dragStart, limitPosition]);
 
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
+  const handleMouseUp = useCallback(() => setIsDragging(false), []);
 
   const handleWheel = useCallback((e) => {
     e.preventDefault();
     const delta = e.deltaY;
-
     if (delta > 0) setZoomLevel(prev => Math.max(prev - 0.1, 0.5));
     else setZoomLevel(prev => Math.min(prev + 0.1, 3));
   }, []);
@@ -104,13 +95,9 @@ const ImgCarousel = ({ ...props }) => {
   const handleTouchStart = useCallback((e) => {
     e.preventDefault();
     const touches = e.touches;
-
     if (touches.length === 1) {
       setIsDragging(true);
-      setTouchStart({
-        x: touches[0].clientX - imagePosition.x,
-        y: touches[0].clientY - imagePosition.y
-      });
+      setTouchStart({ x: touches[0].clientX - imagePosition.x, y: touches[0].clientY - imagePosition.y });
     } else if (touches.length === 2) {
       setIsDragging(false);
       setInitialDistance(getDistance(touches[0], touches[1]));
@@ -121,7 +108,6 @@ const ImgCarousel = ({ ...props }) => {
   const handleTouchMove = useCallback((e) => {
     e.preventDefault();
     const touches = e.touches;
-
     if (touches.length === 1 && isDragging && touchStart) {
       setImagePosition(limitPosition(
         touches[0].clientX - touchStart.x,
@@ -130,8 +116,7 @@ const ImgCarousel = ({ ...props }) => {
     } else if (touches.length === 2 && initialDistance > 0) {
       const distance = getDistance(touches[0], touches[1]);
       const scale = distance / initialDistance;
-      const newZoom = Math.min(Math.max(initialZoom * scale, 0.5), 3);
-      setZoomLevel(newZoom);
+      setZoomLevel(Math.min(Math.max(initialZoom * scale, 0.5), 3));
     }
   }, [isDragging, touchStart, initialDistance, initialZoom, getDistance, limitPosition]);
 
@@ -146,7 +131,6 @@ const ImgCarousel = ({ ...props }) => {
       document.addEventListener('mousemove', handleMouseMove);
       document.addEventListener('mouseup', handleMouseUp);
     }
-
     return () => {
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
@@ -161,7 +145,6 @@ const ImgCarousel = ({ ...props }) => {
       document.body.style.left = '0';
       document.body.style.right = '0';
       document.body.style.overflow = 'hidden';
-
       return () => {
         document.body.style.position = '';
         document.body.style.top = '';
@@ -174,10 +157,7 @@ const ImgCarousel = ({ ...props }) => {
   }, [selectedImage]);
 
   useEffect(() => {
-    const handleKeyPress = (e) => {
-      if (e.key === 'Escape') closeZoomModal();
-    };
-
+    const handleKeyPress = (e) => { if (e.key === 'Escape') closeZoomModal(); };
     if (selectedImage) document.addEventListener('keydown', handleKeyPress);
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [selectedImage, closeZoomModal]);
