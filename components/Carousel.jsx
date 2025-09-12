@@ -189,10 +189,7 @@ const ImgCarousel = ({ ...props }) => {
   return (
     <>
       <div className="h-56 sm:h-64 xl:h-80 2xl:h-unit-96 w-[100%] m-auto">
-        <Carousel 
-          slide={false}
-          theme={customTheme}
-        >
+        <Carousel slide={false} theme={customTheme}>
           {props.images.map((image, key) => (
             <div key={key} className="relative w-full h-full">
               <Image
@@ -213,11 +210,11 @@ const ImgCarousel = ({ ...props }) => {
       {selectedImage && (
         <div className="fixed inset-0 z-50 flex items-center justify-center">
           {/* Overlay */}
-          <div 
+          <div
             className="absolute inset-0 bg-black bg-opacity-80"
             onClick={closeZoomModal}
           />
-          
+
           {/* Modal Content */}
           <div className="relative z-10 w-full h-full flex items-center justify-center p-4">
             {/* Controles de zoom */}
@@ -227,28 +224,58 @@ const ImgCarousel = ({ ...props }) => {
                 className="bg-white bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-40 text-white p-3 rounded-full transition-all duration-200 backdrop-blur-sm touch-manipulation"
                 title="Zoom Out"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 12H4" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M20 12H4"
+                  />
                 </svg>
               </button>
-              
+
               <button
                 onClick={zoomIn}
                 className="bg-white bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-40 text-white p-3 rounded-full transition-all duration-200 backdrop-blur-sm touch-manipulation"
                 title="Zoom In"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 4v16m8-8H4"
+                  />
                 </svg>
               </button>
-              
+
               <button
                 onClick={closeZoomModal}
                 className="bg-white bg-opacity-20 hover:bg-opacity-30 active:bg-opacity-40 text-white p-3 rounded-full transition-all duration-200 backdrop-blur-sm touch-manipulation"
                 title="Cerrar"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
                 </svg>
               </button>
             </div>
@@ -259,18 +286,18 @@ const ImgCarousel = ({ ...props }) => {
             </div>
 
             {/* Imagen con zoom */}
-            <div 
+            <div
               className="relative w-full h-full flex items-center justify-center overflow-hidden"
               onTouchStart={handleTouchStart}
               onTouchMove={handleTouchMove}
               onTouchEnd={handleTouchEnd}
               onWheel={handleWheel}
-              style={{ 
-                touchAction: 'none',
-                userSelect: 'none',
-                WebkitUserSelect: 'none',
-                WebkitTouchCallout: 'none',
-                WebkitTapHighlightColor: 'transparent'
+              style={{
+                touchAction: "none",
+                userSelect: "none",
+                WebkitUserSelect: "none",
+                WebkitTouchCallout: "none",
+                WebkitTapHighlightColor: "transparent",
               }}
             >
               <Image
@@ -280,9 +307,9 @@ const ImgCarousel = ({ ...props }) => {
                 height={600}
                 className="max-w-none select-none cursor-grab active:cursor-grabbing"
                 style={{
-                transform: `translate(${imagePosition.x / zoomLevel}px, ${imagePosition.y / zoomLevel}px) scale(${zoomLevel})`,
-                touchAction: 'none',
-                willChange: 'transform'
+                  transform: `translate(${imagePosition.x}px, ${imagePosition.y}px) scale(${zoomLevel})`,
+                  touchAction: "none",
+                  willChange: "transform",
                 }}
                 onMouseDown={handleMouseDown}
                 onDragStart={(e) => e.preventDefault()}
@@ -293,8 +320,12 @@ const ImgCarousel = ({ ...props }) => {
 
             {/* Instrucciones */}
             <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 bg-white bg-opacity-20 text-white px-4 py-2 rounded-full backdrop-blur-sm text-sm text-center">
-              <span className="hidden sm:inline">Arrastra para mover • Scroll para zoom • ESC para cerrar</span>
-              <span className="sm:hidden">Arrastra para mover • Pellizca para zoom • Toca para cerrar</span>
+              <span className="hidden sm:inline">
+                Arrastra para mover • Scroll para zoom • ESC para cerrar
+              </span>
+              <span className="sm:hidden">
+                Arrastra para mover • Pellizca para zoom • Toca para cerrar
+              </span>
             </div>
           </div>
         </div>
