@@ -278,12 +278,11 @@ const ImgCarousel = ({ ...props }) => {
                 alt={selectedImage.resourceIdObjMeta.alt}
                 width={800}
                 height={600}
-                className="max-w-none select-none"
+                className="max-w-none select-none cursor-grab active:cursor-grabbing"
                 style={{
-                  transform: `scale(${zoomLevel}) translate(${imagePosition.x / zoomLevel}px, ${imagePosition.y / zoomLevel}px)`,
-                  touchAction: 'none',
-                  pointerEvents: 'none',
-                  willChange: 'transform'
+                transform: `translate(${imagePosition.x / zoomLevel}px, ${imagePosition.y / zoomLevel}px) scale(${zoomLevel})`,
+                touchAction: 'none',
+                willChange: 'transform'
                 }}
                 onMouseDown={handleMouseDown}
                 onDragStart={(e) => e.preventDefault()}
