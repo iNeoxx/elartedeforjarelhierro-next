@@ -41,7 +41,7 @@ export function Pager({ current, total, href, ...props }: PagerProps) {
               </Link>
             )}
             {link.type === "page" && (
-              <Link href={link.href as string} passHref>
+              <Link href={link.href as string}>
                 <div
                   className={classNames(
                     "flex items-center justify-center w-12 h-12 font-bold border-2 rounded-xl border-gray-300 bg-white hover:text-red-500",
