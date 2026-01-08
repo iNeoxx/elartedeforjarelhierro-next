@@ -20,7 +20,7 @@
     "drupal-jsonapi-params": "^2.3.1",
     "flowbite-react": "^0.7.2",
     "framer-motion": "^10.16.16",
-    "next": "15.5.3",
+    "next": "15.5.9",
     "next-drupal": "^1.5.0",
     "next-share": "^0.27.0",
     "react": "18.3.1",
