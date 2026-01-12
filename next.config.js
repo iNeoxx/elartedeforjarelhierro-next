@@ -13,7 +13,12 @@ const nextConfig = {
     ]
   },
   images: {
-    domains: [process.env.NEXT_IMAGE_DOMAIN],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_IMAGE_DOMAIN,
+      },
+    ],
   },
 }
 
