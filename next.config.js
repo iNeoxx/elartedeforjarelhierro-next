@@ -16,7 +16,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.NEXT_IMAGE_DOMAIN,
+        hostname: 'dev-elartedeforjarelhierrobackend.pantheonsite.io',
       },
     ],
   },
