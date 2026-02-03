@@ -4,6 +4,13 @@ import { CatalogueTeaser } from "@/components/drupal/CatalogueTeaser"
 import CatalogueDropdown from "@/components/drupal/CatalogueDropdown"
 import { FormSearch } from "@/components/form--search"
 import { Pager } from "@/components/pager"
+import type { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  title: "Catalogo | El Arte de Forjar el Hierro",
+  description: "Explora nuestros amplio catálogo de productos artesanales de forja en hierro.",
+};
 
 const PRODUCTS_PER_PAGE = 16
 
