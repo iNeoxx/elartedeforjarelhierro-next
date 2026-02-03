@@ -19,26 +19,27 @@ export const metadata: Metadata = {
 }
 
 export default async function Home() {
-  // 1. Fetch de Productos (Catálogo) con ODR
-  const catalogues = await drupal.getResourceCollection<DrupalNode[]>(
-    "node--product",
-    {
-      params: {
-        "filter[status]": 1,
-        "sort": "-created",
-        "include": "field_product_image,field_product_type",
-        "fields[node--product]": "title,path,field_product_image,field_product_type,field_product_body,status",
-        "page[limit]": "4",
-      },
-      // CAMBIO: Usamos tags para que el Webhook pueda invalidar la Home
-      next: { 
-        tags: ["node--product", "home-catalogue"],
-        revalidate: false 
-      },
-    }
-  )
+// 1. Fetch de Productos (Catálogo) con ODR Reforzado
+const catalogues = await drupal.getResourceCollection<DrupalNode[]>(
+  "node--product",
+  {
+    params: {
+      "filter[status]": 1,
+      "sort": "-created",
+      "include": "field_product_image,field_product_type",
+      "fields[node--product]": "title,path,field_product_image,field_product_type,field_product_body,status",
+      "page[limit]": "4",
+    },
+    next: { 
+      // Esta es la conexión con el ODR de Drupal
+      tags: ["node--product"], 
+      // Forzamos a que no sea estático perpetuo
+      revalidate: 0 
+    },
+  }
+)
 
-  // 2. Fetch de Artículos (Últimos trabajos / Blog) con ODR
+  // 2. Fetch de Artículos (Últimos trabajos / Blog) con ODR Reforzado
   const articles = await drupal.getResourceCollection<DrupalNode[]>(
     "node--article",
     {
@@ -49,15 +50,12 @@ export default async function Home() {
         "fields[node--article]": "title,path,field_article_image,body,created",
         "page[limit]": "4",
       },
-      // CAMBIO: Tag específico para artículos
       next: { 
-        tags: ["node--article", "home-articles"],
+        tags: ["node--article", "home-articles", "full-site"], 
         revalidate: false 
       },
     }
   )
-
-  const vermasButtonStyle = "flex items-center gap-2 bg-[#C93400] text-white px-8 py-3 rounded-[16px] font-bold border border-[#C93400] hover:bg-transparent hover:text-[#C93400] transition-all group mx-auto w-fit shadow-md";
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden bg-white">

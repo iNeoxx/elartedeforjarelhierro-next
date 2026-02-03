@@ -1,7 +1,7 @@
 "use client"
 
 import { DrupalNode } from "next-drupal"
-import { Link } from "@/components/navigation/Link" // Asegúrate de que este Link sea el que usas para navegación
+import { Link } from "@/components/navigation/Link"
 import { CatalogueTeaser } from "./CatalogueTeaser"
 import ImgCarousel from "../Carousel"
 import BackButton from "../BackButton"
@@ -27,8 +27,8 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
 
   return (
     <article {...props} className="w-full">
-      {/* 1. BOTÓN VOLVER: Discreto a la izquierda */}
-      <div className="flex justify-start mb-6">
+      {/* 1. BOTÓN VOLVER: Con padding para separarlo del borde izquierdo */}
+      <div className="flex justify-start mb-6 px-4 md:px-8">
         <div className="inline-block transform scale-90 origin-left opacity-80 hover:opacity-100 transition-all">
           <BackButton text="Volver" />
         </div>
