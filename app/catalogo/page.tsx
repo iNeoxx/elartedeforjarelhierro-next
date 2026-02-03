@@ -71,13 +71,9 @@ export default async function CatalogoPage(props: {
         </h1>
 
         {/* Buscador y Filtros */}
-        <div className="flex justify-center pb-12 gap-4 max-[1024px]:flex-col max-[1024px]:items-center px-6">
-          <div className="w-full max-w-xs">
-            <CatalogueDropdown tags={tags} />
-          </div>
-          <div className="w-full max-w-md">
-            <FormSearch />
-          </div>
+        <div className="flex justify-center pb-8 gap-4 max-[1024px]:flex-col max-[1024px]:items-center">
+          <CatalogueDropdown tags={tags} />
+          <FormSearch />
         </div>
 
         {/* Info de búsqueda */}
