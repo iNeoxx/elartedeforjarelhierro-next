@@ -1,25 +1,16 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  async rewrites() {
-    return [
-      {
-        source: '/blog',
-        destination: '/blog/page/0',
-      },
-      {
-        source: '/catalogo',
-        destination: '/catalogo/page/0'
-      },
-    ]
-  },
+  reactStrictMode: true,
   images: {
     remotePatterns: [
       {
-        protocol: 'https',
+        // protocol: 'https',
         hostname: process.env.NEXT_IMAGE_DOMAIN,
+        // port: '',
+        // pathname: '/sites/default/files/**',
       },
     ],
   },
 }
 
-module.exports = nextConfig
+module.exports = (nextConfig)

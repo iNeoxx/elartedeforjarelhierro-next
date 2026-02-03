@@ -1,57 +1,78 @@
+"use client"
+
 import * as React from "react"
-import classNames from "classnames"
-import Link from "next/link"
-import { useRouter } from "next/router"
-import styles from "@/components/FormSearch.module.css"
-import {Input, Button} from "@nextui-org/react";
+import { useRouter, useSearchParams } from "next/navigation"
 
 interface FormSearchProps extends React.HTMLProps<HTMLFormElement> {}
 
 export function FormSearch({ className, ...props }: FormSearchProps) {
   const router = useRouter()
+  const searchParams = useSearchParams()
 
-  const onSubmit = async (event) => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const data = new FormData(event.target)
+    const data = new FormData(event.currentTarget)
+    const keys = data.get("keys")
 
-    // Redirect to search page.
-    window.location.href = `/search?keys=${data.get("keys")}`
+    if (!keys) {
+      router.push("/catalogo")
+      return
+    }
+
+    router.push(`/catalogo?q=${encodeURIComponent(keys.toString())}`)
   }
 
   return (
-    <div className="pl-5 w-1/4 max-[1024px]:w-full max-[1024px]:py-5">
+    <div className="w-full px-4 md:px-0 md:pl-5 md:w-2/5 lg:w-1/3 py-5 md:py-0">
       <form
-        className="flex"
+        className="group relative flex items-center h-11 bg-white rounded-xl border border-gray-200 p-1 transition-all duration-300 focus-within:border-[#497EDA] focus-within:shadow-md shadow-sm"
         onSubmit={onSubmit}
         {...props}
       >
-        
-          <Input
+        <div className="relative flex-grow h-full flex items-center">
+          {/* Icono de Lupa - Tamaño estándar 5 */}
+          <div className="absolute left-3 flex items-center pointer-events-none">
+            <svg 
+              className="text-gray-400 group-focus-within:text-[#497EDA] transition-colors duration-300 w-5 h-5" 
+              xmlns="http://www.w3.org/2000/svg" 
+              fill="none" 
+              viewBox="0 0 24 24" 
+              stroke="currentColor" 
+              strokeWidth="2"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+          
+          <input
+            type="text"
             id="keys"
             name="keys"
-            radius="none"
-            isRequired
-            classNames={{
-              inputWrapper: [
-                "shadow-xl",
-                "bg-white",
-                "rounded-l-lg",
-                "h-10"
-              ],
-            }}
-            placeholder="Buscar un producto..."
-            startContent={<svg className="fill-gray-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50" width="25px" height="25px">
-            <path
-            d="M 21 3 C 11.601563 3 4 10.601563 4 20 C 4 29.398438 11.601563 37 21 37 C 24.355469 37 27.460938 36.015625 30.09375 34.34375 L 42.375 46.625 L 46.625 42.375 L 34.5 30.28125 C 36.679688 27.421875 38 23.878906 38 20 C 38 10.601563 30.398438 3 21 3 Z M 21 7 C 28.199219 7 34 12.800781 34 20 C 34 27.199219 28.199219 33 21 33 C 13.800781 33 8 27.199219 8 20 C 8 12.800781 13.800781 7 21 7 Z" />
-            </svg>}
+            required
+            defaultValue={searchParams.get("q") || ""}
+            placeholder="Buscar productos..."
+            className="w-full h-full pl-10 pr-2 text-sm bg-transparent border-none focus:ring-0 outline-none placeholder:text-gray-400"
           />
-          <Button
-            type="submit"
-            className={`font-bold ${styles.form_button}`}
-            value="Buscar"
-          >Buscar</Button>
+        </div>
+
+        {/* Botón con tamaño equilibrado */}
+        <button
+          type="submit"
+          className="h-full bg-[#497EDA] hover:bg-[#345E87] text-white px-6 rounded-lg font-bold text-sm transition-all duration-300 active:scale-95 flex items-center gap-2"
+        >
+          <span>Buscar</span>
+          <svg 
+            xmlns="http://www.w3.org/2000/svg" 
+            className="h-4 w-4" 
+            fill="none" 
+            viewBox="0 0 24 24" 
+            stroke="currentColor" 
+            strokeWidth="2.5"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7-7 7" />
+          </svg>
+        </button>
       </form>
     </div>
   )
 }
-
