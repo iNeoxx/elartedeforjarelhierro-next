@@ -11,12 +11,10 @@ import type { DrupalNode, DrupalTaxonomyTerm, JsonApiParams } from "next-drupal"
 
 type DrupalResource = DrupalNode | DrupalTaxonomyTerm
 
-// --- CONFIGURACIÓN DE REVALIDACIÓN ---
-// Permite que nuevas páginas creadas en Drupal funcionen sin reconstruir el sitio
 export const dynamicParams = true 
 
 /**
- * Función central para obtener datos de Drupal con soporte para ODR
+ * Función central para obtener datos de Drupal
  */
 async function getNode(slug: string[]): Promise<DrupalResource> {
   const path = `/${slug.join("/")}`
@@ -27,6 +25,7 @@ async function getNode(slug: string[]): Promise<DrupalResource> {
     params.resourceVersion = draftData.resourceVersion
   }
 
+  // Traducir la ruta de URL a una entidad de Drupal
   const translatedPath = await drupal.translatePath(path)
 
   if (!translatedPath) {
@@ -36,33 +35,32 @@ async function getNode(slug: string[]): Promise<DrupalResource> {
   const type = translatedPath.jsonapi?.resourceName!
   const uuid = translatedPath.entity.uuid
 
-  // --- CONFIGURACIÓN DE RELACIONES Y ATRIBUTOS ---
+  // --- CONFIGURACIÓN DE RELACIONES SEGÚN TIPO ---
   if (type === "node--article") {
-    params.include = "field_article_image,uid";
-    params["fields[node--article]"] = "title,path,field_article_image,field_body,uid,created,status";
+    params.include = "field_article_image,uid"
   }
 
   if (type === "node--product") {
     params.include = "field_product_image,field_product_type,uid"
-    params["fields[node--product]"] = "title,path,field_product_image,field_product_type,field_product_body,status"
   }
 
+  // IMPORTANTE: Quitamos 'vid' para evitar Error 500 en taxonomías
   if (type === "taxonomy_term--product_type") {
-    params.include = "vid" 
+    params.include = "" 
+    params["fields[taxonomy_term--product_type]"] = "name,path,description"
   }
 
-  // PETICIÓN CON TAGS PARA ODR
+  // Petición con soporte para On-Demand Revalidation
   const resource = await drupal.getResource<any>(type, uuid, {
     params,
     next: { 
-      // Estos tags permiten que el webhook limpie el caché de este nodo específico
       tags: [`${type}:${uuid}`, type, "full-site"],
-      revalidate: false // Solo revalida cuando el Webhook lo solicita
+      revalidate: false 
     }
   })
 
   if (!resource) {
-    throw new Error(`Failed to fetch resource: ${uuid}`, { cause: "DrupalError" })
+    throw new Error(`Failed to fetch resource: ${uuid}`)
   }
 
   return resource
@@ -72,9 +70,6 @@ type NodePageProps = {
   params: Promise<{ slug: string[] }>
 }
 
-/**
- * Generación dinámica de Metadatos (SEO)
- */
 export async function generateMetadata(props: NodePageProps): Promise<Metadata> {
   const { slug } = await props.params
   try {
@@ -89,26 +84,18 @@ export async function generateMetadata(props: NodePageProps): Promise<Metadata> 
   }
 }
 
-/**
- * Generación de rutas estáticas durante el Build
- */
-const RESOURCE_TYPES = ["node--page", "node--article", "node--product", "taxonomy_term--product_type"]
-
 export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   try {
+    const RESOURCE_TYPES = ["node--page", "node--article", "node--product", "taxonomy_term--product_type"]
     const resources = await drupal.getResourceCollectionPathSegments(RESOURCE_TYPES)
     return resources.map((resource) => ({
       slug: resource.segments,
     }))
   } catch (error) {
-    console.error("Error en generateStaticParams:", error)
     return [] 
   }
 }
 
-/**
- * COMPONENTE PRINCIPAL DE PÁGINA
- */
 export default async function NodePage(props: NodePageProps) {
   const { slug } = await props.params
   const isDraftMode = (await draftMode()).isEnabled
@@ -120,34 +107,38 @@ export default async function NodePage(props: NodePageProps) {
     notFound()
   }
 
-  // --- LÓGICA DE PRODUCTOS RELACIONADOS (Si es un Producto) ---
+  // --- LÓGICA DE PRODUCTOS RELACIONADOS ---
   let relatedProducts: DrupalNode[] = []
 
   if (resource.type === "node--product") {
     const product = resource as any
-    const categoryId = product.field_product_type?.[0]?.id
+    // Verificamos si field_product_type es un array o un objeto único
+    const categoryId = Array.isArray(product.field_product_type) 
+      ? product.field_product_type[0]?.id 
+      : product.field_product_type?.id
 
-    relatedProducts = await drupal.getResourceCollection<DrupalNode[]>(
-      "node--product",
-      {
-        params: {
-          "include": "field_product_image,field_product_type",
-          "filter[status]": 1,
-          ...(categoryId && { "filter[category][condition][path]": "field_product_type.id" }),
-          ...(categoryId && { "filter[category][condition][value]": categoryId }),
-          "filter[not_current][condition][path]": "id",
-          "filter[not_current][condition][operator]": "<>",
-          "filter[not_current][condition][value]": product.id,
-          "page[limit]": 3,
-          "sort": "-created",
-          "fields[node--product]": "title,path,field_product_image,field_product_body,field_product_type",
-        },
-        next: { tags: ["node--product"] }
-      }
-    )
+    if (categoryId) {
+      relatedProducts = await drupal.getResourceCollection<DrupalNode[]>(
+        "node--product",
+        {
+          params: {
+            "include": "field_product_image,field_product_type",
+            "filter[status]": 1,
+            "filter[category][condition][path]": "field_product_type.id",
+            "filter[category][condition][value]": categoryId,
+            "filter[not_current][condition][path]": "id",
+            "filter[not_current][condition][operator]": "<>",
+            "filter[not_current][condition][value]": product.id,
+            "page[limit]": 3,
+            "sort": "-created",
+          },
+          next: { tags: ["node--product"] }
+        }
+      )
+    }
   }
 
-  // Verificación de status (Seguridad)
+  // Validación de estatus para Nodos
   if (!isDraftMode && resource.type.startsWith("node--")) {
     if ((resource as DrupalNode).status === false) {
       notFound()
@@ -156,14 +147,9 @@ export default async function NodePage(props: NodePageProps) {
 
   return (
     <div className="w-full">
-      {/* RENDERIZADO CONDICIONAL SEGÚN TIPO DE CONTENIDO */}
-      {resource.type === "node--page" && (
-        <BasicPage node={resource as DrupalNode} />
-      )}
+      {resource.type === "node--page" && <BasicPage node={resource as DrupalNode} />}
       
-      {resource.type === "node--article" && (
-        <Article node={resource as DrupalNode} />
-      )}
+      {resource.type === "node--article" && <Article node={resource as DrupalNode} />}
       
       {resource.type === "node--product" && (
         <NodeCatalogo 
