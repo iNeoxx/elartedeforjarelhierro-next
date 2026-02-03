@@ -4,7 +4,6 @@ import { getDraftData } from "next-drupal/draft"
 import { drupal } from "@/lib/drupal"
 import { Article } from "@/components/drupal/Article"
 import { BasicPage } from "@/components/drupal/BasicPage"
-// Importamos con el nombre correcto y mantenemos el alias TagPage para no romper el JSX inferior
 import { TaxonomyProductType as TagPage } from "@/components/drupal/TagPage"
 import { NodeCatalogo } from "@/components/drupal/Catalogue"
 import type { Metadata } from "next"
@@ -12,6 +11,13 @@ import type { DrupalNode, DrupalTaxonomyTerm, JsonApiParams } from "next-drupal"
 
 type DrupalResource = DrupalNode | DrupalTaxonomyTerm
 
+// --- CONFIGURACIÓN DE REVALIDACIÓN ---
+// Permite que nuevas páginas creadas en Drupal funcionen sin reconstruir el sitio
+export const dynamicParams = true 
+
+/**
+ * Función central para obtener datos de Drupal con soporte para ODR
+ */
 async function getNode(slug: string[]): Promise<DrupalResource> {
   const path = `/${slug.join("/")}`
   const params: JsonApiParams = {}
@@ -33,24 +39,26 @@ async function getNode(slug: string[]): Promise<DrupalResource> {
   // --- CONFIGURACIÓN DE RELACIONES Y ATRIBUTOS ---
   if (type === "node--article") {
     params.include = "field_article_image,uid";
-    // Corregido a field_body
     params["fields[node--article]"] = "title,path,field_article_image,field_body,uid,created,status";
   }
 
   if (type === "node--product") {
     params.include = "field_product_image,field_product_type,uid"
-    // Forzamos campos para evitar Sparse Fieldsets
     params["fields[node--product]"] = "title,path,field_product_image,field_product_type,field_product_body,status"
   }
 
   if (type === "taxonomy_term--product_type") {
-    // Para términos de taxonomía, a veces necesitamos incluir campos si tienen imágenes o relaciones
     params.include = "vid" 
   }
 
+  // PETICIÓN CON TAGS PARA ODR
   const resource = await drupal.getResource<any>(type, uuid, {
     params,
-    cache: "no-store", 
+    next: { 
+      // Estos tags permiten que el webhook limpie el caché de este nodo específico
+      tags: [`${type}:${uuid}`, type, "full-site"],
+      revalidate: false // Solo revalida cuando el Webhook lo solicita
+    }
   })
 
   if (!resource) {
@@ -64,19 +72,26 @@ type NodePageProps = {
   params: Promise<{ slug: string[] }>
 }
 
+/**
+ * Generación dinámica de Metadatos (SEO)
+ */
 export async function generateMetadata(props: NodePageProps): Promise<Metadata> {
   const { slug } = await props.params
   try {
     const resource = await getNode(slug)
     const title = (resource as any)?.title ?? (resource as any)?.name ?? "Página"
-    return { title: `${title} | Mi Sitio` }
+    return { 
+      title: `${title} | El Arte de Forjar el Hierro`,
+      description: "Taller artesanal de forja y diseño en hierro."
+    }
   } catch (e) {
-    return { title: "Not Found" }
+    return { title: "Contenido no encontrado" }
   }
 }
 
-// --- GENERACIÓN DE RUTAS ESTÁTICAS ---
-// Actualizado con el machine name correcto de tu vocabulario
+/**
+ * Generación de rutas estáticas durante el Build
+ */
 const RESOURCE_TYPES = ["node--page", "node--article", "node--product", "taxonomy_term--product_type"]
 
 export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
@@ -91,6 +106,9 @@ export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
   }
 }
 
+/**
+ * COMPONENTE PRINCIPAL DE PÁGINA
+ */
 export default async function NodePage(props: NodePageProps) {
   const { slug } = await props.params
   const isDraftMode = (await draftMode()).isEnabled
@@ -102,7 +120,7 @@ export default async function NodePage(props: NodePageProps) {
     notFound()
   }
 
-  // --- LÓGICA DE PRODUCTOS RELACIONADOS ---
+  // --- LÓGICA DE PRODUCTOS RELACIONADOS (Si es un Producto) ---
   let relatedProducts: DrupalNode[] = []
 
   if (resource.type === "node--product") {
@@ -124,12 +142,12 @@ export default async function NodePage(props: NodePageProps) {
           "sort": "-created",
           "fields[node--product]": "title,path,field_product_image,field_product_body,field_product_type",
         },
-        cache: "no-store",
+        next: { tags: ["node--product"] }
       }
     )
   }
 
-  // Verificación de status
+  // Verificación de status (Seguridad)
   if (!isDraftMode && resource.type.startsWith("node--")) {
     if ((resource as DrupalNode).status === false) {
       notFound()
@@ -137,11 +155,15 @@ export default async function NodePage(props: NodePageProps) {
   }
 
   return (
-    <main className="container mx-auto py-10">
-      {/* RENDERIZADO CONDICIONAL POR TIPO */}
-      {resource.type === "node--page" && <BasicPage node={resource as DrupalNode} />}
+    <div className="w-full">
+      {/* RENDERIZADO CONDICIONAL SEGÚN TIPO DE CONTENIDO */}
+      {resource.type === "node--page" && (
+        <BasicPage node={resource as DrupalNode} />
+      )}
       
-      {resource.type === "node--article" && <Article node={resource as DrupalNode} />}
+      {resource.type === "node--article" && (
+        <Article node={resource as DrupalNode} />
+      )}
       
       {resource.type === "node--product" && (
         <NodeCatalogo 
@@ -150,10 +172,9 @@ export default async function NodePage(props: NodePageProps) {
         />
       )}
 
-      {/* Corregido: Ahora apunta al tipo de vocabulario Product Type */}
       {resource.type === "taxonomy_term--product_type" && (
         <TagPage term={resource as DrupalTaxonomyTerm} />
       )}
-    </main>
+    </div>
   )
 }
