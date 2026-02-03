@@ -11,6 +11,9 @@ import type { DrupalNode, DrupalTaxonomyTerm, JsonApiParams } from "next-drupal"
 
 type DrupalResource = DrupalNode | DrupalTaxonomyTerm
 
+// --- CONFIGURACIÓN DE RENDERIZADO ---
+// Soluciona el error "Page changed from static to dynamic" causado por draftMode/cookies
+export const dynamic = "force-dynamic"
 export const dynamicParams = true 
 
 /**
@@ -19,13 +22,14 @@ export const dynamicParams = true
 async function getNode(slug: string[]): Promise<DrupalResource> {
   const path = `/${slug.join("/")}`
   const params: JsonApiParams = {}
+  
+  // Manejo de Draft Mode / Previsualización
   const draftData = await getDraftData()
-
   if (draftData?.path === path) {
     params.resourceVersion = draftData.resourceVersion
   }
 
-  // Traducir la ruta de URL a una entidad de Drupal
+  // Traducir la ruta de URL a UUID de Drupal
   const translatedPath = await drupal.translatePath(path)
 
   if (!translatedPath) {
@@ -35,7 +39,7 @@ async function getNode(slug: string[]): Promise<DrupalResource> {
   const type = translatedPath.jsonapi?.resourceName!
   const uuid = translatedPath.entity.uuid
 
-  // --- CONFIGURACIÓN DE RELACIONES SEGÚN TIPO ---
+  // --- CONFIGURACIÓN DE RELACIONES POR TIPO ---
   if (type === "node--article") {
     params.include = "field_article_image,uid"
   }
@@ -44,13 +48,13 @@ async function getNode(slug: string[]): Promise<DrupalResource> {
     params.include = "field_product_image,field_product_type,uid"
   }
 
-  // IMPORTANTE: Quitamos 'vid' para evitar Error 500 en taxonomías
+  // Taxonomías: Limpiamos includes problemáticos (como 'vid')
   if (type === "taxonomy_term--product_type") {
     params.include = "" 
     params["fields[taxonomy_term--product_type]"] = "name,path,description"
   }
 
-  // Petición con soporte para On-Demand Revalidation
+  // Petición con tags para On-Demand Revalidation (ODR)
   const resource = await drupal.getResource<any>(type, uuid, {
     params,
     next: { 
@@ -70,6 +74,9 @@ type NodePageProps = {
   params: Promise<{ slug: string[] }>
 }
 
+/**
+ * Metadatos Dinámicos
+ */
 export async function generateMetadata(props: NodePageProps): Promise<Metadata> {
   const { slug } = await props.params
   try {
@@ -84,20 +91,13 @@ export async function generateMetadata(props: NodePageProps): Promise<Metadata> 
   }
 }
 
-export async function generateStaticParams(): Promise<{ slug: string[] }[]> {
-  try {
-    const RESOURCE_TYPES = ["node--page", "node--article", "node--product", "taxonomy_term--product_type"]
-    const resources = await drupal.getResourceCollectionPathSegments(RESOURCE_TYPES)
-    return resources.map((resource) => ({
-      slug: resource.segments,
-    }))
-  } catch (error) {
-    return [] 
-  }
-}
-
+/**
+ * Componente Principal de Página
+ */
 export default async function NodePage(props: NodePageProps) {
   const { slug } = await props.params
+  
+  // draftMode() invoca cookies, por eso usamos force-dynamic arriba
   const isDraftMode = (await draftMode()).isEnabled
 
   let resource: DrupalResource
@@ -107,12 +107,11 @@ export default async function NodePage(props: NodePageProps) {
     notFound()
   }
 
-  // --- LÓGICA DE PRODUCTOS RELACIONADOS ---
+  // --- LÓGICA DE PRODUCTOS RELACIONADOS (Si aplica) ---
   let relatedProducts: DrupalNode[] = []
 
   if (resource.type === "node--product") {
     const product = resource as any
-    // Verificamos si field_product_type es un array o un objeto único
     const categoryId = Array.isArray(product.field_product_type) 
       ? product.field_product_type[0]?.id 
       : product.field_product_type?.id
@@ -138,7 +137,7 @@ export default async function NodePage(props: NodePageProps) {
     }
   }
 
-  // Validación de estatus para Nodos
+  // Validación de estatus (Nodos publicados)
   if (!isDraftMode && resource.type.startsWith("node--")) {
     if ((resource as DrupalNode).status === false) {
       notFound()
@@ -147,9 +146,14 @@ export default async function NodePage(props: NodePageProps) {
 
   return (
     <div className="w-full">
-      {resource.type === "node--page" && <BasicPage node={resource as DrupalNode} />}
+      {/* Selector de componentes según el tipo de recurso */}
+      {resource.type === "node--page" && (
+        <BasicPage node={resource as DrupalNode} />
+      )}
       
-      {resource.type === "node--article" && <Article node={resource as DrupalNode} />}
+      {resource.type === "node--article" && (
+        <Article node={resource as DrupalNode} />
+      )}
       
       {resource.type === "node--product" && (
         <NodeCatalogo 
