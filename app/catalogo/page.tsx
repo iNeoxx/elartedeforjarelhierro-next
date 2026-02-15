@@ -65,7 +65,7 @@ export default async function CatalogoPage(props: {
 
   return (
     <div className="bg-[#EEEDED] min-h-screen">
-      <div className="pt-7 pb-7 md:pt-14 max-w-[1600px] mx-auto">
+      <div className="pt-7 pb-7 md:pt-14 max-w-[1750px] mx-auto">
         <h1 className="pb-10 text-4xl md:text-6xl font-black text-center text-[#1D2721] uppercase tracking-tighter">
           Nuestro <span className="text-[#C93400]">Catálogo</span>
         </h1>
@@ -86,7 +86,7 @@ export default async function CatalogoPage(props: {
         )}
 
         {/* Grid de Productos */}
-        <div className="grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-8 px-6">
+        <div className="grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-12 px-4">
           {products?.length ? (
             products.map((node) => (
               <div key={node.id} className="w-full h-full">
