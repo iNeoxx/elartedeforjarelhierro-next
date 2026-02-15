@@ -30,7 +30,6 @@ export default function QuienesSomos() {
 
           {/* Tarjeta Visión */}
           <div className="group relative p-8 lg:p-10 bg-[#F8F9FA] rounded-[2.5rem] border border-gray-100 transition-all duration-500 hover:shadow-2xl hover:shadow-blue-900/5 hover:-translate-y-1">
-            {/* ICONO SUBIDO: Cambiado de top-8 a top-4 (mobile) y top-6 (desktop) */}
             <div className="absolute top-4 right-6 lg:top-6 lg:right-8 text-[#497EDA]/10 group-hover:text-[#497EDA]/20 transition-colors">
               <svg className="w-12 h-12 lg:w-16 lg:h-16" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
@@ -44,7 +43,6 @@ export default function QuienesSomos() {
 
           {/* Tarjeta Misión */}
           <div className="group relative p-8 lg:p-10 bg-white rounded-[2.5rem] border-2 border-[#C93400]/10 transition-all duration-500 hover:shadow-2xl hover:shadow-orange-900/5 hover:-translate-y-1">
-            {/* ICONO SUBIDO: Cambiado de top-8 a top-4 (mobile) y top-6 (desktop) */}
             <div className="absolute top-4 right-6 lg:top-6 lg:right-8 text-[#C93400]/10 group-hover:text-[#C93400]/20 transition-colors">
               <svg className="w-12 h-12 lg:w-16 lg:h-16" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -57,7 +55,7 @@ export default function QuienesSomos() {
           </div>
         </div>
 
-        {/* LADO DERECHO: IMAGEN ARTÍSTICA - OCULTA TOTALMENTE EN MOBILE */}
+        {/* LADO DERECHO: IMAGEN ARTÍSTICA */}
         <div className="hidden lg:flex lg:w-1/2 relative min-h-[400px]">
           <div className="sticky top-10 w-full h-full">
             <div className="relative h-full overflow-hidden rounded-[3rem] shadow-2xl">
@@ -67,6 +65,9 @@ export default function QuienesSomos() {
                 fill
                 className="object-cover transition-transform duration-1000 hover:scale-105"
                 placeholder="blur"
+                // --- CORRECCIÓN AQUÍ ---
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                // -----------------------
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#1D2721]/40 to-transparent" />
               

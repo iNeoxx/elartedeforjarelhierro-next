@@ -29,13 +29,16 @@ export default function Footer() {
             {/* 1. LOGO */}
             <div className="flex justify-center lg:justify-start">
               <Link href="/" className="transition-transform duration-300 hover:scale-105">
-                <Image
-                  src="/logofooter.svg"
-                  width={180}
-                  height={110}
-                  alt="Footer logo"
-                  className="brightness-0 invert opacity-90"
-                />
+              <Image
+                src="/logofooter.svg"
+                width={180}
+                height={110}
+                alt="Footer logo"
+                // Forzamos que el estilo coincida con las props para que Next.js esté feliz
+                style={{ width: '180px', height: '110px' }} 
+                className="brightness-0 invert opacity-90"
+                priority
+              />
               </Link>
             </div>
 
@@ -48,15 +51,16 @@ export default function Footer() {
               <div className="flex flex-col gap-6 w-full">
                 {/* Redes Sociales - Alineadas con el nuevo ancho */}
                 <div className="flex justify-center gap-6 mb-2">
-                  <Link 
-                    href="https://www.facebook.com/elartedeforjarelhierro" 
-                    target="_blank" 
-                    className="p-3 bg-white/10 rounded-xl hover:bg-white/20 transition-all duration-300"
-                  >
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                    </svg>
-                  </Link>
+                <Link 
+                  href="https://www.facebook.com/elartedeforjarelhierro" 
+                  target="_blank" 
+                  // Cambiamos hover:bg-white/20 por hover:bg-[#1877F2]
+                  className="p-3 bg-white/10 rounded-xl hover:bg-[#1877F2] transition-all duration-300"
+                >
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                  </svg>
+                </Link>
                   <button 
                     onClick={openWhatsApp} 
                     className="p-3 bg-white/10 rounded-xl hover:bg-[#25D366] transition-all duration-300 cursor-pointer"
