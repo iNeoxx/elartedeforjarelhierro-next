@@ -64,7 +64,7 @@ export default async function CatalogoPage(props: {
   const totalPages = Math.ceil(totalCount / PRODUCTS_PER_PAGE)
 
   return (
-    <div className="bg-[#EEEDED] min-h-screen">
+    <div className="bg-[#F8F9FA] min-h-screen">
       <div className="pt-7 pb-7 md:pt-14 max-w-[1750px] mx-auto">
         <h1 className="pb-10 text-4xl md:text-6xl font-black text-center text-[#1D2721] uppercase tracking-tighter">
           Nuestro <span className="text-[#C93400]">Catálogo</span>
