@@ -94,22 +94,29 @@ export function NodeCatalogo({ node, additionalContent, ...props }: NodeProductP
       </div>
 
       {/* 3. PRODUCTOS RELACIONADOS */}
-      <section className="mt-20 pb-20">
-        <div className="flex flex-col items-center mb-10">
-          <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">También te puede interesar</h2>
-          <div className="w-12 h-1 bg-[#C93400] rounded-full"></div>
-        </div>
+<section className="mt-20 pb-20">
+  <div className="flex flex-col items-center mb-10">
+    <h2 className="text-2xl md:text-3xl font-black text-gray-900 mb-2">
+      También te puede interesar
+    </h2>
+    <div className="w-12 h-1 bg-[#C93400] rounded-full"></div>
+  </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {additionalContent.relatedProducts?.length > 0 ? (
-            additionalContent.relatedProducts.map((relNode) => (
-              <CatalogueTeaser key={relNode.id} node={relNode} />
-            ))
-          ) : (
-            <p className="col-span-full text-center text-gray-400 italic">No hay productos similares.</p>
-          )}
-        </div>
-      </section>
+  {/* Aplicamos el padding horizontal aquí */}
+  <div className="px-16"> 
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {additionalContent.relatedProducts?.length > 0 ? (
+        additionalContent.relatedProducts.map((relNode) => (
+          <CatalogueTeaser key={relNode.id} node={relNode} />
+        ))
+      ) : (
+        <p className="col-span-full text-center text-gray-400 italic">
+          No hay productos similares.
+        </p>
+      )}
+    </div>
+  </div>
+</section>
     </article>
   );
 }
