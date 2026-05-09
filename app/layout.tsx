@@ -5,6 +5,7 @@ import type { Metadata } from "next"
 import type { ReactNode } from "react"
 import { Roboto } from 'next/font/google'
 import "@/styles/globals.css"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -25,7 +26,6 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      {/* Añadido suppressHydrationWarning aquí para evitar conflictos con extensiones */}
       <body className={roboto.className} suppressHydrationWarning={true}>
           <DraftAlert />
           <div className="flex flex-col min-h-screen">
@@ -35,6 +35,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
             </main>
             <Footer />
           </div>
+          <SpeedInsights />
       </body>
     </html>
   )
