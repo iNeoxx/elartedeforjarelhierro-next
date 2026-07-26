@@ -201,36 +201,37 @@ export default function AppNavbar() {
         </div>
       </div>
 
-      {/* MENÚ MÓVIL FULLSCREEN CON CRISTAL LÍQUIDO */}
+
       <div
-        className={`sm:hidden fixed inset-0 z-[40] transition-all duration-500 ease-in-out ${
-          isMenuOpen
-            ? "opacity-100 visible"
-            : "opacity-0 invisible pointer-events-none"
+        className={`sm:hidden fixed inset-0 z-[40] transition-opacity duration-200 ease-in-out ${
+          isMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
         }`}
       >
         {/* Backdrop oscuro suavizado */}
         <div
           className="absolute inset-0 bg-[#1D2721]/30 backdrop-blur-md"
+          style={{ willChange: "backdrop-filter" }}
           onClick={() => setIsMenuOpen(false)}
         />
 
-        {/* Panel lateral con cristal congelado */}
         <div
-          className={`absolute top-0 left-0 w-[80%] h-full flex flex-col p-8 transition-transform duration-500 ease-out isolate overflow-hidden ${
-            isMenuOpen ? "translate-x-0" : "-translate-x-full"
-          }`}
+          className="absolute top-0 left-0 w-[80%] h-full flex flex-col p-8 isolate overflow-hidden"
           style={{
             boxShadow:
               "1px 0 1px 0 rgba(255,255,255,0.6) inset, 10px 0 30px rgba(0,0,0,0.15)",
+            clipPath: isMenuOpen ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+            WebkitClipPath: isMenuOpen ? "inset(0 0 0 0)" : "inset(0 100% 0 0)",
+            transition: "clip-path 0.45s ease-out",
+            willChange: "clip-path",
           }}
         >
-          {/* Capa de vidrio del panel */}
+          {/* Capa de vidrio del panel: siempre "encendida", nunca aparece/desaparece de golpe */}
           <div
             className="absolute inset-0 -z-10 bg-white/55 border-r border-white/50"
             style={{
               backdropFilter: "blur(30px) saturate(180%)",
               WebkitBackdropFilter: "blur(30px) saturate(180%)",
+              willChange: "backdrop-filter",
             }}
           />
           {/* Brillo diagonal para dar profundidad de cristal curvo */}
