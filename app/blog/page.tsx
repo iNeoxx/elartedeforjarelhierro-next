@@ -28,7 +28,10 @@ export default async function BlogPage(props: {
         "page[limit]": ARTICLES_PER_PAGE,
         "page[offset]": currentPage * ARTICLES_PER_PAGE,
       },
-      cache: "no-store",
+      next: {
+        tags:["node--article", "blog-list", "full-site"],
+        revalidate: false,
+      },
     }
   );
 

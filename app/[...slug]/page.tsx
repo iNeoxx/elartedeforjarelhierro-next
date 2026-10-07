@@ -6,40 +6,77 @@ import { Article } from "@/components/drupal/Article"
 import { BasicPage } from "@/components/drupal/BasicPage"
 import { TaxonomyProductType as TagPage } from "@/components/drupal/TagPage"
 import { NodeCatalogo } from "@/components/drupal/Catalogue"
+import { unstable_cache } from "next/cache"
 import type { Metadata } from "next"
-import type { DrupalNode, DrupalTaxonomyTerm, JsonApiParams } from "next-drupal"
+import type {
+  DrupalNode,
+  DrupalTaxonomyTerm,
+  JsonApiParams,
+} from "next-drupal"
 
 type DrupalResource = DrupalNode | DrupalTaxonomyTerm
 
-// --- CONFIGURACIÓN DE RENDERIZADO ---
-// Soluciona el error "Page changed from static to dynamic" causado por draftMode/cookies
-export const dynamic = "force-dynamic"
-export const dynamicParams = true 
+export const dynamicParams = true
 
+type NodePageProps = {
+  params: Promise<{ slug: string[] }>
+}
+async function getTranslatedPath(path: string) {
+  const cachedTranslatePath = unstable_cache(
+    async () => drupal.translatePath(path),
+    ["drupal-path", path],
+    {
+      tags: ["drupal-paths"],
+      revalidate: false,
+    }
+  )
+
+  return cachedTranslatePath()
+}
 /**
- * Función central para obtener datos de Drupal
+ * Resuelve una ruta de Drupal y obtiene el recurso correspondiente.
+ *
+ * - Modo público: utiliza Data Cache + tags ODR.
+ * - Draft Mode: evita la caché para mostrar siempre la revisión solicitada.
  */
-async function getNode(slug: string[]): Promise<DrupalResource> {
+async function getNode(
+  slug: string[],
+  isDraftMode = false
+): Promise<DrupalResource> {
   const path = `/${slug.join("/")}`
   const params: JsonApiParams = {}
-  
-  // Manejo de Draft Mode / Previsualización
-  const draftData = await getDraftData()
-  if (draftData?.path === path) {
-    params.resourceVersion = draftData.resourceVersion
+
+  /**
+   * Solo consultamos información de Draft Mode cuando realmente
+   * estamos en una sesión de previsualización.
+   */
+  if (isDraftMode) {
+    const draftData = await getDraftData()
+
+    if (draftData?.path === path) {
+      params.resourceVersion = draftData.resourceVersion
+    }
   }
 
-  // Traducir la ruta de URL a UUID de Drupal
-  const translatedPath = await drupal.translatePath(path)
+  /**
+   * Resuelve el alias de Drupal.
+   */
+  const translatedPath = isDraftMode
+  ? await drupal.translatePath(path)
+  : await getTranslatedPath(path)
 
-  if (!translatedPath) {
-    throw new Error("Resource not found", { cause: "NotFound" })
+  if (!translatedPath?.jsonapi?.resourceName) {
+    throw new Error("Resource not found", {
+      cause: "NotFound",
+    })
   }
 
-  const type = translatedPath.jsonapi?.resourceName!
+  const type = translatedPath.jsonapi.resourceName
   const uuid = translatedPath.entity.uuid
 
-  // --- CONFIGURACIÓN DE RELACIONES POR TIPO ---
+  /**
+   * Relaciones necesarias según el tipo de recurso.
+   */
   if (type === "node--article") {
     params.include = "field_article_image,uid"
   }
@@ -48,20 +85,52 @@ async function getNode(slug: string[]): Promise<DrupalResource> {
     params.include = "field_product_image,field_product_type,uid"
   }
 
-  // Taxonomías: Limpiamos includes problemáticos (como 'vid')
   if (type === "taxonomy_term--product_type") {
-    params.include = "" 
-    params["fields[taxonomy_term--product_type]"] = "name,path,description"
+    params.include = ""
+    params["fields[taxonomy_term--product_type]"] =
+      "name,path,description"
   }
 
-  // Petición con tags para On-Demand Revalidation (ODR)
-  const resource = await drupal.getResource<any>(type, uuid, {
-    params,
-    next: { 
-      tags: [`${type}:${uuid}`, type, "full-site"],
-      revalidate: false 
+  /**
+   * Draft Mode:
+   * nunca almacenar previews/revisiones en la caché pública.
+   */
+  if (isDraftMode) {
+    const resource = await drupal.getResource<DrupalResource>(
+      type,
+      uuid,
+      {
+        params,
+        cache: "no-store",
+      }
+    )
+
+    if (!resource) {
+      throw new Error(`Failed to fetch resource: ${uuid}`)
     }
-  })
+
+    return resource
+  }
+
+  /**
+   * Contenido público:
+   * cache indefinida controlada mediante ODR.
+   */
+  const resource = await drupal.getResource<DrupalResource>(
+    type,
+    uuid,
+    {
+      params,
+      next: {
+        tags: [
+          `${type}:${uuid}`,
+          type,
+          "full-site",
+        ],
+        revalidate: false,
+      },
+    }
+  )
 
   if (!resource) {
     throw new Error(`Failed to fetch resource: ${uuid}`)
@@ -70,100 +139,158 @@ async function getNode(slug: string[]): Promise<DrupalResource> {
   return resource
 }
 
-type NodePageProps = {
-  params: Promise<{ slug: string[] }>
-}
-
 /**
- * Metadatos Dinámicos
+ * Metadata
  */
-export async function generateMetadata(props: NodePageProps): Promise<Metadata> {
+export async function generateMetadata(
+  props: NodePageProps
+): Promise<Metadata> {
   const { slug } = await props.params
+
   try {
+    /**
+     * Metadata pública.
+     *
+     * No necesitamos consultar Draft Mode aquí.
+     */
     const resource = await getNode(slug)
-    const title = (resource as any)?.title ?? (resource as any)?.name ?? "Página"
-    return { 
+
+    const title =
+      (resource as any)?.title ??
+      (resource as any)?.name ??
+      "Página"
+
+    return {
       title: `${title} | El Arte de Forjar el Hierro`,
-      description: "Taller artesanal de forja y diseño en hierro."
+      description:
+        "Taller artesanal de forja y diseño en hierro.",
     }
-  } catch (e) {
-    return { title: "Contenido no encontrado" }
+  } catch {
+    return {
+      title: "Contenido no encontrado",
+    }
   }
 }
 
 /**
- * Componente Principal de Página
+ * Página principal
  */
-export default async function NodePage(props: NodePageProps) {
+export default async function NodePage(
+  props: NodePageProps
+) {
   const { slug } = await props.params
-  
-  // draftMode() invoca cookies, por eso usamos force-dynamic arriba
-  const isDraftMode = (await draftMode()).isEnabled
+
+  /**
+   * Esta lectura hace que la ruta sea dinámica.
+   *
+   * Eso es esperado porque Draft Mode depende de una cookie.
+   * La Data Cache de Drupal puede seguir funcionando
+   * independientemente.
+   */
+  const { isEnabled: isDraftMode } = await draftMode()
 
   let resource: DrupalResource
+
   try {
-    resource = await getNode(slug)
-  } catch (error) {
+    resource = await getNode(slug, isDraftMode)
+  } catch {
     notFound()
   }
 
-  // --- LÓGICA DE PRODUCTOS RELACIONADOS (Si aplica) ---
+  /**
+   * Evitar mostrar nodos no publicados fuera de Draft Mode.
+   */
+  if (
+    !isDraftMode &&
+    resource.type.startsWith("node--") &&
+    (resource as DrupalNode).status === false
+  ) {
+    notFound()
+  }
+
+  /**
+   * Productos relacionados.
+   */
   let relatedProducts: DrupalNode[] = []
 
   if (resource.type === "node--product") {
-    const product = resource as any
-    const categoryId = Array.isArray(product.field_product_type) 
-      ? product.field_product_type[0]?.id 
+    const product = resource as DrupalNode & {
+      field_product_type?: any
+    }
+
+    const categoryId = Array.isArray(
+      product.field_product_type
+    )
+      ? product.field_product_type[0]?.id
       : product.field_product_type?.id
 
     if (categoryId) {
-      relatedProducts = await drupal.getResourceCollection<DrupalNode[]>(
-        "node--product",
-        {
-          params: {
-            "include": "field_product_image,field_product_type",
-            "filter[status]": 1,
-            "filter[category][condition][path]": "field_product_type.id",
-            "filter[category][condition][value]": categoryId,
-            "filter[not_current][condition][path]": "id",
-            "filter[not_current][condition][operator]": "<>",
-            "filter[not_current][condition][value]": product.id,
-            "page[limit]": 3,
-            "sort": "-created",
-          },
-          next: { tags: ["node--product"] }
-        }
-      )
-    }
-  }
+      relatedProducts =
+        await drupal.getResourceCollection<DrupalNode[]>(
+          "node--product",
+          {
+            params: {
+              include:
+                "field_product_image,field_product_type",
 
-  // Validación de estatus (Nodos publicados)
-  if (!isDraftMode && resource.type.startsWith("node--")) {
-    if ((resource as DrupalNode).status === false) {
-      notFound()
+              "filter[status]": 1,
+
+              "filter[category][condition][path]":
+                "field_product_type.id",
+
+              "filter[category][condition][value]":
+                categoryId,
+
+              "filter[not_current][condition][path]":
+                "id",
+
+              "filter[not_current][condition][operator]":
+                "<>",
+
+              "filter[not_current][condition][value]":
+                product.id,
+
+              "page[limit]": 3,
+              sort: "-created",
+            },
+
+            next: {
+              tags: [
+                "node--product",
+                "related-products",
+                "full-site",
+              ],
+              revalidate: false,
+            },
+          }
+        )
     }
   }
 
   return (
     <div className="w-full">
-      {/* Selector de componentes según el tipo de recurso */}
       {resource.type === "node--page" && (
         <BasicPage node={resource as DrupalNode} />
       )}
-      
+
       {resource.type === "node--article" && (
         <Article node={resource as DrupalNode} />
       )}
-      
+
       {resource.type === "node--product" && (
-        <NodeCatalogo 
-          node={resource as DrupalNode} 
-          additionalContent={{ relatedProducts: relatedProducts || [] }} 
+        <NodeCatalogo
+          node={resource as DrupalNode}
+          additionalContent={{
+            relatedProducts,
+          }}
         />
       )}
 
-      {resource.type === "taxonomy_term--product_type" && (
-        <TagPage term={resource as DrupalTaxonomyTerm} />
+      {resource.type ===
+        "taxonomy_term--product_type" && (
+        <TagPage
+          term={resource as DrupalTaxonomyTerm}
+        />
       )}
     </div>
   )

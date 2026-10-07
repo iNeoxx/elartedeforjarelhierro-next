@@ -26,7 +26,10 @@ export default async function CatalogoPage(props: {
     "taxonomy_term--product_type",
     {
       params: { "fields[taxonomy_term--product_type]": "name,path" },
-      next: { tags: ["taxonomy_term--product_type"], revalidate: 3600 } // Revalida cada hora o por ODR
+      next: { 
+        tags: ["taxonomy_term--product_type", "catalogue-list", "full-site"], 
+        revalidate: false, 
+      } // Revalida cada hora o por ODR
     }
   )
 
@@ -52,8 +55,8 @@ export default async function CatalogoPage(props: {
       },
       // Clave para el rendimiento:
       next: { 
-        tags: ["node--product", "catalogue-list"],
-        revalidate: 3600 // Cache por una hora, pero el webhook puede romperlo antes
+        tags: ["node--product", "catalogue-list", "full-site"],
+        revalidate: false, // Cache por una hora, pero el webhook puede romperlo antes
       }
     }
   )

@@ -32,9 +32,9 @@ const catalogues = await drupal.getResourceCollection<DrupalNode[]>(
     },
     next: { 
       // Esta es la conexión con el ODR de Drupal
-      tags: ["node--product"], 
+      tags: ["node--product", "home-products", "full-site"], 
       // Forzamos a que no sea estático perpetuo
-      revalidate: 0 
+      revalidate: false,
     },
   }
 )
