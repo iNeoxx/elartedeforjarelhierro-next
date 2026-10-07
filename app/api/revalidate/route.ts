@@ -7,6 +7,11 @@ async function handler(request: NextRequest) {
   const path = searchParams.get("path")
   const tags = searchParams.get("tags")
   const secret = searchParams.get("secret")
+  
+  console.log("=== DRUPAL ODR ===")
+  console.log("path:", path)
+  console.log("tags:", tags)
+  console.log("==================")
 
   // Validar secreto de Drupal.
   if (secret !== process.env.DRUPAL_REVALIDATE_SECRET) {
