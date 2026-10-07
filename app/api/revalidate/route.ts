@@ -7,20 +7,13 @@ async function handler(request: NextRequest) {
   const path = searchParams.get("path")
   const tags = searchParams.get("tags")
   const secret = searchParams.get("secret")
-  
-  console.log("=== DRUPAL ODR ===")
-  console.log("path:", path)
-  console.log("tags:", tags)
-  console.log("==================")
 
-  // Validar secreto de Drupal.
   if (secret !== process.env.DRUPAL_REVALIDATE_SECRET) {
     return new Response("Invalid secret.", {
       status: 401,
     })
   }
 
-  // Debe recibirse al menos path o tags.
   if (!path && !tags) {
     return new Response("Missing path or tags.", {
       status: 400,
@@ -28,22 +21,29 @@ async function handler(request: NextRequest) {
   }
 
   try {
-    /**
-     * Revalidar la ruta concreta.
-     */
     if (path) {
+      /**
+       * Invalida la página que Drupal solicita.
+       */
       revalidatePath(path)
 
       /**
-       * Si cambia una ruta en Drupal también invalidamos
-       * la resolución de aliases.
+       * Invalida la caché utilizada por translatePath().
        */
       revalidateTag("drupal-paths")
+
+      /**
+       * Drupal Next.js revalida mediante paths.
+       *
+       * Nuestras consultas utilizan Data Cache mediante tags,
+       * por lo que también debemos invalidar los datos Drupal
+       * que pueden ser compartidos por otras páginas.
+       */
+      revalidateTag("node--product")
+      revalidateTag("node--article")
+      revalidateTag("taxonomy_term--product_type")
     }
 
-    /**
-     * Revalidar los tags enviados por Drupal.
-     */
     if (tags) {
       const tagsToRevalidate = tags
         .split(",")
@@ -58,7 +58,11 @@ async function handler(request: NextRequest) {
     return Response.json({
       revalidated: true,
       path: path ?? null,
-      tags: tags?.split(",").map((tag) => tag.trim()) ?? [],
+      tags:
+        tags
+          ?.split(",")
+          .map((tag) => tag.trim())
+          .filter(Boolean) ?? [],
     })
   } catch (error) {
     console.error("Revalidation error:", error)
