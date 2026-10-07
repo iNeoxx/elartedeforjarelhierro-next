@@ -45,9 +45,11 @@ export function Article({ node }: NodeArticleProps) {
         
         {/* Columna de Contenido (Izquierda) */}
         <main className="lg:col-span-8 lg:col-start-3">
-          {node.field_body?.processed || node.field_body?.value ? (
+          {node.field_body?.processed ? (
             <div
-              dangerouslySetInnerHTML={{ __html: node.field_body.processed || node.field_body.value }}
+              dangerouslySetInnerHTML={{
+                __html: node.field_body.processed,
+              }}
               className="prose prose-lg md:prose-xl max-w-none 
                 prose-headings:text-[#1D2721] prose-headings:font-black prose-headings:uppercase prose-headings:tracking-tighter
                 prose-p:text-gray-600 prose-p:leading-relaxed prose-p:mb-8
@@ -56,7 +58,9 @@ export function Article({ node }: NodeArticleProps) {
                 text-gray-700 font-medium"
             />
           ) : (
-            <p className="text-gray-400 italic">Este artículo no contiene descripción detallada.</p>
+            <p className="text-gray-400 italic">
+              Este artículo no contiene descripción detallada.
+            </p>
           )}
 
           {/* ACCIONES Y COMPARTIR */}
