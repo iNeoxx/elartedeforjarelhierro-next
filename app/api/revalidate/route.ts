@@ -1,6 +1,27 @@
 import { revalidatePath, revalidateTag } from "next/cache"
 import type { NextRequest } from "next/server"
 
+const ALLOWED_PATHS = [
+  "/",
+  "/blog",
+  "/blog/page",
+  "/catalogo",
+  "/catalogo/page",
+  "/catalog",
+]
+
+function isAllowedPath(path: string): boolean {
+  if (!path.startsWith("/")) {
+    return false
+  }
+
+  return ALLOWED_PATHS.some(
+    (allowedPath) =>
+      path === allowedPath ||
+      path.startsWith(`${allowedPath}/`)
+  )
+}
+
 async function handler(request: NextRequest) {
   const searchParams = request.nextUrl.searchParams
 
@@ -20,25 +41,17 @@ async function handler(request: NextRequest) {
     })
   }
 
+  if (path && !isAllowedPath(path)) {
+    return new Response("Invalid path.", {
+      status: 400,
+    })
+  }
+
   try {
     if (path) {
-      /**
-       * Invalida la página que Drupal solicita.
-       */
       revalidatePath(path)
 
-      /**
-       * Invalida la caché utilizada por translatePath().
-       */
       revalidateTag("drupal-paths")
-
-      /**
-       * Drupal Next.js revalida mediante paths.
-       *
-       * Nuestras consultas utilizan Data Cache mediante tags,
-       * por lo que también debemos invalidar los datos Drupal
-       * que pueden ser compartidos por otras páginas.
-       */
       revalidateTag("node--product")
       revalidateTag("node--article")
       revalidateTag("taxonomy_term--product_type")
