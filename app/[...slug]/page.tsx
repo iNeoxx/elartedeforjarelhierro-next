@@ -7,8 +7,6 @@ import { BasicPage } from "@/components/drupal/BasicPage"
 import { TaxonomyProductType as TagPage } from "@/components/drupal/TagPage"
 import { NodeCatalogo } from "@/components/drupal/Catalogue"
 import { unstable_cache } from "next/cache"
-import { getBlurDataURL } from "@/lib/getBlurDataURL"
-import { absoluteUrl } from "@/lib/utils"
 
 import type { Metadata } from "next"
 import type {
@@ -240,26 +238,6 @@ export default async function NodePage(
     }
   }
 
-  // Generar los blurs en el servidor.
-  const relatedProductBlurs: Record<string, string> = {}
-
-  if (resource.type === "node--product") {
-    await Promise.all(
-      relatedProducts.map(async (product) => {
-        const image = product.field_product_image?.[0]
-
-        if (!image?.uri?.url) return
-
-        const blurDataURL = await getBlurDataURL(
-          absoluteUrl(image.uri.url)
-        )
-
-        if (blurDataURL) {
-          relatedProductBlurs[product.id] = blurDataURL
-        }
-      })
-    )
-  }
 
   return (
     <div className="w-full">
@@ -271,15 +249,14 @@ export default async function NodePage(
         <Article node={resource as DrupalNode} />
       )}
 
-      {resource.type === "node--product" && (
-        <NodeCatalogo
-          node={resource as DrupalNode}
-          additionalContent={{
-            relatedProducts,
-            relatedProductBlurs,
-          }}
-        />
-      )}
+  {resource.type === "node--product" && (
+    <NodeCatalogo
+      node={resource as DrupalNode}
+      additionalContent={{
+        relatedProducts,
+      }}
+    />
+  )}
 
       {resource.type === "taxonomy_term--product_type" && (
         <TagPage

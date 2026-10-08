@@ -4,8 +4,6 @@ import { CatalogueTeaser } from "@/components/drupal/CatalogueTeaser"
 import CatalogueDropdown from "@/components/drupal/CatalogueDropdown"
 import { FormSearch } from "@/components/form--search"
 import { Pager } from "@/components/pager"
-import { getBlurDataURL } from "@/lib/getBlurDataURL"
-import { absoluteUrl } from "@/lib/utils"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
@@ -49,74 +47,59 @@ export default async function CatalogoPage(props: {
       ? parsedPage
       : 0
 
-  // 1. Fetch de categorías con ODR.
-  const tags = await drupal.getResourceCollection<DrupalTaxonomyTerm[]>(
-    "taxonomy_term--product_type",
-    {
-      params: {
-        "fields[taxonomy_term--product_type]": "name,path",
-      },
-      next: {
-        tags: [
-          "taxonomy_term--product_type",
-          "catalogue-list",
-          "full-site",
-        ],
-        revalidate: false,
-      },
-    }
-  )
+  // Obtener categorías y productos en paralelo, conservando ODR.
+  const [tags, json] = await Promise.all([
+    drupal.getResourceCollection<DrupalTaxonomyTerm[]>(
+      "taxonomy_term--product_type",
+      {
+        params: {
+          "fields[taxonomy_term--product_type]": "name,path",
+        },
+        next: {
+          tags: [
+            "taxonomy_term--product_type",
+            "catalogue-list",
+            "full-site",
+          ],
+          revalidate: false,
+        },
+      }
+    ),
 
-  // 2. Fetch de productos con ODR.
-  const json = await drupal.getResourceCollection<ProductCollectionResponse>(
-    "node--product",
-    {
-      deserialize: false,
-      params: {
-        "filter[status]": 1,
-        include: "field_product_image,field_product_type",
-        sort: "-created",
-        "page[limit]": PRODUCTS_PER_PAGE,
-        "page[offset]": currentPage * PRODUCTS_PER_PAGE,
-        "fields[node--product]":
-          "title,path,field_product_image,field_product_body,field_product_type",
-        ...(query && {
-          "filter[title-filter][condition][path]": "title",
-          "filter[title-filter][condition][operator]": "CONTAINS",
-          "filter[title-filter][condition][value]": query,
-        }),
-      },
-      next: {
-        tags: ["node--product", "catalogue-list", "full-site"],
-        revalidate: false,
-      },
-    }
-  )
+    drupal.getResourceCollection<ProductCollectionResponse>(
+      "node--product",
+      {
+        deserialize: false,
+        params: {
+          "filter[status]": 1,
+          include: "field_product_image,field_product_type",
+          sort: "-created",
+          "page[limit]": PRODUCTS_PER_PAGE,
+          "page[offset]": currentPage * PRODUCTS_PER_PAGE,
+          "fields[node--product]":
+            "title,path,field_product_image,field_product_body,field_product_type",
+          ...(query && {
+            "filter[title-filter][condition][path]": "title",
+            "filter[title-filter][condition][operator]": "CONTAINS",
+            "filter[title-filter][condition][value]": query,
+          }),
+        },
+        next: {
+          tags: [
+            "node--product",
+            "catalogue-list",
+            "full-site",
+          ],
+          revalidate: false,
+        },
+      }
+    ),
+  ])
 
-  // 3. Procesamiento de datos.
+  // Procesamiento de datos.
   const products = drupal.deserialize(json) as DrupalNode[]
   const totalCount = json.meta?.count ?? 0
   const totalPages = Math.ceil(totalCount / PRODUCTS_PER_PAGE)
-
-  // 4. Generación de placeholders dinámicos en el servidor.
-  // Se ejecutan en paralelo y getBlurDataURL utiliza caché.
-  const productBlurs: Record<string, string> = {}
-
-  await Promise.all(
-    products.map(async (node) => {
-      const image = node.field_product_image?.[0]
-
-      if (!image?.uri?.url) return
-
-      const blurDataURL = await getBlurDataURL(
-        absoluteUrl(image.uri.url)
-      )
-
-      if (blurDataURL) {
-        productBlurs[node.id] = blurDataURL
-      }
-    })
-  )
 
   return (
     <div className="bg-[#F8F9FA] min-h-screen">
@@ -125,13 +108,13 @@ export default async function CatalogoPage(props: {
           Nuestro <span className="text-[#C93400]">Catálogo</span>
         </h1>
 
-        {/* Buscador y Filtros */}
+        {/* Buscador y filtros */}
         <div className="flex justify-center pb-8 gap-4 max-[1024px]:flex-col max-[1024px]:items-center">
           <CatalogueDropdown tags={tags} />
           <FormSearch />
         </div>
 
-        {/* Info de búsqueda */}
+        {/* Información de búsqueda */}
         {query && (
           <div className="max-w-7xl mx-auto px-6 mb-8">
             <p className="text-gray-600 italic bg-white/50 inline-block px-4 py-2 rounded-lg border border-gray-200">
@@ -143,15 +126,15 @@ export default async function CatalogoPage(props: {
           </div>
         )}
 
-        {/* Grid de Productos */}
+        {/* Grid de productos */}
         <div className="grid justify-items-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-12 px-4">
-          {products?.length ? (
+          {products.length > 0 ? (
             products.map((node) => (
-              <div key={node.id} className="w-full h-full">
-                <CatalogueTeaser
-                  node={node}
-                  blurDataURL={productBlurs[node.id]}
-                />
+              <div
+                key={node.id}
+                className="w-full h-full"
+              >
+                <CatalogueTeaser node={node} />
               </div>
             ))
           ) : (
@@ -170,6 +153,7 @@ export default async function CatalogoPage(props: {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
+
               <p className="text-xl text-gray-400 font-bold uppercase tracking-widest">
                 No se encontraron piezas
               </p>

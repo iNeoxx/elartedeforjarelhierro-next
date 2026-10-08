@@ -1,18 +1,16 @@
 import type { DrupalNode } from "next-drupal"
 import { Link } from "@/components/navigation/Link"
 import { absoluteUrl } from "@/lib/utils"
-import { CatalogueImage } from "./CatalogueImage"
+import CatalogueImage from "./CatalogueImage"
 
 interface CatalogueTeaserProps {
   node: DrupalNode
   className?: string
-  blurDataURL?: string
 }
 
 export function CatalogueTeaser({
   node,
   className,
-  blurDataURL,
   ...props
 }: CatalogueTeaserProps) {
   const image = node.field_product_image?.[0]
@@ -44,8 +42,7 @@ export function CatalogueTeaser({
           {imageUrl ? (
             <CatalogueImage
               src={imageUrl}
-              alt={image.resourceIdObjMeta?.alt || node.title}
-              blurDataURL={blurDataURL}
+              alt={node.title}
             />
           ) : (
             <div className="flex items-center justify-center w-full h-full bg-gray-100 text-gray-300">

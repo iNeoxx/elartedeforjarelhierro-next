@@ -20,7 +20,6 @@ export interface NodeProductProps {
   node: DrupalNode
   additionalContent: {
     relatedProducts: DrupalNode[]
-    relatedProductBlurs?: Record<string, string>
   }
 }
 
@@ -132,21 +131,18 @@ export function NodeCatalogo({
 
         <div className="px-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {additionalContent.relatedProducts?.length > 0 ? (
-              additionalContent.relatedProducts.map((relNode) => (
-                <CatalogueTeaser
-                  key={relNode.id}
-                  node={relNode}
-                  blurDataURL={
-                    additionalContent.relatedProductBlurs?.[relNode.id]
-                  }
-                />
-              ))
-            ) : (
-              <p className="col-span-full text-center text-gray-400 italic">
-                No hay productos similares.
-              </p>
-            )}
+          {additionalContent.relatedProducts?.length > 0 ? (
+            additionalContent.relatedProducts.map((relNode) => (
+              <CatalogueTeaser
+                key={relNode.id}
+                node={relNode}
+              />
+            ))
+          ) : (
+            <p className="col-span-full text-center text-gray-400 italic">
+              No hay productos similares.
+            </p>
+          )}
           </div>
         </div>
       </section>

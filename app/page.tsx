@@ -3,8 +3,6 @@ import { drupal } from "@/lib/drupal"
 import type { Metadata } from "next"
 import type { DrupalNode } from "next-drupal"
 import Link from "next/link"
-import { getBlurDataURL } from "@/lib/getBlurDataURL"
-import { absoluteUrl } from "@/lib/utils"
 
 
 // Componentes Estáticos de la Home
@@ -43,24 +41,6 @@ export default async function Home() {
     }
   )
 
-  // Generar los placeholders dinámicos de los productos recientes.
-const productBlurs: Record<string, string> = {}
-
-await Promise.all(
-  catalogues.map(async (node) => {
-    const image = node.field_product_image?.[0]
-
-    if (!image?.uri?.url) return
-
-    const blurDataURL = await getBlurDataURL(
-      absoluteUrl(image.uri.url)
-    )
-
-    if (blurDataURL) {
-      productBlurs[node.id] = blurDataURL
-    }
-  })
-)
 
   return (
     <div className="flex flex-col w-full overflow-x-hidden bg-white">
@@ -96,10 +76,7 @@ await Promise.all(
                 key={node.id}
                 className="w-full h-full flex justify-center"
               >
-                <CatalogueTeaser
-                  node={node}
-                  blurDataURL={productBlurs[node.id]}
-                />
+              <CatalogueTeaser node={node} />
               </div>
             ))
           ) : (
