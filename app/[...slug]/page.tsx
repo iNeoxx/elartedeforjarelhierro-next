@@ -1,3 +1,4 @@
+
 import { draftMode } from "next/headers"
 import { notFound } from "next/navigation"
 import { getDraftData } from "next-drupal/draft"
@@ -16,11 +17,19 @@ import type {
 
 type DrupalResource = DrupalNode | DrupalTaxonomyTerm
 
+type ProductWithCategories = DrupalNode & {
+  field_product_type?:
+    | DrupalTaxonomyTerm
+    | DrupalTaxonomyTerm[]
+    | null
+}
+
 export const dynamicParams = true
 
 type NodePageProps = {
   params: Promise<{ slug: string[] }>
 }
+
 async function getTranslatedPath(path: string) {
   const cachedTranslatePath = unstable_cache(
     async () => drupal.translatePath(path),
@@ -33,11 +42,12 @@ async function getTranslatedPath(path: string) {
 
   return cachedTranslatePath()
 }
+
 /**
  * Resuelve una ruta de Drupal y obtiene el recurso correspondiente.
  *
  * - Modo público: utiliza Data Cache + tags ODR.
- * - Draft Mode: evita la caché para mostrar siempre la revisión solicitada.
+ * - Draft Mode: evita la caché para mostrar la revisión solicitada.
  */
 async function getNode(
   slug: string[],
@@ -62,8 +72,8 @@ async function getNode(
    * Resuelve el alias de Drupal.
    */
   const translatedPath = isDraftMode
-  ? await drupal.translatePath(path)
-  : await getTranslatedPath(path)
+    ? await drupal.translatePath(path)
+    : await getTranslatedPath(path)
 
   if (!translatedPath?.jsonapi?.resourceName) {
     throw new Error("Resource not found", {
@@ -114,7 +124,7 @@ async function getNode(
 
   /**
    * Contenido público:
-   * cache indefinida controlada mediante ODR.
+   * caché indefinida controlada mediante ODR.
    */
   const resource = await drupal.getResource<DrupalResource>(
     type,
@@ -156,12 +166,12 @@ export async function generateMetadata(
     const resource = await getNode(slug)
 
     const title =
-      (resource as any)?.title ??
-      (resource as any)?.name ??
-      "Página"
+      resource.type.startsWith("node--")
+        ? (resource as DrupalNode).title
+        : (resource as DrupalTaxonomyTerm).name
 
     return {
-      title: `${title} | El Arte de Forjar el Hierro`,
+      title: `${title ?? "Página"} | El Arte de Forjar el Hierro`,
       description:
         "Taller artesanal de forja y diseño en hierro.",
     }
@@ -214,9 +224,7 @@ export default async function NodePage(
   let relatedProducts: DrupalNode[] = []
 
   if (resource.type === "node--product") {
-    const product = resource as DrupalNode & {
-      field_product_type?: any
-    }
+    const product = resource as ProductWithCategories
 
     const categoryId = Array.isArray(
       product.field_product_type
@@ -286,8 +294,7 @@ export default async function NodePage(
         />
       )}
 
-      {resource.type ===
-        "taxonomy_term--product_type" && (
+      {resource.type === "taxonomy_term--product_type" && (
         <TagPage
           term={resource as DrupalTaxonomyTerm}
         />

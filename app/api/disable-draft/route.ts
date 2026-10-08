@@ -1,6 +1,5 @@
 import { disableDraftMode } from "next-drupal/draft"
-import type { NextRequest } from "next/server"
 
-export async function GET(_: NextRequest) {
+export async function GET() {
   return await disableDraftMode()
 }

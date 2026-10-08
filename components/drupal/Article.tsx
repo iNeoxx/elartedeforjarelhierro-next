@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { DiscussionEmbed } from 'disqus-react';
 import { FacebookShareButton, WhatsappShareButton } from 'next-share';
 import Carousel from "../Carousel"; 
-import BackButton from "../BackButton";
 import { formatDate } from "@/lib/utils";
 
 interface NodeArticleProps {
