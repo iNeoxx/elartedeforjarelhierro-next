@@ -35,7 +35,7 @@ export default function CatalogueImage({
         quality={70}
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         onLoad={() => setLoaded(true)}
-        className={`object-contain p-6 transition-opacity duration-700 group-hover:scale-105 ${
+        className={`object-contain p-6 transition-opacity duration-700 ${
           loaded ? "opacity-100" : "opacity-0"
         }`}
       />

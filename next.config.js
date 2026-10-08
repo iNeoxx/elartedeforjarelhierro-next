@@ -10,6 +10,7 @@ const nextConfig = {
         pathname: "/sites/default/files/**",
       },
     ],
+    qualities: [70, 75],
   },
 }
 
