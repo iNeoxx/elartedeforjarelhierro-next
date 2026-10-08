@@ -7,7 +7,7 @@ async function generateBlurDataURL(
 ): Promise<string | undefined> {
   try {
     const response = await fetch(imageUrl, {
-      cache: "force-cache",
+    cache: "no-store",
     })
 
     if (!response.ok) {
