@@ -31,6 +31,7 @@ const ALLOWED_TAGS = new Set([
   "blog-list",
   "catalogue-list",
   "related-products",
+  "image-blurs",
   "full-site",
 ])
 
@@ -132,23 +133,25 @@ async function handler(request: NextRequest) {
       revalidatePath(path)
 
       /**
-       * translatePath() utiliza su propia caché.
-       *
-       * Es importante invalidarla porque Drupal puede cambiar
-       * el alias de una página al modificar su título.
+       * Invalidar la caché de traducción de rutas.
        */
       revalidateTag("drupal-paths")
 
       /**
-       * Drupal Next.js revalida mediante paths, mientras que
-       * nuestras consultas utilizan Data Cache mediante tags.
-       *
-       * Invalidamos los datos compartidos para evitar que una
-       * página regenerada reutilice datos antiguos.
+       * Invalidar los datos compartidos de Drupal.
        */
       revalidateTag("node--product")
       revalidateTag("node--article")
       revalidateTag("taxonomy_term--product_type")
+
+      /**
+       * NUEVO:
+       * Invalidar los placeholders de imágenes.
+       *
+       * Esto permite regenerar los blurs cuando
+       * Drupal actualiza las fotografías.
+       */
+      revalidateTag("image-blurs")
     }
 
     /**
@@ -185,7 +188,6 @@ async function handler(request: NextRequest) {
  * GET se mantiene porque el módulo Next.js de Drupal
  * utiliza actualmente este método para ODR.
  *
- * POST se conserva para compatibilidad y posibles
- * integraciones futuras.
+ * POST se conserva para compatibilidad futura.
  */
 export { handler as GET, handler as POST }

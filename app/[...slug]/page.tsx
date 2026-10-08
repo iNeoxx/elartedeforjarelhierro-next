@@ -1,4 +1,3 @@
-
 import { draftMode } from "next/headers"
 import { notFound } from "next/navigation"
 import { getDraftData } from "next-drupal/draft"
@@ -8,6 +7,9 @@ import { BasicPage } from "@/components/drupal/BasicPage"
 import { TaxonomyProductType as TagPage } from "@/components/drupal/TagPage"
 import { NodeCatalogo } from "@/components/drupal/Catalogue"
 import { unstable_cache } from "next/cache"
+import { getBlurDataURL } from "@/lib/getBlurDataURL"
+import { absoluteUrl } from "@/lib/utils"
+
 import type { Metadata } from "next"
 import type {
   DrupalNode,
@@ -56,10 +58,6 @@ async function getNode(
   const path = `/${slug.join("/")}`
   const params: JsonApiParams = {}
 
-  /**
-   * Solo consultamos información de Draft Mode cuando realmente
-   * estamos en una sesión de previsualización.
-   */
   if (isDraftMode) {
     const draftData = await getDraftData()
 
@@ -68,9 +66,6 @@ async function getNode(
     }
   }
 
-  /**
-   * Resuelve el alias de Drupal.
-   */
   const translatedPath = isDraftMode
     ? await drupal.translatePath(path)
     : await getTranslatedPath(path)
@@ -84,9 +79,6 @@ async function getNode(
   const type = translatedPath.jsonapi.resourceName
   const uuid = translatedPath.entity.uuid
 
-  /**
-   * Relaciones necesarias según el tipo de recurso.
-   */
   if (type === "node--article") {
     params.include = "field_article_image,uid"
   }
@@ -101,10 +93,6 @@ async function getNode(
       "name,path,description"
   }
 
-  /**
-   * Draft Mode:
-   * nunca almacenar previews/revisiones en la caché pública.
-   */
   if (isDraftMode) {
     const resource = await drupal.getResource<DrupalResource>(
       type,
@@ -122,10 +110,6 @@ async function getNode(
     return resource
   }
 
-  /**
-   * Contenido público:
-   * caché indefinida controlada mediante ODR.
-   */
   const resource = await drupal.getResource<DrupalResource>(
     type,
     uuid,
@@ -158,11 +142,6 @@ export async function generateMetadata(
   const { slug } = await props.params
 
   try {
-    /**
-     * Metadata pública.
-     *
-     * No necesitamos consultar Draft Mode aquí.
-     */
     const resource = await getNode(slug)
 
     const title =
@@ -189,14 +168,6 @@ export default async function NodePage(
   props: NodePageProps
 ) {
   const { slug } = await props.params
-
-  /**
-   * Esta lectura hace que la ruta sea dinámica.
-   *
-   * Eso es esperado porque Draft Mode depende de una cookie.
-   * La Data Cache de Drupal puede seguir funcionando
-   * independientemente.
-   */
   const { isEnabled: isDraftMode } = await draftMode()
 
   let resource: DrupalResource
@@ -207,9 +178,6 @@ export default async function NodePage(
     notFound()
   }
 
-  /**
-   * Evitar mostrar nodos no publicados fuera de Draft Mode.
-   */
   if (
     !isDraftMode &&
     resource.type.startsWith("node--") &&
@@ -218,9 +186,6 @@ export default async function NodePage(
     notFound()
   }
 
-  /**
-   * Productos relacionados.
-   */
   let relatedProducts: DrupalNode[] = []
 
   if (resource.type === "node--product") {
@@ -275,6 +240,27 @@ export default async function NodePage(
     }
   }
 
+  // Generar los blurs en el servidor.
+  const relatedProductBlurs: Record<string, string> = {}
+
+  if (resource.type === "node--product") {
+    await Promise.all(
+      relatedProducts.map(async (product) => {
+        const image = product.field_product_image?.[0]
+
+        if (!image?.uri?.url) return
+
+        const blurDataURL = await getBlurDataURL(
+          absoluteUrl(image.uri.url)
+        )
+
+        if (blurDataURL) {
+          relatedProductBlurs[product.id] = blurDataURL
+        }
+      })
+    )
+  }
+
   return (
     <div className="w-full">
       {resource.type === "node--page" && (
@@ -290,6 +276,7 @@ export default async function NodePage(
           node={resource as DrupalNode}
           additionalContent={{
             relatedProducts,
+            relatedProductBlurs,
           }}
         />
       )}

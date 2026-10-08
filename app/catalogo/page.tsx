@@ -1,16 +1,17 @@
-
 import { drupal } from "@/lib/drupal"
 import type { DrupalNode, DrupalTaxonomyTerm } from "next-drupal"
 import { CatalogueTeaser } from "@/components/drupal/CatalogueTeaser"
 import CatalogueDropdown from "@/components/drupal/CatalogueDropdown"
 import { FormSearch } from "@/components/form--search"
 import { Pager } from "@/components/pager"
+import { getBlurDataURL } from "@/lib/getBlurDataURL"
+import { absoluteUrl } from "@/lib/utils"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
   title: "Catalogo | El Arte de Forjar el Hierro",
   description:
-    "Explora nuestros amplio catálogo de productos artesanales de forja en hierro.",
+    "Explora nuestro amplio catálogo de productos artesanales de forja en hierro.",
 }
 
 const PRODUCTS_PER_PAGE = 16
@@ -48,7 +49,7 @@ export default async function CatalogoPage(props: {
       ? parsedPage
       : 0
 
-  // 1. Fetch de Tags (Categorías) - Con ODR
+  // 1. Fetch de categorías con ODR.
   const tags = await drupal.getResourceCollection<DrupalTaxonomyTerm[]>(
     "taxonomy_term--product_type",
     {
@@ -66,8 +67,7 @@ export default async function CatalogoPage(props: {
     }
   )
 
-  // 2. Fetch de Productos
-  // La página es dinámica por searchParams, pero los datos utilizan caché.
+  // 2. Fetch de productos con ODR.
   const json = await drupal.getResourceCollection<ProductCollectionResponse>(
     "node--product",
     {
@@ -93,10 +93,30 @@ export default async function CatalogoPage(props: {
     }
   )
 
-  // 3. Procesamiento de datos
+  // 3. Procesamiento de datos.
   const products = drupal.deserialize(json) as DrupalNode[]
   const totalCount = json.meta?.count ?? 0
   const totalPages = Math.ceil(totalCount / PRODUCTS_PER_PAGE)
+
+  // 4. Generación de placeholders dinámicos en el servidor.
+  // Se ejecutan en paralelo y getBlurDataURL utiliza caché.
+  const productBlurs: Record<string, string> = {}
+
+  await Promise.all(
+    products.map(async (node) => {
+      const image = node.field_product_image?.[0]
+
+      if (!image?.uri?.url) return
+
+      const blurDataURL = await getBlurDataURL(
+        absoluteUrl(image.uri.url)
+      )
+
+      if (blurDataURL) {
+        productBlurs[node.id] = blurDataURL
+      }
+    })
+  )
 
   return (
     <div className="bg-[#F8F9FA] min-h-screen">
@@ -128,7 +148,10 @@ export default async function CatalogoPage(props: {
           {products?.length ? (
             products.map((node) => (
               <div key={node.id} className="w-full h-full">
-                <CatalogueTeaser node={node} />
+                <CatalogueTeaser
+                  node={node}
+                  blurDataURL={productBlurs[node.id]}
+                />
               </div>
             ))
           ) : (
